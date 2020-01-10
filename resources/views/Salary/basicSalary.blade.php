@@ -1,0 +1,53 @@
+@extends('layouts.masterLayout')
+
+@section('content')
+    <section class="content">
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Manage Users</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Father Name</th>
+                        @foreach($salaryHead as $s)
+                        <th>{{$s->name}}</th>
+                        @endforeach
+                        <th>strategy</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($employee as $b)
+                        <tr>
+                            <form class="form" method="POST" action="{{route('save_salary')}}" enctype="multipart/form-data">
+                                @csrf
+                            <td>{{$b->Name}}<input type="hidden" required="required" class="form-control" value="{{$b->e_id}}" name="id" /></td>
+                            <td>{{$b->fatherName}}</td>
+                            @foreach($salaryHead as $s)
+                            <td><input maxlength="100" type="text" required="required"class="form-control" style="width: 100%" name="{{$s->name}}"/></td>
+                            @endforeach
+                            <td><select  class="form-control" name="salaryFlag" >
+                                    <option>Per Day</option>
+                                    <option>Per Month</option>
+                                </select></td>
+                            <td class="text-center"><button class="btn btn-success " type="submit">Add</button></td>
+                            </form>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </section>
+
+@endsection
+@section('script')
+@endsection

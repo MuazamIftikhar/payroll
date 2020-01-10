@@ -1,0 +1,59 @@
+@extends('layouts.masterLayout')
+
+@section('content')
+    <section class="content">
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Manage Employee</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>PR Day</th>
+                        <th>PL</th>
+                        <th>SL</th>
+                        <th>CL</th>
+                        <th>PH</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($attendance as $b)
+                        <tr>
+                            <td>{{$b->Name}}</td>
+                            <td>{{$b->PR_Day}}</td>
+                            <td>{{$b->PL}}</td>
+                            <td>{{$b->SL}}</td>
+                            <td>{{$b->CL}}</td>
+                            <td>{{$b->PH}}</td>
+                            <td>{{$b->Total}}</td>
+                            <td class="text-center"><a href="{{route('delete_attendance',["id" => $b->a_id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+    </section>
+
+@endsection
+@section('script')
+
+
+
+@endsection
+
+
+
+
+
+
