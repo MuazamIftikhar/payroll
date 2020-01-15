@@ -210,7 +210,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Company Name</label>
-                                        <input type="text" required="required" class="form-control" name="companyName"/>
+                                        <input type="text" required="required" readonly value="{{$name}}" class="form-control" name="companyName"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -454,7 +454,6 @@
 @section('script')
 
     $(document).ready(function () {
-
     var navListItems = $('div.setup-box div a'),
     allWells = $('.setup-content'),
     allNextBtn = $('.nextBtn');

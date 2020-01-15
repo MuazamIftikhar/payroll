@@ -44,14 +44,25 @@
                         <th>Action</th>
                     </tr>
                     </thead>
+                    @php
+                    $countSalaryHead=count($salaryHead);
+                    @endphp
                     <tbody>
                     @foreach($employee as $b)
+                        @php
+                            $countSalaryHeads=json_decode($b->salary_head,true);
+                            $counts=count($countSalaryHeads);
+                        @endphp
                         <tr>
                         <td>{{$b->Name}}</td>
                         <td>{{$b->fatherName}}</td>
                         @foreach(json_decode($b->salary_head) as $s)
-                            <td><input maxlength="100" type="text" required="required"class="form-control" value="{{$s}}" disabled name="basicSalary[]" /></td>
+                            <td><input maxlength="100" type="text" required="required"class="form-control" value="{{$s}}" disabled name="basicSalary[]"/></td>
                         @endforeach
+                            @if($countSalaryHead == $counts)
+                            @else
+                                <td><input maxlength="100" type="text" required="required"class="form-control" value="0" disabled name="basicSalary[]"/></td>
+                            @endif
                         <td><input maxlength="100" type="text" required="required" disabled class="form-control" value="{{$b->salary_flag}}" name="basicSalary[]" /></td>
                         <td class="text-center"><a href="{{route('edit_salary',["id" => $b->id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a></td>
                         </tr>

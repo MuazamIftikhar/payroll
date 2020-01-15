@@ -132,6 +132,7 @@ class SalaryController extends Controller
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
             ->get();
         $salaryHead=SalaryHead::all();
+
         return view('Salary.manageSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead]);
     }
     public function delete_salary_head(Request $request)

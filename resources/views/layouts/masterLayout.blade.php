@@ -242,7 +242,8 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('add_account')}}"><i class="fa fa-circle-o"></i> Create Registration</a></li>
+                        <li><a href="{{route('add_account')}}"><i class="fa fa-circle-o"></i> Create Staff</a></li>
+                        <li><a href="{{route('add_company')}}"><i class="fa fa-circle-o"></i> Create Company</a></li>
                         <li><a href="{{route('manage_account')}}"><i class="fa fa-circle-o"></i> Manage Registration</a>
                         </li>
                     </ul>
@@ -262,19 +263,16 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('est')}}"><i class="fa fa-circle-o"></i> Create Estimation</a></li>
-                        <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Estimation</a>
-                        </li>
+                        <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Estimation</a></li>
                     </ul>
                 </li>
-		<li class="header"><i class="ion ion-calendar"></i> Registration</li>
+	        	<li class="header"><i class="ion ion-calendar"></i> Registration</li>
                 <li class="treeview">
                     <a href="#">
                         <i class="ion ion-ios-people"></i> <span> Employee </span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('employee')}}"><i class="fa fa-circle-o"></i> Create Employee</a></li>
                         <li><a href="{{route('manage_employee')}}"><i class="fa fa-circle-o"></i> Manage Employee</a>
                         </li>
                     </ul>
@@ -310,7 +308,8 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('add_account')}}"><i class="fa fa-circle-o"></i> Create Registration</a></li>
+                        <li><a href="{{route('add_account')}}"><i class="fa fa-circle-o"></i> Create Staff</a></li>
+                        <li><a href="{{route('add_company')}}"><i class="fa fa-circle-o"></i> Create Company</a></li>
                         <li><a href="{{route('manage_account')}}"><i class="fa fa-circle-o"></i> Manage Registration</a>
                         </li>
                     </ul>
@@ -330,7 +329,6 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('est')}}"><i class="fa fa-circle-o"></i> Create Estimation</a></li>
                         <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Estimation</a>
                         </li>
                     </ul>
@@ -341,7 +339,6 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('employee')}}"><i class="fa fa-circle-o"></i> Create Employee</a></li>
                         <li><a href="{{route('manage_employee')}}"><i class="fa fa-circle-o"></i> Manage Employee</a>
                         </li>
                     </ul>
@@ -370,6 +367,17 @@
                 </li>
                 @endrole
                 @role('Company Admin')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-clipboard"></i> <span> Estimation </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('est')}}"><i class="fa fa-circle-o"></i> Create Estimation</a>
+                        <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Estimation</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="header"><i class="ion ion-calendar"></i> Registration</li>
                 <li class="treeview">
                     <a href="#">

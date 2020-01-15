@@ -76,11 +76,12 @@
                                     <h3 class="box-title">Estimation</h3>
                                 </div>
                                 <div class="box-body">
+                                    @foreach($est as $e)
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Name</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="estName" placeholder="Enter  Name" />
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->companyName}}" name="estName" placeholder="Enter  Name" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -93,28 +94,28 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">Pin Code</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="Pin" placeholder="Enter Pin Code" />
+                                                <label class="control-label">Est Type</label>
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->EstType}}" name="Type" placeholder="Enter Est Type" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">City</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="City" placeholder="Enter City" />
+                                                <label class="control-label">OwnerShip Type</label>
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->ownershipType}}" name="ownershipType" placeholder="Enter Type" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">District</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="District" placeholder="Enter District" />
+                                                <label class="control-label">City</label>
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->City}}" name="City" placeholder="Enter City" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">Phone</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="Phone" placeholder="Enter Phone" />
+                                                <label class="control-label">District</label>
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->District}}" name="District" placeholder="Enter District" />
                                             </div>
                                         </div>
                                     </div>
@@ -122,30 +123,46 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">State</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="State" placeholder="Enter State" />
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->State}}" name="State" placeholder="Enter State" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Pin Code</label>
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->Pin}}" name="Pin" placeholder="Enter Pin Code" />
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Phone</label>
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->number}}" name="Phone" placeholder="Enter Phone" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
                                     <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
                                 </div>
                             </div>
 
                             <div class="box box-primary setup-content" id="step-2">
                                 <div class="box-header">
-                                    <h3 class="box-title">Destination</h3>
+                                    <h4 class="box-title">Owner</h4>
                                 </div>
                                 <div class="box-body">
+                                  <div class="po">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Name</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="Name" placeholder="Enter  Name" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" name="ownerName[]" placeholder="Enter  Name" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Mobile</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control"  name="Mobile"  placeholder="Enter Mobile" />
+                                                <input maxlength="100" type="text" required="required" class="form-control"  name="ownerMobile[]"  placeholder="Enter Mobile" />
                                             </div>
                                         </div>
                                     </div>
@@ -153,75 +170,35 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Email</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="Email" placeholder="Enter Email" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" name="ownerEmail[]" placeholder="Enter Email" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Pan Number</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="Pan" placeholder="Enter Pan Number" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" name="Pan[]" placeholder="Enter Pan Number" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">Est Type</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="Type" placeholder="Enter Est Type" />
+                                                <label class="control-label">Remarks</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" name="ownerRemarks[]" placeholder="Enter Remarks" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">Nature of Business</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="natureOfBusiness" placeholder="Enter Nature Of Business" />
+                                                <label class="control-label">Designation</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" name="Designation[]" placeholder="Enter Designation" />
                                             </div>
                                         </div>
                                     </div>
-                                    <h4 class="box-title">Owner</h4>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">OwnerShip Type</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="ownershipType" placeholder="Enter Type" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Owner Name</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="ownerName" placeholder="Enter Name" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                  </div>
+                                    <button type="button" class="btn  btn-info btn-flat remove-btn" id="appendRow">Add </button>
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Owner Add</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="ownerAdd" placeholder="Enter District" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Mobile Number</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="ownerMobile" placeholder="Enter Mobile" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Email Id</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="ownerEmail" placeholder="Enter Email" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Invoice Period</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" name="invoicePeriod" placeholder="Enter Invoice Period" />
-                                            </div>
-                                        </div>
 
-                                    </div>
+                                    <div id="appendDiv"></div>
                                     <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
                                 </div>
                             </div>
@@ -248,97 +225,108 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>Factory License</td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="f_license_doccument" /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="f_license_doa" /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="f_license_doe" /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="f_license_renewal" /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="f_license_doc_upload" /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="f_license_remarks" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="f_license_doccument" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="f_license_doa" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="f_license_doe" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="f_license_renewal" /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="f_license_doc_upload" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="f_license_remarks" /></td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
                                                 <td>Labour Lic</td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="l_lic_doccument" /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="l_lic_doa" /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="l_lic_doe" /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="l_lic_renewal" /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="l_lic_doc_upload" /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="l_lic_remarks" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="l_lic_doccument" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="l_lic_doa" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="l_lic_doe" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="l_lic_renewal" /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="l_lic_doc_upload" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="l_lic_remarks" /></td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
                                                 <td>EPF Coverage Letter</td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="EPF_doccument"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="EPF_doa"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="EPF_doe"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="EPF_renewal"  /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="EPF_doc_upload"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="EPF_remarks"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="EPF_doccument"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="EPF_doa"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="EPF_doe"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="EPF_renewal"  /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="EPF_doc_upload"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="EPF_remarks"  /></td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
                                                 <td>ESIC Code letter</td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="ESIC_doccument"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="ESIC_doa"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="ESIC_doe"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="ESIC_renewal"  /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="ESIC_doc_upload"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="ESIC_remarks"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="ESIC_doccument"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="ESIC_doa"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="ESIC_doe"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="ESIC_renewal"  /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="ESIC_doc_upload"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="ESIC_remarks"  /></td>
                                            </tr>  <tr>
                                                 <td>5</td>
                                                 <td>PAN Card</td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PAN_doccument"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PAN_doa"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PAN_doe"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PAN_renewal"  /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="PAN_doc_upload"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PAN_remarks"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PAN_doccument"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PAN_doa"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PAN_doe"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PAN_renewal"  /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="PAN_doc_upload"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PAN_remarks"  /></td>
                                            </tr>  <tr>
                                                 <td>6</td>
                                                 <td>PT Est</td>
 
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EST_doccument" /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EST_doa"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EST_doe"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EST_renewal"  /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="PT_EST_doc_upload"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EST_remarks"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EST_doccument" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EST_doa"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EST_doe"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EST_renewal"  /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="PT_EST_doc_upload"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EST_remarks"  /></td>
                                            </tr>  <tr>
                                                 <td>7</td>
                                                 <td>PT EE</td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EE_doccument"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EE_doa"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EE_doe"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EE_renewal"  /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="PT_EE_doc_upload"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="PT_EE_remarks"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EE_doccument"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EE_doa"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EE_doe"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EE_renewal"  /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="PT_EE_doc_upload"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="PT_EE_remarks"  /></td>
                                            </tr>  <tr>
                                                 <td>8</td>
                                                 <td>LWF</td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="LWF_doccument"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="LWF_doa"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="LWF_doe"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="LWF_renewal"  /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="LWF_doc_upload"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="LWF_remarks"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="LWF_doccument"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="LWF_doa"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="LWF_doe"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="LWF_renewal"  /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="LWF_doc_upload"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="LWF_remarks"  /></td>
                                            </tr>  <tr>
                                                 <td>9</td>
                                                 <td>GST No.</td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="GST_doccument"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="GST_doa"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="GST_doe"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="GST_renewal"  /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="GST_doc_upload"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="GST_remarks"  /></td>
-                                           </tr>  <tr>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="GST_doccument"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="GST_doa"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="GST_doe"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="GST_renewal"  /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="GST_doc_upload"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="GST_remarks"  /></td>
+                                           </tr>
+                                            <tr>
                                                 <td>10</td>
                                                 <td>Digital Sign</td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="Digital_doccument"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="Digital_doa"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="Digital_doe"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="Digital_renewal"  /></td>
-                                                <td><input maxlength="100" type="file" required="required" class="form-control" name="Digital_doc_upload"  /></td>
-                                                <td><input maxlength="100" type="text" required="required" class="form-control" name="Digital_remarks"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="Digital_doccument"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="Digital_doa"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="Digital_doe"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="Digital_renewal"  /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="Digital_doc_upload"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="Digital_remarks"  /></td>
+                                           </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="doccument_name" /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="doccument"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="doa"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="doe"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="renewal"  /></td>
+                                                <td><input maxlength="100" type="file"  class="form-control" name="doc_upload"  /></td>
+                                                <td><input maxlength="100" type="text"  class="form-control" name="remarks"  /></td>
                                            </tr>
                                         </tbody>
                                         <tfoot>
@@ -397,6 +385,10 @@
     });
 
     $('div.setup-box div a.btn-success').trigger('click');
+    });
+
+    $(document).on('click','#appendRow',function(){
+    $(".po").clone().insertAfter("#appendDiv");
     });
 @endsection
 

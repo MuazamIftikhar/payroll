@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Employee;
 use App\Estimation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EstimationController extends Controller
 {
@@ -15,7 +17,10 @@ class EstimationController extends Controller
      */
     public function index()
     {
-        return view('Est.index');
+        $est=Company::where('user_id',Auth::user()->id)
+            ->join('users','companies.id','=','users.id')
+            ->get();
+        return view('Est.index',compact('est'));
     }
 
     /**
@@ -34,18 +39,14 @@ class EstimationController extends Controller
         $est->District=$request->District;
         $est->State=$request->State;
         $est->Phone=$request->Phone;
-        $est->Name=$request->Name;
-        $est->Mobile=$request->Mobile;
-        $est->Email=$request->Email;
-        $est->Pan=$request->Pan;
         $est->Type=$request->Type;
-        $est->natureOfBusiness=$request->natureOfBusiness;
         $est->ownershipType=$request->ownershipType;
-        $est->ownerName=$request->ownerName;
-        $est->ownerAdd=$request->ownerAdd;
-        $est->ownerMobile=$request->ownerMobile;
-        $est->ownerEmail=$request->ownerEmail;
-        $est->invoicePeriod=$request->invoicePeriod;
+        $est->ownerName=json_encode($request->ownerName);
+        $est->ownerMobile=json_encode($request->ownerMobile);
+        $est->ownerEmail=json_encode($request->ownerEmail);
+        $est->Pan=json_encode($request->Pan);
+        $est->Designation=json_encode($request->Designation);
+        $est->ownerRemarks=json_encode($request->ownerRemarks);
         $est->f_license_doccument=$request->f_license_doccument;
         $est->f_license_doa=$request->f_license_doa;
         $est->f_license_doe=$request->f_license_doe;
@@ -168,6 +169,19 @@ class EstimationController extends Controller
             $est->Digital_doc_upload=$name;
         }
         $est->Digital_remarks=$request->Digital_remarks;
+        $est->doccument_name=$request->doccument_name;
+        $est->doccument=$request->doccument;
+        $est->doa=$request->doa;
+        $est->doe=$request->doe;
+        $est->renewal=$request->renewal;
+        if ($request->hasFile('doc_upload')) {
+            $image = $request->file('doc_upload');
+            $name = time().'.'.$image->getClientOriginalName();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $name);
+            $est->doc_upload=$name;
+        }
+        $est->remarks=$request->remarks;
         $est->save();
         return back();
     }

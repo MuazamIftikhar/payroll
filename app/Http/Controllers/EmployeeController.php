@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
@@ -15,7 +17,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('Employee.index');
+        $name=Company::where('user_id','=',Auth::user()->id)->first()->companyName;
+        return view('Employee.index',compact('name'));
     }
 
     /**

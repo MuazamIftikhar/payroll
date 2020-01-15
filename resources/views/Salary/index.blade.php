@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="Name">Employee Name</label>
+                                        <label for="Name">Enter Salary Head</label>
                                         <input type="text" class="form-control" id="Name" value="{{old('Name')}}" name="Name" placeholder="Enter Name">
                                         @if ($errors->has('Name'))
                                             <span class="danger">{{$errors->first('Name')}}</span>

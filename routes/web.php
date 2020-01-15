@@ -16,6 +16,7 @@ Route::group([ 'middleware' => ['auth']], function() {
     Route::GET('/', 'HomeController@index')->name('home');
     //Account
     Route::GET('/add_account', 'AccountController@index')->name('add_account');
+    Route::GET('/add_company', 'AccountController@company')->name('add_company');
     Route::POST('/save_account', 'AccountController@create')->name('save_account');
     Route::GET('/manage_account', 'AccountController@manageAccount')->name('manage_account');
     Route::GET('/edit_user', 'AccountController@edit_user')->name('edit_user');
