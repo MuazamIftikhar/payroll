@@ -46,6 +46,14 @@ class UserTableSeeder extends Seeder
         $deduction->value4=150;
         $deduction->value5=200;
         $deduction->save();
+        $setting=new \App\Setting();
+        $setting->form='REGISTER OF WAGES OVERTIME DEDUCTION FOR FINE, DAMAGE FOR LOSS AND ADVANCES FORM 2';
+        $setting->rules='1. Form under rule-6 of equal Remeneration Rules 1976
+2.Form under rule-21 (4),25 (2),26 (1) and 26 (2) of Gujarat Minimum Wages Rules 1961
+3.Form under rule-6 of Payment of Wages Gujarat Rules, 1963
+4. Form under rule-78 of Contract Labour ( Regulation  Abolition) Gujarat Rules 1972                                      
+5. Form under rule-52(2) of Inter State Migrant Workers (Gujarat)Rules 1981';
+        $setting->save();
 
     }
 }
