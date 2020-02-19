@@ -20,6 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->string('lastName');
             $table->string('DOB');
             $table->string('DOJ');
+            $table->string('DOE');
             $table->string('Gender');
             $table->string('Religion');
             $table->string('Phone');
@@ -33,7 +34,7 @@ class CreateEmployeesTable extends Migration
             $table->string('per_State');
             $table->string('per_zipCode');
             $table->string('Designation');
-            $table->string('companyName');
+            $table->string('company_id');
             $table->string('Status');
             $table->string('bankName');
             $table->string('accountNumber');
@@ -59,6 +60,8 @@ class CreateEmployeesTable extends Migration
             $table->string('family_Nominee');
             $table->string('family_DOB');
             $table->string('family_adharNumber');
+            $table->string('Witness');
+            $table->string('witnessAddress');
             $table->timestamps();
         });
     }

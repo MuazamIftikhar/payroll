@@ -39,5 +39,13 @@ class UserTableSeeder extends Seeder
         $employee->display_name = 'Employee'; // optional
         $employee->description  = 'Employee is the user of a given project'; // optional
         $employee->save();
+        $deduction=new \App\Ptax();
+        $deduction->value1=0;
+        $deduction->value2=0;
+        $deduction->value3=80;
+        $deduction->value4=150;
+        $deduction->value5=200;
+        $deduction->save();
+
     }
 }

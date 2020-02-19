@@ -69,6 +69,10 @@
                 <form class="form" method="POST" action="{{route('update_employee',["id" => $e->id ])}}" enctype="multipart/form-data">
                     @csrf
                     <div class="box box-primary setup-content" id="step-1">
+
+                        <div class="box-header">
+                            <h3 class="box-title">Personal Detail</h3>
+                        </div>
                         @if (session('error'))
                             <div class="alert alert-error mt-2" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -85,9 +89,6 @@
                                 <strong>{{ session('success') }}</strong>
                             </div>
                         @endif
-                        <div class="box-header">
-                            <h3 class="box-title">Personal Detail</h3>
-                        </div>
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-4">
@@ -123,22 +124,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Gender</label>
-                                        <div class="radio">
-                                            <?php
-                                            $gender=$e->Gender;
-                                            ?>
-                                            <label>
-                                                <input type="radio" name="Gender" value="Male" {{$gender=="Male" ? "checked" : ""}}>
-                                                Male
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="Gender" {{$gender=="Female" ? "checked" : ""}} value="Female">
-                                                Female
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <label class="control-label">Contract End</label>
+                                    <input type="date" required="required" class="form-control" value="{{$e->DOE}}" name="DOE"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -227,26 +214,52 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Company Name</label>
-                                        <input type="text" required="required" class="form-control"  value="{{$e->companyName}}" name="companyName"/>
-                                    </div>
+                                    <label class="control-label">Company Name</label>
+                                    <select class="form-control" name="companyName">
+                                        @foreach($company as $n)
+                                            <option value="{{$n->id}}" selected {{$e->company_id == $n->id ? "selected" : ""}}>{{$n->companyName}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label class="control-label">Marital Status</label>
                                         <div class="radio">
                                             <?php
                                             $status=$e->Status;
                                             ?>
-                                           <label>
-                                                <input type="radio" name="Status" value="Married" {{$status=="Married" ? "checked" : ""}}>
-                                                Married
+                                               <label>
+                                                    <input type="radio" name="Status" value="Married" {{$status=="Married" ? "checked" : ""}}>
+                                                    Married
+                                               </label>
+                                               <label>
+                                                    <input type="radio" name="Status" value="Unmarried" {{$status=="Unmarried" ? "checked" : ""}}>
+                                                    Unmarried
+                                               </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">Gender</label>
+                                        <div class="radio">
+                                            <?php
+                                            $gender=$e->Gender;
+                                            ?>
+                                            <label>
+                                                <input type="radio" name="Gender" value="Male" {{$gender=="Male" ? "checked" : ""}}>
+                                                Male
                                             </label>
                                             <label>
-                                                <input type="radio" name="Status" value="Unmarried" {{$status=="Unmarried" ? "checked" : ""}}>
-                                                Unmarried
+                                                <input type="radio" name="Gender" {{$gender=="Female" ? "checked" : ""}} value="Female">
+                                                Female
                                             </label>
+                                            <label>
+                                                <input type="radio" name="Gender" {{$gender=="Transgender" ? "checked" : ""}} value="Transgender">
+                                                Transgender
+                                            </label>
+
                                         </div>
                                     </div>
                                 </div>
@@ -298,15 +311,6 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Emplyee PF/UAN Number</label>
-                                        <select class="form-control" name="UAN">
-                                            <option {{$e->UAN=="Yes" ? "selected" : ""}}>Yes</option>
-                                            <option {{$e->UAN=="No" ? "selected" : ""}}>No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <label class="control-label">Esic Flag</label>
                                         <select class="form-control"  value="{{$e->esicFlag}}"  name="esicFlag">
                                             <option {{$e->esicFlag=="Yes" ? "selected" : ""}}>Yes</option>
@@ -314,8 +318,6 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">PT Flag</label>
@@ -323,6 +325,15 @@
                                             <option {{$e->PTFlag=="Yes" ? "selected" : ""}}>Yes</option>
                                             <option {{$e->PTFlag=="No" ? "selected" : ""}}>No</option>
                                         </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Emplyee PF/UAN Number</label>
+                                        <input type="text" required="required" class="form-control"  value="{{$e->UAN}}" name="UAN"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -404,6 +415,8 @@
                                 $family_adharNumber=json_decode($e->family_adharNumber);
                                 $family_DOB=json_decode($e->family_DOB);
                                 $family_Nominee=json_decode($e->family_Nominee);
+                                $Witness=json_decode($e->Witness);
+                                $witnessAddress=json_decode($e->witnessAddress);
                                     @endphp
                                 @for($i=0 ; $i < $getIndexCount ; $i++)
                                 <div class="row">
@@ -470,8 +483,21 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                    @endfor
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Witness Name</label>
+                                            <input type="text" required="required" class="form-control" value="{{$Witness[$i]}}" name="Witness[]" placeholder="Enter Witness Name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Witness Address</label>
+                                            <input type="text" required="required" class="form-control" value="{{$witnessAddress[$i]}}" name="witnessAddress[]" placeholder="Enter Witness Address"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endfor
                             </div>
                             <button type="button" class="btn  btn-info btn-flat " id="appendRow">Add</button>
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Employee;
+use App\SalaryHead;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +19,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $name=Company::where('user_id','=',Auth::user()->id)->first()->companyName;
+        $name=Company::where('user_id','=',Auth::user()->id)->get();
         return view('Employee.index',compact('name'));
     }
 
@@ -34,6 +36,7 @@ class EmployeeController extends Controller
         $employee->lastName=$request->lastName;
         $employee->DOB=$request->DOB;
         $employee->DOJ=$request->DOJ;
+        $employee->DOE=$request->DOE;
         $employee->Gender=$request->Gender;
         $employee->Religion=$request->Religion;
         $employee->Phone=$request->Phone;
@@ -47,7 +50,7 @@ class EmployeeController extends Controller
         $employee->per_State=$request->per_State;
         $employee->per_zipCode=$request->per_zipCode;
         $employee->Designation=$request->Designation;
-        $employee->companyName=$request->companyName;
+        $employee->company_id=$request->companyName;
         $employee->Status=$request->Status;
         $employee->bankName=$request->bankName;
         $employee->accountNumber=$request->accountNumber;
@@ -91,8 +94,10 @@ class EmployeeController extends Controller
         $employee->family_Nominee=json_encode($request->family_Nominee);
         $employee->family_DOB=json_encode($request->family_DOB);
         $employee->family_adharNumber=json_encode($request->family_adharNumber);
+        $employee->Witness=json_encode($request->Witness);
+        $employee->witnessAddress=json_encode($request->witnessAddress);
         $employee->save();
-        return back();
+        return redirect()->back()->with("success" , "User Added Successfully!");
     }
 
     /**
@@ -103,8 +108,19 @@ class EmployeeController extends Controller
      */
     public function manage_employee()
     {
-        $employee=Employee::all();
-        return view('Employee.manage',compact('employee'));
+
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+        if (count($user) > 0){
+            $companyName=Company::all();
+            $employee=Employee::all();
+        }
+        else{
+        $company=Company::where('user_id','=',Auth::user()->id)->first()->id;
+        $employee=Employee::where('company_id',$company)
+           ->get();
+        $companyName=Company::where('user_id','=',Auth::user()->id)->get();
+        }
+        return view('Employee.manage',['employee'=>$employee,'company'=>$companyName]);
     }
 
     /**
@@ -127,8 +143,15 @@ class EmployeeController extends Controller
      */
     public function edit_employee(Request $request)
     {
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+        if (count($user) > 0){
+            $company=Company::all();
+        }
+        else{
+            $company=Company::where('user_id','=',Auth::user()->id)->get();
+        }
         $employee=Employee::where('id','=',$request->id)->get();
-        return view('Employee.edit',['employee' => $employee]);
+        return view('Employee.edit',['employee' => $employee,'company'=>$company]);
     }
 
     /**
@@ -146,6 +169,7 @@ class EmployeeController extends Controller
         $lastName=$request->lastName;
         $DOB=$request->DOB;
         $DOJ=$request->DOJ;
+        $DOE=$request->DOE;
         $Gender=$request->Gender;
         $Religion=$request->Religion;
         $Phone=$request->Phone;
@@ -213,9 +237,9 @@ class EmployeeController extends Controller
         $family_DOB=json_encode($request->family_DOB);
         $family_adharNumber=json_encode($request->family_adharNumber);
 
-        $update=DB::table('employees')->where('id', '=', $request->id)->update(['Name' => $Name,'fatherName' => $fatherName,'lastName' => $lastName,'DOB' => $DOB,'DOJ' => $DOJ,'Gender' => $Gender,
+        $update=DB::table('employees')->where('id', '=', $request->id)->update(['Name' => $Name,'fatherName' => $fatherName,'lastName' => $lastName,'DOB' => $DOB,'DOJ' => $DOJ,'DOE' => $DOE,'Gender' => $Gender,
             'Religion' => $Religion,'Phone' => $Phone,'Email' => $Email,'streetAddress' => $streetAddress,'City' => $City,'State' => $State,'zipCode' => $zipCode,'per_streetAddress' => $per_streetAddress,
-            'per_City' => $per_City,'per_State' => $per_State,'per_zipCode' => $per_zipCode,'Designation' => $Designation,'companyName' => $companyName,'Status' => $Status,'bankName' => $bankName,
+            'per_City' => $per_City,'per_State' => $per_State,'per_zipCode' => $per_zipCode,'Designation' => $Designation,'company_id' => $companyName,'Status' => $Status,'bankName' => $bankName,
             'accountNumber' => $accountNumber,'ISFC' => $ISFC,'checkBook' => $checkBook,'esicNumber' => $esicNumber,'UAN' => $UAN,'esicFlag' => $esicFlag,'PTFlag' => $PTFlag,'PFSaturating' => $PFSaturating,
             'PFFlag' => $PFFlag,'NameAsAdhar' => $NameAsAdhar,'adharNumber' => $adharNumber,'adharProof' => $adharProof,'NameAsPan' => $NameAsPan,'panNumber' => $panNumber,'panProof' => $panProof,
             'family_firstName' => $family_firstName,'family_lastName' => $family_lastName,'family_Relation' => $family_Relation,'family_presentAddress' => $family_presentAddress,'family_permanentAddress' => $family_permanentAddress,
@@ -234,8 +258,24 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function searchByCompany( Request $request)
     {
-        //
+
+
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+        if (count($user) > 0){
+            $employee=Employee::where('company_id',$request->Name)->get();
+            $companyName=Company::all();
+        }
+        else{
+            $company=Company::where('user_id','=',Auth::user()->id)->where('id','=',$request->Name)->first()->id;
+            $employee=Employee::where('company_id',$company)->get();
+            $companyName=Company::where('user_id','=',Auth::user()->id)->get();
+        }
+//        $employee=DB::table('employees')->select(DB::raw('*,employees.id as id'))
+//            ->leftJoin('salaries', 'employees.id', '=', 'salaries.employee_id')
+//            ->where('company_id','=',$request->Name)
+//            ->get();
+        return view('Employee.manage',['employee'=>$employee,'company'=>$companyName]);
     }
 }

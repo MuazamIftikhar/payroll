@@ -255,15 +255,27 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('salary_head')}}"><i class="fa fa-circle-o"></i> Create Salary Haad</a></li>
+                        <li><a href="{{route('manage_company_basic')}}"><i class="fa fa-circle-o"></i>Manage Salary Head</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-clipboard"></i> <span> Estimation </span>
+                        <i class="ion ion-ios-basketball-outline"></i> <span> Deduction </span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Estimation</a></li>
+                        {{--<li><a href="{{route('deduction')}}"><i class="fa fa-circle-o"></i> PF</a></li>--}}
+                        {{--<li><a href="{{route('esic_deduction')}}"><i class="fa fa-circle-o"></i>ESIC</a></li>--}}
+                        <li><a href="{{route('ptax')}}"><i class="fa fa-circle-o"></i>P Tax</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-clipboard"></i> <span> Establishment </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Establishment</a></li>
                     </ul>
                 </li>
 	        	<li class="header"><i class="ion ion-calendar"></i> Registration</li>
@@ -283,7 +295,6 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('salary')}}"><i class="fa fa-circle-o"></i> Create Salary</a></li>
                         <li><a href="{{route('manage_salary')}}"><i class="fa fa-circle-o"></i> Manage Salary</a>
                         </li>
                     </ul>
@@ -294,8 +305,27 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('attendance')}}"><i class="fa fa-circle-o"></i> Create Attendance</a></li>
                         <li><a href="{{route('manage_attendance')}}"><i class="fa fa-circle-o"></i> Manage Attendance</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-users"></i> <span> Excel </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('excel')}}"><i class="fa fa-circle-o"></i> Salary Excel</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a >
+                        <i class="fa fa-users"></i> <span> Setting </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('setting')}}"><i class="fa fa-circle-o"></i> Salary Excel</a>
                         </li>
                     </ul>
                 </li>
@@ -321,18 +351,30 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('salary_head')}}"><i class="fa fa-circle-o"></i> Create Salary Haad</a></li>
+                        <li><a href="{{route('manage_company_basic')}}"><i class="fa fa-circle-o"></i>Manage Salary Head</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-clipboard"></i> <span> Estimation </span>
+                        <i class="ion ion-ios-basketball-outline"></i> <span> Deduction </span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Estimation</a>
-                        </li>
+                        {{--<li><a href="{{route('deduction')}}"><i class="fa fa-circle-o"></i> PF</a></li>--}}
+                        {{--<li><a href="{{route('esic_deduction')}}"><i class="fa fa-circle-o"></i>ESIC</a></li>--}}
+                        <li><a href="{{route('ptax')}}"><i class="fa fa-circle-o"></i>P Tax</a></li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-clipboard"></i> <span> Establishment </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Establishment</a></li>
+                    </ul>
+                </li>
+	        	<li class="header"><i class="ion ion-calendar"></i> Registration</li>
                 <li class="treeview">
                     <a href="#">
                         <i class="ion ion-ios-people"></i> <span> Employee </span>
@@ -349,7 +391,6 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('salary')}}"><i class="fa fa-circle-o"></i> Create Salary</a></li>
                         <li><a href="{{route('manage_salary')}}"><i class="fa fa-circle-o"></i> Manage Salary</a>
                         </li>
                     </ul>
@@ -360,8 +401,27 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('attendance')}}"><i class="fa fa-circle-o"></i> Create Attendance</a></li>
                         <li><a href="{{route('manage_attendance')}}"><i class="fa fa-circle-o"></i> Manage Attendance</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-users"></i> <span> Excel </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('excel')}}"><i class="fa fa-circle-o"></i> Salary Excel</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a >
+                        <i class="fa fa-users"></i> <span> Setting </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('setting')}}"><i class="fa fa-circle-o"></i> Salary Excel</a>
                         </li>
                     </ul>
                 </li>
@@ -369,12 +429,12 @@
                 @role('Company Admin')
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-clipboard"></i> <span> Estimation </span>
+                        <i class="fa fa-clipboard"></i> <span> Establishment </span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('est')}}"><i class="fa fa-circle-o"></i> Create Estimation</a>
-                        <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Estimation</a>
+                        <li><a href="{{route('est')}}"><i class="fa fa-circle-o"></i> Create Establishment</a>
+                        <li><a href="{{route('manage_estimation')}}"><i class="fa fa-circle-o"></i> Manage Establishment</a>
                         </li>
                     </ul>
                 </li>
@@ -409,6 +469,17 @@
                     <ul class="treeview-menu">
                         <li><a href="{{route('attendance')}}"><i class="fa fa-circle-o"></i> Create Attendance</a></li>
                         <li><a href="{{route('manage_attendance')}}"><i class="fa fa-circle-o"></i> Manage Attendance</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-users"></i> <span> Leave and loan </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('manage_leave')}}"><i class="fa fa-circle-o"></i> Leave</a></li>
+                        <li><a href="{{route('manage_loan')}}"><i class="fa fa-circle-o"></i> Loan</a>
                         </li>
                     </ul>
                 </li>

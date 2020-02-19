@@ -1,0 +1,202 @@
+<?php
+
+namespace App\Exports;
+
+use App\Attendance;
+use App\Company;
+use App\company_basic;
+use App\Employee;
+use App\Ptax;
+use App\SalaryHead;
+use App\Setting;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Events\BeforeExport;
+use Maatwebsite\Excel\Events\BeforeSheet;
+use Maatwebsite\Excel\Events\BeforeWriting;
+use Nexmo\Account\Secret;
+use Zend\Diactoros\Request;
+
+class LeaveExport implements FromView,WithEvents
+{
+
+    public function __construct($id,$month)
+    {
+        $this->id = $id;
+        $this->month = $month;
+    }
+
+    public function view(): View
+    {
+        $printDate=$this->month;
+        $date=explode('-',$this->month);
+        $year=$date[0];
+        $month=$date[1];
+        $company_id=Company::where('id','=',$this->id)->first()->id;
+        $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
+        $decodeIDs = json_decode($getIds);
+        $namesOfsalaryHead=array();
+        foreach ($decodeIDs as $i){
+            $GetName = SalaryHead::where('id', '=', $i)->first();
+            $namesOfsalaryHead[]=$GetName;
+        }
+        $ptax=Ptax::first();
+        $employee = Employee::select(DB::raw('*'))
+            ->Join('attendances','employees.id','=','attendances.employee_id')
+            ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
+            ->whereYear('salaries.created_at', '=', $year)->whereMonth('salaries.created_at', '=', $month)
+            ->whereYear('attendances.created_at', '=', $year)->whereMonth('attendances.created_at', '=', $month)
+            ->where('employees.company_id','=',$this->id)->get();
+        $company=Company::where('id','=',$company_id)->get();
+        $setting=Setting::where('id','=',1)->get();
+        return view('Employee.excelExport', [
+            'employee' => $employee,"salaryHead"=>$namesOfsalaryHead,"ptax"=>$ptax,'company'=>$company,'printDate'=>$printDate,'setting'=>$setting]);
+    }
+    public function registerEvents(): array
+    {
+        return[
+            BeforeWriting::class => function(BeforeWriting $event) {
+
+                $event->writer->getDelegate()->getActiveSheet()->mergeCells('A1:B1');
+                $event->writer->getDelegate()->getActiveSheet()->mergeCells('A2:B3');
+                $event->writer->getDelegate()->getActiveSheet()->mergeCells('A4:B4');
+                $event->writer->getDelegate()->getActiveSheet()->mergeCells('A5:B6');
+                $event->writer->getDelegate()->getActiveSheet()->mergeCells('D1:G3');
+                $event->writer->getDelegate()->getActiveSheet()->mergeCells('D4:G6');
+                $event->writer->getDelegate()->getActiveSheet()->mergeCells('H1:P5');
+
+
+
+                $event->writer->getDelegate()->getActiveSheet()->getStyle("A1:B1")->applyFromArray($styleArray = [
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                            'text-align' => 'center'
+                        ],
+                    ],
+                    'font' => [
+                        'bold' => true,
+                        'size' => 16
+                    ],
+                ]);
+                $event->writer->getDelegate()->getActiveSheet()->getStyle("D1:G3")->applyFromArray($styleArray = [
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                            'text-align' => 'center'
+                        ],
+                    ],
+                    'font' => [
+                        'size' => 12
+                    ],
+                ])->getAlignment()->setWrapText(true);
+                $event->writer->getDelegate()->getActiveSheet()->getStyle("H1:P5")->applyFromArray($styleArray = [
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                            'text-align' => 'center'
+                        ],
+                    ],
+                    'font' => [
+                        'size' => 11
+                    ],
+                ])->getAlignment()->setWrapText(true);
+                $event->writer->getDelegate()->getActiveSheet()->getStyle("A2:B6")->applyFromArray($styleArray = [
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                            'text-align' => 'center'
+                        ],
+                    ],
+                    'font' => [
+                        'size' => 12
+                    ],
+                ])->getAlignment()->setWrapText(true);
+
+                $date=explode('-',$this->month);
+                $year=$date[0];
+                $month=$date[1];
+                $getRows=Employee::select(DB::raw('*'))
+                    ->Join('attendances','employees.id','=','attendances.employee_id')
+                    ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
+                    ->whereYear('salaries.created_at', '=', $year)->whereMonth('salaries.created_at', '=', $month)
+                    ->whereYear('attendances.created_at', '=', $year)->whereMonth('attendances.created_at', '=', $month)
+                    ->where('employees.company_id','=',$this->id)->get();
+                $getRowsCount=count($getRows)+8;
+
+                $event->writer->getDelegate()->getActiveSheet()->getStyle("A7:X$getRowsCount")->applyFromArray($styleArray = [
+                         'borders' => [
+                             'allBorders' => [
+                                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                                 'color' => ['argb' => '000000'],
+                                 'text-align' => 'center'
+                             ],
+                         ],
+
+                     'alignment' => [
+                         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                     ],
+                ]);
+                ////Setting Width of Coulmns
+                $cols=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X'];
+                foreach($cols as $col)
+                {
+                    if($col == 'X')
+                    {
+                        $event->writer->getDelegate()->getActiveSheet()->getColumnDimension($col)->setWidth(20);
+                    }
+                    else
+                    {
+                        $event->writer->getDelegate()->getActiveSheet()->getColumnDimension($col)->setAutoSize($col);
+                    }
+
+                }
+
+//
+
+                //Setting M Coulmn Colors
+//                $data = array();
+//                $date=explode('-',$this->month);
+//                $year=$date[0];
+//                $month=$date[1];
+//                $getRows = Employee::select(DB::raw('*'))
+//                    ->Join('attendances','employees.id','=','attendances.employee_id')
+//                    ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
+//                    ->whereYear('salaries.created_at', '=', $year)->whereMonth('salaries.created_at', '=', $month)
+//                    ->whereYear('attendances.created_at', '=', $year)->whereMonth('attendances.created_at', '=', $month)
+//                    ->where('employees.id','=',$this->id)->get();
+//                $index = 6;
+
+//                foreach ($getRows as $i) {
+//
+//                    $emptyRow = $index+1; //After Printing then fill Empty Row
+//                    $index=$emptyRow;
+//                    $data[]=$emptyRow;
+//                    // that is before index because of need to fill empty
+//                    $event->writer->getDelegate()->getActiveSheet()->getStyle("A$emptyRow:W$emptyRow")->getFill()
+//                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+//                    ->getStartColor()->setARGB('FFFAFA');
+//                    $event->writer->getDelegate()->getActiveSheet()->getRowDimension($emptyRow)->setRowHeight(30);
+//                    $index = $emptyRow + 1; //If count then +1 for empty row
+//                    $event->writer->getDelegate()->getActiveSheet()->getRowDimension($index)->setRowHeight(30);
+//
+//
+//
+//                }
+
+            }
+
+        ];
+    }
+}

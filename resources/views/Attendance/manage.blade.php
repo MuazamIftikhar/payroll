@@ -3,9 +3,44 @@
 @section('content')
     <section class="content">
 
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Search</h3>
+                    </div>
+                    <form class="form" method="GET" action="{{route('searchByCompany_manageAttendance')}}">
+                        <div class="box-body">
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                    <select name="Name" class="form-control">
+                                        @foreach($company as $c)
+                                            <option value="{{$c->id}}">{{$c->companyName}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <input type="month" class="form-control" id="Month"  name="Month" >
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                            <div class="box-footer">
+                            <button type="submit" class="btn btn-primary pull-right">Search</button>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Manage Employee</h3>
+                <h3 class="box-title">Manage Attendance</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -32,7 +67,7 @@
                             <td>{{$b->CL}}</td>
                             <td>{{$b->PH}}</td>
                             <td>{{$b->Total}}</td>
-                            <td class="text-center"><a href="{{route('delete_attendance',["id" => $b->a_id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
+                            <td class="text-center"><a href="{{route('edit_attendance',["id" => $b->e_id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>  <a href="{{route('delete_attendance',["id" => $b->a_id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>

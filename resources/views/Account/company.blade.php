@@ -8,7 +8,7 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add User</h3>
+                        <h3 class="box-title">Add Company</h3>
                     </div>
                     <form class="form" method="POST" action="{{route('save_account')}}">
                         @csrf
@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="Hotel">Password</label>
+                                    <label for="Hotel">Confirm Password</label>
                                     <input type="text" class="form-control" value="{{old('Password_confirmation')}}" id="Password_confirmation" name="Password_confirmation" placeholder="Password">
                                     @if ($errors->has('Password_confirmation'))
                                         <span class="danger">{{$errors->first('Password_confirmation')}}</span>
@@ -88,12 +88,12 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Company Name</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" name="companyName" placeholder="Enter Company Name" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Pin Code</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" name="Pin" placeholder="Enter Pin Code" />
+                                    </div>
                                 </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">City</label>
@@ -112,22 +112,24 @@
                                     <input maxlength="100" type="text" required="required" class="form-control" name="State" placeholder="Enter State" />
                                 </div>
                             </div>
+                                <div id="po">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Pin Code</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" name="Pin" placeholder="Enter Pin Code" />
+                                    <label class="control-label">Company Name</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" name="companyName[]" placeholder="Enter Company Name" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Address</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" name="Address" placeholder="Enter Address" />
+                                    <input maxlength="100" type="text" required="required" class="form-control" name="Address[]" placeholder="Enter Address" />
                                 </div>
                             </div>
+                                </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Est Type</label>
-                                    <select class="form-control" name="EstType">
+                                    <select class="form-control" id="EstType" name="EstType">
                                         <option>Company</option>
                                         <option>Contractor</option>
                                         <option>Both</option>
@@ -140,7 +142,15 @@
                                     <input maxlength="100" type="text" required="required" class="form-control" name="ownershipType" placeholder="Enter Type" />
                                 </div>
                             </div>
+                                <div class="col-md-12">
+                                <button type="button" class="btn  btn-info btn-flat remove-btn hidden appendRow" id="appendRow">Add </button>
+                                </div>
+
+                                <div id="appendDiv"></div>
                         </div>
+
+
+
 
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary pull-right">Submit</button>
@@ -155,5 +165,31 @@
 
 @endsection
 @section('script')
+    $(document).ready(function() {
+    $(document).on('change','#EstType',function() {
+    var est=$('#EstType').val();
+    if(est == "Contractor" || est == "Both"){
+    $('.appendRow').removeClass('hidden');
+    }else{
+    $('.appendRow').addClass('hidden');
+    }
+    });
+
+    $(document).on('click','.appendRow',function(){
+    $(" <div class=\"col-md-6\">\n" +
+        "                                <div class=\"form-group\">\n" +
+        "                                    <label class=\"control-label\">Company Name</label>\n" +
+        "                                    <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"companyName[]\" placeholder=\"Enter Company Name\" />\n" +
+        "                                </div>\n" +
+        "                            </div>\n" +
+        "                            <div class=\"col-md-6\">\n" +
+        "                                <div class=\"form-group\">\n" +
+        "                                    <label class=\"control-label\">Address</label>\n" +
+        "                                    <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"Address[]\" placeholder=\"Enter Address\" />\n" +
+        "                                </div>\n" +
+        "                            </div>").insertAfter("#appendDiv");
+
+    });
+    });
 @endsection
 

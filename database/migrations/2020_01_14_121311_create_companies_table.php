@@ -17,13 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->increments('id');
             $table->string('user_id');
             $table->string('companyName');
-            $table->string('Pin');
-            $table->string('City');
-            $table->string('District');
-            $table->string('State');
             $table->string('Address');
-            $table->string('EstType');
-            $table->string('ownershipType');
             $table->timestamps();
         });
     }

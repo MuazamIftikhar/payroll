@@ -27,7 +27,7 @@
                         <form class="form" method="POST" action="{{route('update_salary')}}" enctype="multipart/form-data">
                             @csrf
                         <td>{{$b->Name}}<input type="hidden" required="required" class="form-control" name="id" value="{{$b->e_id}}"><input type="hidden" required="required" class="form-control" name="employee_id" value="{{$b->employee_id}}"></td>
-                        <td>{{$b->fatherName}}</td>
+                        <td>{{$b->fatherName}}<input type="hidden" class="form-control" value="{{$b->id}}" name="Name"/></td>
                         @foreach($salaryHead as $s)
                             <td><input maxlength="100" type="text" required="required"class="form-control" style="width: 100%" name="{{$s->name}}"/></td>
                         @endforeach

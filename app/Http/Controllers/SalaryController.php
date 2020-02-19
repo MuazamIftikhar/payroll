@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
+use App\company_basic;
+use App\CompanyDeduction;
+use App\Deduction;
 use App\Employee;
 use App\Salary;
 use App\SalaryHead;
+use Carbon\Carbon;
+use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SalaryController extends Controller
@@ -82,17 +89,31 @@ class SalaryController extends Controller
      */
     public function salary()
     {
-        $salary_ID=Salary::pluck('employee_id');
-        if(count($salary_ID) > 0)
-        {
-            $employee=Employee::select(DB::raw('*,employees.id as e_id'))->whereNotIn('employees.id',$salary_ID)
-                ->get();
-        }else
-        {
-            $employee=Employee::select(DB::raw('*,employees.id as e_id'))->get();
+        $salary_ID = Salary::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('employee_id');
+        $company=Company::where('user_id','=',Auth::user()->id)->first()->id;
+        if (count($salary_ID) > 0) {
+            $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$company)
+                ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))->whereNotIn('employees.id', $salary_ID)->get();
+        }else{
+            $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$company)
+            ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))->get();
         }
-        $salaryHead=SalaryHead::all();
-        return view('Salary.basicSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead]);
+        $company_id=Company::where('user_id','=',Auth::user()->id)->first()->id;
+        $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
+        $decodeIDs = json_decode($getIds);
+        $namesOfsalaryHead=array();
+        foreach ($decodeIDs as $i){
+            $GetName = SalaryHead::where('id', '=', $i)->first();
+            $namesOfsalaryHead[]=$GetName;
+        }
+
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+        if (count($user) > 0){
+            $companyName=Company::all();
+        }else{
+            $companyName=Company::where('user_id','=',Auth::user()->id)->get();
+        }
+        return view('Salary.basicSalary',['employee'=>$employee, 'salaryHead'=>$namesOfsalaryHead,'company'=>$companyName]);
     }
 
     /**
@@ -107,14 +128,15 @@ class SalaryController extends Controller
     }
     public function save_salary(Request $request)
     {
-        $salarHead=SalaryHead::pluck('name');
+        $company=Company::where('id','=',$request->Name)->where('user_id',Auth::user()->id)->first()->id;
+        $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
+        $salarHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->pluck('name');
         $vs=array();
         foreach($salarHead as $n)
         {
             if($_POST[$n])
             {
                $vs=$this->array_push_assoc($vs,$n,$_POST[$n]);
-
             }
         }
         $salary=new Salary();
@@ -128,12 +150,31 @@ class SalaryController extends Controller
 
     public function manage_salary()
     {
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+        if (count($user) > 0){
+            $company=Company::first()->id;   
+        }else{
+        $company=Company::where('user_id','=',Auth::user()->id)->first()->id;
+        }
         $employee=DB::table('employees')->select(DB::raw('*,employees.id as e_id'))
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
+            ->where('employees.company_id',$company)
+            ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
             ->get();
-        $salaryHead=SalaryHead::all();
-
-        return view('Salary.manageSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead]);
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+        if (count($user) > 0){
+            $companyName=Company::all();
+            $company=Company::first()->id;   
+        }
+        else{
+            $companyName=Company::where('user_id','=',Auth::user()->id)->get();
+            $company=Company::where('user_id',Auth::user()->id)->first()->id;
+        }
+        
+        $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
+        $salaryHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->get();
+       
+        return view('Salary.manageSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead,'company'=>$companyName]);
     }
     public function delete_salary_head(Request $request)
     {
@@ -145,13 +186,18 @@ class SalaryController extends Controller
         $employee=DB::table('employees')->select(DB::raw('*,salaries.id as e_id,employees.id as employee_id'))
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
             ->where('salaries.id','=',$request->id)
+            ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
             ->get();
-        $salaryHead=SalaryHead::all();
+        $company=Company::where('id','=',$request->Name)->first()->id;
+        $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
+        $salaryHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->get();
         return view('Salary.editSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead]);
     }
     public function update_salary(Request $request)
     {
-        $salarHead=SalaryHead::pluck('name');
+        $company=Company::where('id','=',$request->Name)->where('user_id',Auth::user()->id)->first()->id;
+        $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
+        $salarHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->pluck('name');
         $vs=array();
         foreach($salarHead as $n)
         {
@@ -190,4 +236,102 @@ class SalaryController extends Controller
         $salaryHead=SalaryHead::all();
         return view('Salary.manageSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead]);
     }
+
+    public function company_basic(Request $request)
+    {
+        $salaryHead=SalaryHead::all();
+        $deduction=Deduction::all();
+        return view('Salary.assign',[ 'salaryHead'=>$salaryHead,'id'=>$request->id,'deduction'=>$deduction]);
+    }
+    public function save_company_basic(Request $request)
+    {
+        $id=company_basic::where('company_id','=',$request->id)->get();
+        if (count($id)  <=  0) {
+            $salary = new company_basic();
+            $salary->company_id = $request->id;
+            $salary->salary_head = json_encode($request->salaryHead);
+            $salary->save();
+        }else{
+            company_basic::where('id', '=', $id[0]->id)
+                ->update(['company_id' => $request->id, 'salary_head' => json_encode($request->salaryHead)]);
+        }
+        return redirect()->route('manage_company_basic');
+    }
+    public function save_company_deduction(Request $request)
+    {
+
+        $salary=new CompanyDeduction();
+        $salary->company_id=$request->id;
+        $salary->deduction=json_encode($request->deduction);
+        $salary->save();
+        return redirect()->route('manage_company_basic');
+    }
+    public function manage_company_basic(Request $request)
+    {
+        $company=Company::select(DB::raw('*,companies.id as c_id'))
+            ->join('company_infos','companies.user_id','=','company_infos.user_id')
+            ->get();
+        return view('Salary.manageAssign',compact('company'));
+    }
+
+    public function searchByCompany_salary(Request $request)
+    {
+        $salary_ID = Salary::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('employee_id');
+        if (count($salary_ID) > 0) {
+            $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$request->Name)
+                ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))->whereNotIn('employees.id', $salary_ID)
+                ->get();
+        } else {
+            $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$request->Name)
+                ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))->get();
+        }
+        $company_id=Company::where('user_id','=',Auth::user()->id)->where('id','=',$request->Name)->first()->id;
+        $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
+        $decodeIDs = json_decode($getIds);
+        $namesOfsalaryHead=array();
+        foreach ($decodeIDs as $i){
+            $GetName = SalaryHead::where('id', '=', $i)->first();
+            $namesOfsalaryHead[]=$GetName;
+        }
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+        if (count($user) > 0){
+            $companyName=Company::all();
+        }
+        else{
+            $companyName=Company::where('user_id','=',Auth::user()->id)->get();
+        }
+        return view('Salary.basicSalary',['employee'=>$employee, 'salaryHead'=>$namesOfsalaryHead,'company'=>$companyName]);
+    }
+    public function searchByCompany_manageSalary(Request $request)
+    {
+        $date=explode('-',$request->Month);
+        $year=$date[0];
+        $month=$date[1];
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+        if (count($user) > 0){
+            $company=Company::where('id','=',$request->Name)->first()->id;   
+        }else{
+            $company=Company::where('user_id','=',Auth::user()->id)->where('id','=',$request->Name)->first()->id;
+        }
+        $employee=DB::table('employees')->select(DB::raw('*,employees.id as e_id,salaries.created_at as s_created_at'))
+            ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
+            ->where('employees.company_id',$company)
+            ->whereYear('salaries.created_at', '=', $year)->whereMonth('salaries.created_at', '=', $month)
+            ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
+            ->get();
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+            if (count($user) > 0){
+                $companyName=Company::all();
+                $company=Company::where('id','=',$request->Name)->first()->id; 
+            }
+            else{
+            $companyName=Company::where('user_id','=',Auth::user()->id)->get();
+            $company=Company::where('id','=',$request->Name)->where('user_id',Auth::user()->id)->first()->id;
+            }
+        $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
+        $salaryHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->get();
+       
+        return view('Salary.manageSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead,'company'=>$companyName]);
+    }
+
 }

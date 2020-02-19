@@ -2,29 +2,41 @@
 
 @section('content')
     <section class="content">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Search</h3>
-            </div>
-            <form class="form" method="GET" action="{{route('searchByMonth_salary')}}">
-                @csrf
-                <div class="box-body">
-                    <div class="col-md-12">
-                        <div class="input-group input-group-lg">
-                            <input type="month" class="form-control" id="Name" value="{{old('Name')}}" name="date" placeholder="Enter Name">
-                            <span class="input-group-btn">
-                      <button type="submit"  class="btn btn-primary pull-right"><i class="fa fa-search"> Search</i> </button>
-                    </span>
-                        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Search</h3>
                     </div>
+                    <form class="form" method="GET" action="{{route('searchByCompany_manageSalary')}}">
+                        <div class="box-body">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select name="Name" class="form-control">
+                                        @foreach($company as $c)
+                                            <option value="{{$c->id}}">{{$c->companyName}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <input type="month" class="form-control" id="Month"  name="Month" >
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                            <div class="box-footer">
+                            <button type="submit" class="btn btn-primary pull-right">Search</button>
+                        </div>
+                            </div>
+                            
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-        </div>
-    </div>
 
         <div class="box">
             <div class="box-header">
@@ -64,7 +76,7 @@
                                 <td><input maxlength="100" type="text" required="required"class="form-control" value="0" disabled name="basicSalary[]"/></td>
                             @endif
                         <td><input maxlength="100" type="text" required="required" disabled class="form-control" value="{{$b->salary_flag}}" name="basicSalary[]" /></td>
-                        <td class="text-center"><a href="{{route('edit_salary',["id" => $b->id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a></td>
+                        <td class="text-center"><a href="{{route('edit_salary',["id" => $b->id,"Name"=>$b->company_id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>

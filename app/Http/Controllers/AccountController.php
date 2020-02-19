@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\CompanyInfo;
 use App\Mail\WelcomeMail;
 use App\Role;
 use App\User;
@@ -53,17 +54,23 @@ class AccountController extends Controller
             $user->attachRole($request->Role);
             if ($request->Role == "3")
             {
+                $count=count($request->Address);
+                for($i=0;$i<$count;$i++){
                 $company_info=new Company();
                 $company_info->user_id=$user->id;
-                $company_info->companyName=$request->companyName;
-                $company_info->Pin=$request->Pin;
-                $company_info->City=$request->City;
-                $company_info->District=$request->District;
-                $company_info->State=$request->State;
-                $company_info->Address=$request->Address;
-                $company_info->EstType=$request->EstType;
-                $company_info->ownershipType=$request->ownershipType;
+                $company_info->companyName=$request->companyName[$i];
+                $company_info->Address=$request->Address[$i];
                 $company_info->save();
+                }
+                $company=new CompanyInfo();
+                $company->user_id=$user->id;
+                $company->Pin=$request->Pin;
+                $company->City=$request->City;
+                $company->District=$request->District;
+                $company->State=$request->State;
+                $company->EstType=$request->EstType;
+                $company->ownershipType=$request->ownershipType;
+                $company->save();
             }
             Mail::to($request->Email)->send(new WelcomeMail($demo));
             return redirect()->back()->with("success" , "User Added Successfully!");
@@ -95,14 +102,14 @@ class AccountController extends Controller
 
         if($user->role_id == "3"){
             $user=User::select(DB::raw('*,users.name as user_name,users.id as user_col_id,roles.name as role_name,roles.id as role_id'))
-                ->join('companies','users.id','=','companies.user_id')
+                ->join('company_infos','users.id','=','company_infos.user_id')
                 ->join('role_user','users.id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->where('users.id','=',$request->id)
                 ->first();
-            return view('Account.editCompany',['user' => $user,'roles' => $roles]);
+            $company=Company::where('user_id','=',$request->id)->get();
+            return view('Account.editCompany',['user' => $user,'roles' => $roles,'company'=>$company]);
         }else{
-
         return view('Account.edit',['user' => $user,'roles' => $roles]);
         }
     }
@@ -131,8 +138,21 @@ class AccountController extends Controller
             $user = User::where('id', '=', $request->id)
                 ->update(['name' => $request->Name, 'email' => $request->Email, 'number' => $request->Number, 'password' => $password]);
             if ($request->Role == "3"){
-                Company::where('user_id',$request->id)->update(['companyName'=>$request->companyName,'Pin'=>$request->Pin,'City'=>$request->City,'District'=>$request->District,
-                    'State'=>$request->State,'Address'=>$request->Address,'EstType'=>$request->EstType,'ownershipType'=>$request->ownershipType]);
+//                Company::where('user_id',$request->id)->update(['companyName'=>$request->companyName,'Pin'=>$request->Pin,'City'=>$request->City,'District'=>$request->District,
+//                    'State'=>$request->State,'Address'=>$request->Address,'EstType'=>$request->EstType,'ownershipType'=>$request->ownershipType]);
+                $count=count($request->company_id);
+                for($i=0;$i<$count;$i++) {
+                    Company::where('id', $request->company_id[$i])->update(['companyName' => $request->companyName[$i], 'Address' => $request->Address[$i]]);
+                }
+                $i--;
+                $countCompany=count($request->companyName);
+                for($b=$i;$b<$countCompany;$b++){
+                    $company_info=new Company();
+                    $company_info->user_id=$request->id;
+                    $company_info->companyName=$request->companyName[$b];
+                    $company_info->Address=$request->Address[$b];
+                    $company_info->save();
+                }
             }
             if ($user) {
                  DB::table('role_user')->where('user_id', '=', $request->id)->update(['role_id' => $request->Role]);

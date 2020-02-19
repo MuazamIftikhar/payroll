@@ -15,15 +15,8 @@ class CreateEstimationsTable extends Migration
     {
         Schema::create('estimations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('estName');
+            $table->string('user_id');
             $table->string('Factory');
-            $table->string('Pin');
-            $table->string('City');
-            $table->string('District');
-            $table->string('State');
-            $table->string('Phone');
-            $table->string('Type');
-            $table->string('ownershipType');
             $table->string('ownerName');
             $table->string('Designation');
             $table->string('ownerMobile');

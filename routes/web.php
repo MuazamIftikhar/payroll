@@ -53,6 +53,49 @@ Route::group([ 'middleware' => ['auth']], function() {
     Route::POST('/save_attendance', 'AttendanceController@save_attendance')->name('save_attendance');
     Route::GET('/manage_attendance', 'AttendanceController@manage_attendance')->name('manage_attendance');
     Route::GET('/delete_attendance', 'AttendanceController@delete_attendance')->name('delete_attendance');
+    Route::GET('/edit_attendance', 'AttendanceController@edit_attendance')->name('edit_attendance');
+    Route::POST('/update_attendance', 'AttendanceController@update_attendance')->name('update_attendance');
+
+    //Deduction
+    Route::GET('/deduction', 'DeductionController@index')->name('deduction');
+    Route::GET('/esic_deduction', 'DeductionController@esic_deduction')->name('esic_deduction');
+    Route::POST('/save_deduction', 'DeductionController@save_deduction')->name('save_deduction');
+    Route::GET('/ptax', 'DeductionController@ptax')->name('ptax');
+    Route::POST('/save_ptax', 'DeductionController@save_ptax')->name('save_ptax');
+    Route::GET('/manage_deduction', 'DeductionController@manage_deduction')->name('manage_deduction');
+    Route::GET('/delete_deduction', 'DeductionController@delete_deduction')->name('delete_deduction');
+
+//    //Company Deduction
+//    Route::GET('/company_deduction', 'DeductionController@company_deduction')->name('company_deduction');
+//    Route::POST('/save_company_deduction', 'DeductionController@save_company_deduction')->name('save_company_deduction');
+//    Route::GET('/edit_company_deduction', 'DeductionController@edit_company_deduction')->name('edit_company_deduction');
+//    Route::POST('/update_company_deduction', 'DeductionController@update_company_deduction')->name('update_company_deduction');
+
+    //Leave
+    Route::GET('/manage_leave', 'LeaveCotroller@manage_leave')->name('manage_leave');
+    Route::GET('/leave', 'LeaveCotroller@index')->name('leave');
+    Route::POST('/save_leave', 'LeaveCotroller@save_leave')->name('save_leave');
+    Route::GET('/manage_loan', 'LeaveCotroller@manage_loan')->name('manage_loan');
+    Route::GET('/loan', 'LeaveCotroller@loan')->name('loan');
+    Route::POST('/save_loan', 'LeaveCotroller@save_loan')->name('save_loan');
+
+    Route::GET('/searchByCompany', 'EmployeeController@searchByCompany')->name('searchByCompany');
+    Route::GET('/searchByCompany_salary', 'SalaryController@searchByCompany_salary')->name('searchByCompany_salary');
+    Route::GET('/searchByCompany_manageSalary', 'SalaryController@searchByCompany_manageSalary')->name('searchByCompany_manageSalary');
+    Route::GET('/searchByCompany_attendance', 'AttendanceController@searchByCompany_attendance')->name('searchByCompany_attendance');
+    Route::GET('/searchByCompany_leave', 'LeaveCotroller@searchByCompany_leave')->name('searchByCompany_leave');
+    Route::GET('/searchByCompany_loan', 'LeaveCotroller@searchByCompany_loan')->name('searchByCompany_loan');
+    Route::GET('/searchByCompany_manageAttendance', 'AttendanceController@searchByCompany_manageAttendance')->name('searchByCompany_manageAttendance');
+
+    Route::GET('/manage_company_basic', 'SalaryController@manage_company_basic')->name('manage_company_basic');
+    Route::GET('/company_basic', 'SalaryController@company_basic')->name('company_basic');
+    Route::POST('/save_company_basic', 'SalaryController@save_company_basic')->name('save_company_basic');
+    Route::POST('/save_company_deduction', 'SalaryController@save_company_deduction')->name('save_company_deduction');
 
 
+    Route::GET('/setting', 'SettingController@index')->name('setting');
+    Route::POST('/save_setting', 'SettingController@save_setting')->name('save_setting');
+
+    Route::GET('/excel', 'ExcelController@index')->name('excel');
+    Route::GET('/salary_excel', 'ExcelController@salary_excel')->name('salary_excel');
 });

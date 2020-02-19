@@ -76,12 +76,27 @@
                                     <h3 class="box-title">Estimation</h3>
                                 </div>
                                 <div class="box-body">
-                                    @foreach($est as $e)
+                                    @if (session('error'))
+                                        <div class="alert alert-error" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <strong>{{ session('error') }}</strong>
+                                        </div>
+                                    @endif
+                                    @if (session('success'))
+                                        <div class="alert alert-success" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <strong>{{ session('success') }}</strong>
+                                        </div>
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Name</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->companyName}}" name="estName" placeholder="Enter  Name" />
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->name}}" name="Phone" placeholder="Enter Phone" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -95,13 +110,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Est Type</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->EstType}}" name="Type" placeholder="Enter Est Type" />
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->EstType}}" name="Type" placeholder="Enter Est Type" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">OwnerShip Type</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->ownershipType}}" name="ownershipType" placeholder="Enter Type" />
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->ownershipType}}" name="ownershipType" placeholder="Enter Type" />
                                             </div>
                                         </div>
                                     </div>
@@ -109,13 +124,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">City</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->City}}" name="City" placeholder="Enter City" />
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->City}}" name="City" placeholder="Enter City" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">District</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->District}}" name="District" placeholder="Enter District" />
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->District}}" name="District" placeholder="Enter District" />
                                             </div>
                                         </div>
                                     </div>
@@ -123,25 +138,16 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">State</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->State}}" name="State" placeholder="Enter State" />
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->State}}" name="State" placeholder="Enter State" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Pin Code</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->Pin}}" name="Pin" placeholder="Enter Pin Code" />
+                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->Pin}}" name="Pin" placeholder="Enter Pin Code" />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Phone</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$e->number}}" name="Phone" placeholder="Enter Phone" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
                                     <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
                                 </div>
                             </div>
@@ -386,9 +392,49 @@
 
     $('div.setup-box div a.btn-success').trigger('click');
     });
-
     $(document).on('click','#appendRow',function(){
-    $(".po").clone().insertAfter("#appendDiv");
+    $("<div class=\"row\">\n" +
+        "                                        <div class=\"col-md-6\">\n" +
+        "                                            <div class=\"form-group\">\n" +
+        "                                                <label class=\"control-label\">Name</label>\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"ownerName[]\" placeholder=\"Enter  Name\" />\n" +
+        "                                            </div>\n" +
+        "                                        </div>\n" +
+        "                                        <div class=\"col-md-6\">\n" +
+        "                                            <div class=\"form-group\">\n" +
+        "                                                <label class=\"control-label\">Mobile</label>\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\"  name=\"ownerMobile[]\"  placeholder=\"Enter Mobile\" />\n" +
+        "                                            </div>\n" +
+        "                                        </div>\n" +
+        "                                    </div>\n" +
+        "                                    <div class=\"row\">\n" +
+        "                                        <div class=\"col-md-6\">\n" +
+        "                                            <div class=\"form-group\">\n" +
+        "                                                <label class=\"control-label\">Email</label>\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"ownerEmail[]\" placeholder=\"Enter Email\" />\n" +
+        "                                            </div>\n" +
+        "                                        </div>\n" +
+        "                                        <div class=\"col-md-6\">\n" +
+        "                                            <div class=\"form-group\">\n" +
+        "                                                <label class=\"control-label\">Pan Number</label>\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"Pan[]\" placeholder=\"Enter Pan Number\" />\n" +
+        "                                            </div>\n" +
+        "                                        </div>\n" +
+        "                                    </div>\n" +
+        "                                    <div class=\"row\">\n" +
+        "                                        <div class=\"col-md-6\">\n" +
+        "                                            <div class=\"form-group\">\n" +
+        "                                                <label class=\"control-label\">Remarks</label>\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"ownerRemarks[]\" placeholder=\"Enter Remarks\" />\n" +
+        "                                            </div>\n" +
+        "                                        </div>\n" +
+        "                                        <div class=\"col-md-6\">\n" +
+        "                                            <div class=\"form-group\">\n" +
+        "                                                <label class=\"control-label\">Designation</label>\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"Designation[]\" placeholder=\"Enter Designation\" />\n" +
+        "                                            </div>\n" +
+        "                                        </div>\n" +
+        "                                    </div>").insertAfter("#appendDiv");
     });
 @endsection
 

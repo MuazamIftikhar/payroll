@@ -12,9 +12,9 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
+                        <th>Type</th>
+                        <th>Factory</th>
+                        <th>Pin</th>
                         <th>City</th>
                         <th>Action</th>
                     </tr>
@@ -22,11 +22,11 @@
                     <tbody>
                     @foreach($estimation as $b)
                         <tr>
-                            <td>{{$b->estName}}</td>
+                            <td>{{$b->EstType}}</td>
                             <td>{{$b->Factory}}</td>
                             <td>{{$b->Pin}}</td>
                             <td>{{$b->City}}</td>
-                            <td class="text-center"> <a href="{{route('delete_est',["id" => $b->id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
+                            <td class="text-center"> <a href="{{route('delete_est',["id" => $b->e_id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>

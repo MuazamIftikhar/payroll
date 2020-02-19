@@ -10,6 +10,33 @@
 @section('content')
     <section class="content">
 
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Search</h3>
+                    </div>
+                    <form class="form" method="GET" action="{{route('searchByCompany_attendance')}}">
+                        <div class="box-body">
+                            <div class="col-md-12">
+                                <div class="input-group input-group-lg">
+                                    <select name="Name" class="form-control">
+                                        @foreach($company as $c)
+                                            <option value="{{$c->id}}">{{$c->companyName}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="input-group-btn">
+                                  <button type="submit"  class="btn btn-primary pull-right"><i class="fa fa-search"> Search</i> </button>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Manage Users</h3>
@@ -41,13 +68,16 @@
                                 @csrf
                                 <td>{{$b->Name}}<input type="hidden" required="required" class="form-control" value="{{$b->e_id}}" name="id" /></td>
                                 <td><input  type ="text" required="required" value="0" class="PR_Day" id="PR_Day" name="PR_Day" ></td>
-                                <td><input  type ="text" required="required" value="0" id="PL" name="PL" ></td>
-                                <td><input  type ="text" required="required" value="0" id="SL" name="SL" ></td>
-                                <td><input  type ="text" required="required" value="0" id="CL" name="CL" ></td>
+                                <td><input  type ="text" required="required" value="{{$b->OB_PL == "" ? "0" : "$b->OB_PL"}}" id="PL" name="PL" ></td>
+                                <td><input  type ="text" required="required" value="{{$b->OB_SL == "" ? "0" : "$b->OB_SL"}}" id="SL" name="SL" ></td>
+                                <td><input  type ="text" required="required" value="{{$b->OB_CL == "" ? "0" : "$b->OB_CL"}}" id="CL" name="CL" ></td>
                                 <td><input  type ="text" required="required" value="0" id="PH" name="PH" ></td>
                                 <td><input  type ="text" required="required" id="Total" name="Total"></td>
                                 <td><input  type ="text" required="required" name="Advance" ></td>
-                                <td><input  type ="text" required="required" name="Loan"></td>
+                                @php
+                                    $checkLoan=App\Http\Controllers\AttendanceController::CheckLoan($b->e_id);
+                                @endphp
+                                <td><input  type ="text" required="required" value="{{$checkLoan == null ? "0" : ($checkLoan->Balance < $checkLoan->monthlyInstallment ? $checkLoan->Balance : $checkLoan->monthlyInstallment)}}" name="Loan"></td>
                                 <td><input  type ="text" required="required" name="Deduction"></td>
                                 <td><input  type ="text" required="required" name="OT" ></td>
                                 <td class="text-center"><button class="btn btn-success " type="submit">Add</button></td>
@@ -74,7 +104,7 @@
      var CL=$(this).closest('tr').find('#CL').val();
      var PH=$(this).closest('tr').find('#PH').val();
      var total=parseInt(PR_Day)+parseInt(PL)+parseInt(SL)+parseInt(CL)+parseInt(PH);
-     $('#Total').val(total);
+     $(this).closest('tr').find('#Total').val(total);
      });
     });
 @endsection

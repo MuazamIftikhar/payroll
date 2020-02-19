@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="Hotel">Password</label>
+                                    <label for="Confirm">Confirm Password</label>
                                     <input type="text" class="form-control" value="{{old('Password_confirmation')}}" id="Password_confirmation" name="Password_confirmation" placeholder="Password">
                                     @if ($errors->has('Password_confirmation'))
                                         <span class="danger">{{$errors->first('Password_confirmation')}}</span>

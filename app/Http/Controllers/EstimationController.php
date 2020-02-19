@@ -7,6 +7,7 @@ use App\Employee;
 use App\Estimation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class EstimationController extends Controller
 {
@@ -17,9 +18,10 @@ class EstimationController extends Controller
      */
     public function index()
     {
-        $est=Company::where('user_id',Auth::user()->id)
-            ->join('users','companies.id','=','users.id')
-            ->get();
+        $est=Company::join('users','companies.user_id','=','users.id')
+            ->join('company_infos','companies.user_id','=','company_infos.user_id')
+            ->where('companies.user_id',Auth::user()->id)
+            ->first();
         return view('Est.index',compact('est'));
     }
 
@@ -31,16 +33,11 @@ class EstimationController extends Controller
 
     public function create(Request $request)
     {
+        $id=Estimation::where('user_id','=',Auth::user()->id)->get();
+        if (count($id)  <= 0){
         $est=new Estimation();
-        $est->estName=$request->estName;
+        $est->user_id=Auth::user()->id;
         $est->Factory=$request->Factory;
-        $est->Pin=$request->Pin;
-        $est->City=$request->City;
-        $est->District=$request->District;
-        $est->State=$request->State;
-        $est->Phone=$request->Phone;
-        $est->Type=$request->Type;
-        $est->ownershipType=$request->ownershipType;
         $est->ownerName=json_encode($request->ownerName);
         $est->ownerMobile=json_encode($request->ownerMobile);
         $est->ownerEmail=json_encode($request->ownerEmail);
@@ -183,7 +180,10 @@ class EstimationController extends Controller
         }
         $est->remarks=$request->remarks;
         $est->save();
-        return back();
+        return redirect()->back()->with("success", "User Updated Successfully!");
+        }else{
+           return redirect()->back()->with("error", "User Already ADD This!");
+        }
     }
 
     /**
@@ -194,7 +194,10 @@ class EstimationController extends Controller
      */
     public function manage_estimation()
     {
-        $estimation=Estimation::all();
+        $estimation=Estimation::select(DB::raw('*,estimations.id as e_id'))
+            ->join('companies','estimations.user_id','=','companies.id')
+            ->join('company_infos','estimations.user_id','=','company_infos.user_id')
+            ->get();
         return view('Est.manage',compact('estimation'));
     }
 

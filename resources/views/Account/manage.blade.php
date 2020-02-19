@@ -27,6 +27,7 @@
                             <td>{{$b->number}}</td>
                             <td>{{$b->role_name}}</td>
                             <td class="text-center"><a href="{{route('edit_user',["id" => $b->user_col_id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> @if($b->user_col_id > 1)<a href="{{route('delete_user',["id" => $b->user_col_id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>@endif</td>
+    {{--                            <a href="{{route('edit_user',["id" => $b->user_col_id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>--}}
                         </tr>
                     @endforeach
                     </tbody>

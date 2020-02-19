@@ -57,7 +57,7 @@
                         </div>
                         <div class="stepwizard-step col-xs-4">
                             <a href="#step-2" type="button" class="btn btn-default btn-circle">2</a>
-                            <p><small>Owner</small></p>
+                            <p><small>Bank Detail</small></p>
                         </div>
                         <div class="stepwizard-step col-xs-4">
                             <a href="#step-3" type="button" class="btn btn-default btn-circle">3</a>
@@ -73,6 +73,22 @@
                             <h3 class="box-title">Personal Detail</h3>
                         </div>
                         <div class="box-body">
+                            @if (session('error'))
+                                <div class="alert alert-error" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <strong>{{ session('error') }}</strong>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <strong>{{ session('success') }}</strong>
+                                </div>
+                            @endif
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -102,24 +118,18 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Date Of Joining</label>
+                                        <label class="control-label">Joining Date</label>
                                         <input type="date" required="required" class="form-control" name="DOJ"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Gender</label>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="Gender" value="Male" checked="">
-                                                Male
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="Gender" value="Female">
-                                                Female
-                                            </label>
-                                        </div>
+                                        <label class="control-label">Ennding Date</label>
+                                        <input type="date" required="required" class="form-control" name="DOE"/>
                                     </div>
+                                </div>
+                                <div class="col-md-4">
+
                                 </div>
                             </div>
                             <div class="row">
@@ -138,7 +148,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Email</label>
-                                        <input maxlength="100" type="email" required="required" class="form-control" name="Email" placeholder="Enter Email" />
+                                        <input maxlength="100" type="text" required="required" class="form-control" name="Email" placeholder="Enter Email" />
                                     </div>
                                 </div>
                             </div>
@@ -210,10 +220,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Company Name</label>
-                                        <input type="text" required="required" readonly value="{{$name}}" class="form-control" name="companyName"/>
+                                        <select class="form-control" name="companyName">
+                                            @foreach($name as $n)
+                                            <option value="{{$n->id}}">{{$n->companyName}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label class="control-label">Marital Status</label>
                                         <div class="radio">
@@ -228,6 +242,25 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">Gender</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="Gender" value="Male" checked="">
+                                                Male
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="Gender" value="Female">
+                                                Female
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="Gender" value="Transgender">
+                                                Transgender
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
                         </div>
@@ -238,6 +271,59 @@
                             <h3 class="box-title">Destination</h3>
                         </div>
                         <div class="box-body">
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Employee Esic Number</label>
+                                        <input type="text" required="required" class="form-control" name="esicNumber"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Esic Flag</label>
+                                        <select class="form-control"  name="esicFlag">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">PT Flag</label>
+                                        <select class="form-control"  name="PTFlag">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Emplyee PF/UAN Number</label>
+                                        <input type="text" required="required" class="form-control" name="UAN" placeholder="Enter UAN" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">PF Saturating Ceilling</label>
+                                        <select class="form-control"  name="PFSaturating">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">PF Flag</label>
+                                        <select class="form-control"  name="PFFlag">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -266,62 +352,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Employee Esic Number</label>
-                                        <input type="text" required="required" class="form-control" name="esicNumber"/>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Emplyee PF/UAN Number</label>
-                                        <select class="form-control"  name="UAN">
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Esic Flag</label>
-                                        <select class="form-control"  name="esicFlag">
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">PT Flag</label>
-                                        <select class="form-control"  name="PTFlag">
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">PF Saturating Ceilling</label>
-                                        <select class="form-control"  name="PFSaturating">
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">PF Flag</label>
-                                        <select class="form-control"  name="PFFlag">
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -430,7 +461,21 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Adhar Number</label>
-                                            <input type="text" required="required" class="form-control" name="family_adharNumber[]"/>
+                                            <input type="text" required="required" class="form-control" name="family_adharNumber[]" placeholder="Enter Adhar Number"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Witness Name</label>
+                                            <input type="text" required="required" class="form-control" name="Witness[]" placeholder="Enter Witness Name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Witness Address</label>
+                                            <input type="text" required="required" class="form-control" name="witnessAddress[]" placeholder="Enter Witness Address"/>
                                         </div>
                                     </div>
                                 </div>
