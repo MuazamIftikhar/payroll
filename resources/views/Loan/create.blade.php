@@ -8,7 +8,7 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add User</h3>
+                        <h3 class="box-title">Add Loan</h3>
                     </div>
                     @if(count($loan) > 0)
                         <form class="form" method="POST" action="{{route('save_loan',['id'=>$id])}}">

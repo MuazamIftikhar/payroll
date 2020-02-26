@@ -40,6 +40,7 @@
                                 <form class="form" method="POST" action="{{route('update_attendance')}}" enctype="multipart/form-data">
                                     @csrf
                                     <td>{{$b->Name}}<input type="hidden" required="required" class="form-control" value="{{$b->e_id}}" name="id" /></td>
+                                    <td><input  type ="text" required="required" value="0" name="assignDay" ></td>
                                     <td><input  type ="text" required="required" value="{{$b->PR_Day}}" class="PR_Day" id="PR_Day" name="PR_Day" ></td>
                                     <td><input  type ="text" required="required" value="{{$b->PL}}" id="PL" name="PL" ></td>
                                     <td><input  type ="text" required="required" value="{{$b->SL}}" id="SL" name="SL" ></td>

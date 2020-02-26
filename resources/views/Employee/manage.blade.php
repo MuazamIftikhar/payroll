@@ -30,7 +30,7 @@
         </div>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Manage Employee</h3>
+                <h3 class="box-title">Manage Employer</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -39,7 +39,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Phone Number</th>
+                        <th>Mobile Number</th>
                         <th>City</th>
                         <th>Action</th>
                     </tr>

@@ -2,34 +2,29 @@
 
 namespace App\Exports;
 
-use App\Attendance;
 use App\Company;
 use App\company_basic;
 use App\Employee;
 use App\Ptax;
 use App\SalaryHead;
 use App\Setting;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
-use Maatwebsite\Excel\Events\BeforeExport;
-use Maatwebsite\Excel\Events\BeforeSheet;
 use Maatwebsite\Excel\Events\BeforeWriting;
-use Nexmo\Account\Secret;
-use Zend\Diactoros\Request;
+use Maatwebsite\Excel\Sheet;
+
 
 class LeaveExport implements FromView,WithEvents
 {
 
-    public function __construct($id,$month)
+    public function __construct($id,$month,$setting)
     {
         $this->id = $id;
         $this->month = $month;
+        $this->setting = $setting;
     }
 
     public function view(): View
@@ -51,18 +46,29 @@ class LeaveExport implements FromView,WithEvents
             ->Join('attendances','employees.id','=','attendances.employee_id')
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
             ->whereYear('salaries.created_at', '=', $year)->whereMonth('salaries.created_at', '=', $month)
-            ->whereYear('attendances.created_at', '=', $year)->whereMonth('attendances.created_at', '=', $month)
+            ->where('attendances.Month', '=', $this->month)
             ->where('employees.company_id','=',$this->id)->get();
         $company=Company::where('id','=',$company_id)->get();
-        $setting=Setting::where('id','=',1)->get();
+        $setting=Setting::where('id','=',$this->setting)->get();
         return view('Employee.excelExport', [
             'employee' => $employee,"salaryHead"=>$namesOfsalaryHead,"ptax"=>$ptax,'company'=>$company,'printDate'=>$printDate,'setting'=>$setting]);
     }
     public function registerEvents(): array
     {
         return[
-            BeforeWriting::class => function(BeforeWriting $event) {
+            AfterSheet::class    => function(AfterSheet $event) {
+                $event->getDelegate()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+                $event->getDelegate()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+//                $pageMargins = new \PhpOffice\PhpSpreadsheet\Worksheet\PageMargins();
+//                $pageMargins->setTop(0.16);
+//                $pageMargins->setRight(0.04);
+//                $pageMargins->setBottom(0.04);
+//                $pageMargins->setLeft(0.04);
+//
+//                Sheet::macro('setPageMargins', function($event, $pageMargins){});
+            },
 
+            BeforeWriting::class => function(BeforeWriting $event) {
                 $event->writer->getDelegate()->getActiveSheet()->mergeCells('A1:B1');
                 $event->writer->getDelegate()->getActiveSheet()->mergeCells('A2:B3');
                 $event->writer->getDelegate()->getActiveSheet()->mergeCells('A4:B4');
@@ -130,9 +136,9 @@ class LeaveExport implements FromView,WithEvents
                     ->Join('attendances','employees.id','=','attendances.employee_id')
                     ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
                     ->whereYear('salaries.created_at', '=', $year)->whereMonth('salaries.created_at', '=', $month)
-                    ->whereYear('attendances.created_at', '=', $year)->whereMonth('attendances.created_at', '=', $month)
+                    ->where('attendances.Month', '=', $this->month)
                     ->where('employees.company_id','=',$this->id)->get();
-                $getRowsCount=count($getRows)+8;
+                $getRowsCount=count($getRows)+9;
 
                 $event->writer->getDelegate()->getActiveSheet()->getStyle("A7:X$getRowsCount")->applyFromArray($styleArray = [
                          'borders' => [
@@ -142,6 +148,9 @@ class LeaveExport implements FromView,WithEvents
                                  'text-align' => 'center'
                              ],
                          ],
+                    'font' => [
+                        'size' => 12
+                    ],
 
                      'alignment' => [
                          'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -154,7 +163,7 @@ class LeaveExport implements FromView,WithEvents
                 {
                     if($col == 'X')
                     {
-                        $event->writer->getDelegate()->getActiveSheet()->getColumnDimension($col)->setWidth(20);
+                        $event->writer->getDelegate()->getActiveSheet()->getColumnDimension($col)->setWidth(30);
                     }
                     else
                     {

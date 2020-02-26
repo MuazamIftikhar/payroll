@@ -14,7 +14,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $setting=Setting::where('id','=',1)->get();
+        $setting=Setting::all();
         return view('Setting.excel',compact('setting'));
     }
 
@@ -25,7 +25,7 @@ class SettingController extends Controller
      */
     public function save_setting(Request $request)
     {
-        Setting::where('id', '=',1)
+        Setting::where('id', '=',$request->id)
             ->update(['form' => $request->form,'rules' => $request->rules]);
         return back()->with("success" , "Setting Updated Successfully!");
     }

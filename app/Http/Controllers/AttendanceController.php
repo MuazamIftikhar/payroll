@@ -20,8 +20,8 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-       // dd(Carbon::now()->addMonths(2)->format('yy-m'));
-        $employee_ID=Attendance::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('employee_id');
+        $month=Carbon::now()->format('yy-m');
+        $employee_ID=Attendance::where('Month',$month)->pluck('employee_id');
         $company=Company::where('user_id','=',Auth::user()->id)->first()->id;
         if(count($employee_ID) > 0){
             $employee=Employee::select(DB::raw('*,employees.id as e_id'))
@@ -39,7 +39,7 @@ class AttendanceController extends Controller
                ->get();
         }
         $company=Company::where('user_id','=',Auth::user()->id)->get();
-        return view('Attendance.index',["employee"=>$employee,"company"=>$company]);
+        return view('Attendance.index',["employee"=>$employee,"company"=>$company,"month"=>$month]);
     }
 
     public static function CheckLoan($user_id){
@@ -52,6 +52,8 @@ class AttendanceController extends Controller
     {
         $attendance=new Attendance();
         $attendance->employee_id=$request->id;
+        $attendance->assignDay=$request->assignDay;
+        $attendance->Month=$request->month;
         $attendance->PR_Day=$request->PR_Day;
         $attendance->PL=$request->PL;
         $attendance->SL=$request->SL;
@@ -64,14 +66,17 @@ class AttendanceController extends Controller
         $attendance->OT=$request->OT;
         $attendance->save();
 
+        $loan=Loan::where('employee_id', '=', $request->id)->get();
+        if (count($loan) > 0){
         $balance=Loan::where('employee_id','=',$request->id)->first()->Balance;
         $numberInstallment=Loan::where('employee_id','=',$request->id)->first()->numberInstallment;
-        if($balance)
+        if(count($balance) > 0)
         {
             $numberInstallment=$numberInstallment-1;
             $amount=$balance-$request->Loan;
             Loan::where('employee_id', '=', $request->id)
                 ->update(['Balance' => $amount,'numberInstallment'=>$numberInstallment]);
+        }
         }
         return redirect()->route('attendance');
     }
@@ -115,7 +120,7 @@ class AttendanceController extends Controller
     public function update_attendance(Request $request)
     {
         Attendance::where('id','=',$request->id)
-            ->update(['PR_Day' => $request->PR_Day,'PL' => $request->PL,'SL' => $request->SL,'CL' => $request->CL,'PH' => $request->PH,'Total' => $request->Total,'Advance' => $request->Advance,
+            ->update(['assignDay' => $request->assignDay,'PR_Day' => $request->PR_Day,'PL' => $request->PL,'SL' => $request->SL,'CL' => $request->CL,'PH' => $request->PH,'Total' => $request->Total,'Advance' => $request->Advance,
                 'Loan' => $request->Loan,'Deduction' => $request->Deduction,'OT' => $request->OT]);
         return back();
     }
@@ -129,7 +134,8 @@ class AttendanceController extends Controller
      */
     public function searchByCompany_attendance(Request $request)
     {
-        $employee_ID=Attendance::pluck('employee_id');
+        $month=$request->Month;
+        $employee_ID=Attendance::where('Month',$month)->pluck('employee_id');
         $company=Company::where('user_id','=',Auth::user()->id)->where('id','=',$request->Name)->first()->id;
         if(count($employee_ID) > 0){
             $employee=Employee::select(DB::raw('*,employees.id as e_id'))
@@ -145,13 +151,11 @@ class AttendanceController extends Controller
                 ->get();
         }
         $company=Company::where('user_id','=',Auth::user()->id)->get();
-        return view('Attendance.index',["employee"=>$employee,"company"=>$company]);
+        return view('Attendance.index',["employee"=>$employee,"company"=>$company,"month"=>$month]);
     }
     public function searchByCompany_manageAttendance(Request $request)
     {
-        $date=explode('-',$request->Month);
-        $year=$date[0];
-        $month=$date[1];
+        $month=$request->Month;
         $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
         if (count($user) > 0){
             $companyName=Company::where('id','=',$request->Name)->first()->id; 
@@ -164,7 +168,7 @@ class AttendanceController extends Controller
             ->join('employees','attendances.employee_id','=','employees.id')
             ->where('employees.company_id',$companyName)
             ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
-            ->whereYear('attendances.created_at', '=', $year)->whereMonth('attendances.created_at', '=', $month)
+            ->where('attendances.Month', '=', $month)
             ->get();
         return view('Attendance.manage',["attendance"=>$attendance,"company"=>$company]);
     }

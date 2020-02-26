@@ -57,11 +57,11 @@
                         </div>
                         <div class="stepwizard-step col-xs-4">
                             <a href="#step-2" type="button" class="btn btn-default btn-circle">2</a>
-                            <p><small>Bank Detail</small></p>
+                            <p><small>Doccument</small></p>
                         </div>
                         <div class="stepwizard-step col-xs-4">
                             <a href="#step-3" type="button" class="btn btn-default btn-circle">3</a>
-                            <p><small>Doccument</small></p>
+                            <p><small>Family / Nominee </small></p>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Ennding Date</label>
+                                        <label class="control-label">Date of Leaving</label>
                                         <input type="date" required="required" class="form-control" name="DOE"/>
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Phone Number</label>
+                                        <label class="control-label">Mobile Number</label>
                                         <input maxlength="100" type="text" required="required" class="form-control" name="Phone" placeholder="Enter Phone" />
                                     </div>
                                 </div>
@@ -268,7 +268,7 @@
 
                     <div class="box box-primary setup-content" id="step-2">
                         <div class="box-header">
-                            <h3 class="box-title">Destination</h3>
+
                         </div>
                         <div class="box-body">
                             <hr>
@@ -327,7 +327,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Bank Name</label>
+                                        <label class="control-label">Name As Per Bank</label>
                                         <input type="text" required="required" class="form-control" name="bankName" placeholder="Enter Bank Name" />
                                     </div>
                                 </div>
@@ -356,7 +356,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Name as Adhar</label>
+                                        <label class="control-label">Name As Per Adhar</label>
                                         <input type="text" required="required" class="form-control" name="NameAsAdhar" placeholder="Enter Adhar Name" />
                                     </div>
                                 </div>
@@ -376,7 +376,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Name as Pan</label>
+                                        <label class="control-label">Name As Per Pan</label>
                                         <input type="text" required="required" class="form-control" name="NameAsPan" placeholder="Enter Pan Name" />
                                     </div>
                                 </div>
@@ -465,25 +465,40 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Witness Name</label>
-                                            <input type="text" required="required" class="form-control" name="Witness[]" placeholder="Enter Witness Name"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Witness Address</label>
-                                            <input type="text" required="required" class="form-control" name="witnessAddress[]" placeholder="Enter Witness Address"/>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <button type="button" class="btn  btn-info btn-flat remove-btn" id="appendRow">Add </button>
 
 
                             <div id="appendDiv"></div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Witness Name 1</label>
+                                        <input type="text" required="required" class="form-control" name="Witness[]" placeholder="Enter Witness Name"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Witness Address 1</label>
+                                        <input type="text" required="required" class="form-control" name="witnessAddress[]" placeholder="Enter Witness Address"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Witness Name 2</label>
+                                        <input type="text" required="required" class="form-control" name="Witness[]" placeholder="Enter Witness Name"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Witness Address 2</label>
+                                        <input type="text" required="required" class="form-control" name="witnessAddress[]" placeholder="Enter Witness Address"/>
+                                    </div>
+                                </div>
+                            </div>
 
 
                             <button class="btn btn-success pull-right" type="submit">Finish!</button>

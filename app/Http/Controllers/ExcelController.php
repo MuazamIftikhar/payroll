@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Exports\LeaveExport;
+use App\Setting;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -17,7 +18,8 @@ class ExcelController extends Controller
     public function index()
     {
         $company=Company::all();
-        return view('Excel.index',compact('company'));
+        $setting=Setting::all();
+        return view('Excel.index',['company'=>$company,'setting'=>$setting]);
     }
 
     /**
@@ -29,9 +31,10 @@ class ExcelController extends Controller
     {
         $id=$request->id;
         $month=$request->Month;
+        $setting=$request->setting;
 
 
-        return Excel::download(new LeaveExport($id,$month),'Salary_sheet.xlsx');
+        return Excel::download(new LeaveExport($id,$month,$setting),'Salary_sheet.xlsx');
     }
 
     /**

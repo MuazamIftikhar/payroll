@@ -48,6 +48,7 @@
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Assign Day</th>
                         <th>PR Day</th>
                         <th>PL</th>
                         <th>SL</th>
@@ -61,6 +62,7 @@
                     @foreach($attendance as $b)
                         <tr>
                             <td>{{$b->Name}}</td>
+                            <td>{{$b->assignDay}}</td>
                             <td>{{$b->PR_Day}}</td>
                             <td>{{$b->PL}}</td>
                             <td>{{$b->SL}}</td>

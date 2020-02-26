@@ -16,6 +16,8 @@ class CreateAttendancesTable extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->increments('id');
             $table->string('employee_id');
+            $table->string('assignDay');
+            $table->string('Month');;
             $table->string('PR_Day');
             $table->string('PL');
             $table->string('SL');

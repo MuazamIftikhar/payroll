@@ -350,8 +350,8 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('salary_head')}}"><i class="fa fa-circle-o"></i> Create Salary Haad</a></li>
-                        <li><a href="{{route('manage_company_basic')}}"><i class="fa fa-circle-o"></i>Manage Salary Head</a></li>
+                        <li><a href="{{route('salary_head')}}"><i class="fa fa-circle-o"></i> Create Salary Head</a></li>
+                        <li><a href="{{route('manage_company_basic')}}"><i class="fa fa-circle-o"></i>Allocate Salary Head</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

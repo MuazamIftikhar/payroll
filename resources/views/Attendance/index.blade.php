@@ -19,16 +19,24 @@
                     </div>
                     <form class="form" method="GET" action="{{route('searchByCompany_attendance')}}">
                         <div class="box-body">
-                            <div class="col-md-12">
-                                <div class="input-group input-group-lg">
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <select name="Name" class="form-control">
                                         @foreach($company as $c)
                                             <option value="{{$c->id}}">{{$c->companyName}}</option>
                                         @endforeach
                                     </select>
-                                    <span class="input-group-btn">
-                                  <button type="submit"  class="btn btn-primary pull-right"><i class="fa fa-search"> Search</i> </button>
-                                </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" id="Month"  name="Month" type="text" placeholder="Month YYYY" onfocus="(this.type='month')" >
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary pull-right">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -48,6 +56,7 @@
                         <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Assign Day</th>
                             <th>Pr Day</th>
                             <th>PL</th>
                             <th>SL</th>
@@ -64,9 +73,10 @@
                         <tbody>
                         @foreach($employee as $b)
                         <tr>
-                            <form class="form" method="POST" action="{{route('save_attendance')}}" enctype="multipart/form-data">
+                            <form class="form" method="POST" action="{{route('save_attendance',["month"=>$month])}}" enctype="multipart/form-data">
                                 @csrf
                                 <td>{{$b->Name}}<input type="hidden" required="required" class="form-control" value="{{$b->e_id}}" name="id" /></td>
+                                <td><input  type ="text" required="required" value="0" name="assignDay" ></td>
                                 <td><input  type ="text" required="required" value="0" class="PR_Day" id="PR_Day" name="PR_Day" ></td>
                                 <td><input  type ="text" required="required" value="{{$b->OB_PL == "" ? "0" : "$b->OB_PL"}}" id="PL" name="PL" ></td>
                                 <td><input  type ="text" required="required" value="{{$b->OB_SL == "" ? "0" : "$b->OB_SL"}}" id="SL" name="SL" ></td>

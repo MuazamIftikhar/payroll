@@ -1,4 +1,34 @@
-<table id="example1" class="table table-bordered table-striped">
+@php
+        $OTTotal=0;
+        $PR_DayTotal=0;
+        $PLTotal=0;
+        $PHTotal=0;
+        $TotalTotal=0;
+        $toal1=0;
+        $toal2=0;
+        $toal3=0;
+        $toal4=0;
+        $toal5=0;
+        $toal6=0;
+        $Totallwf=0;
+         $totalWages1=0;
+         $totalWages2=0;
+         $totalWages3=0;
+         $totalWages4=0;
+         $totalWages5=0;
+         $totalWages6=0;
+        $totalsum=0;
+        $totalOverTime=0;
+        $totalEarned=0;
+        $TotalPF=0;
+        $TotalESIC =0;
+        $TotalPTax = 0;
+        $TotalLoan = 0;
+        $TotalDeduction = 0;
+        $FinalCash = 0;
+$FinalDeduction=0;
+@endphp
+    <table id="example1" class="table table-bordered table-striped">
         <thead>
         @foreach($company as $c)
         <tr>
@@ -95,7 +125,22 @@
                 @foreach(json_decode($b->salary_head) as $s)
                 <td>{{$s}}</td>
                     @php
-                    $sum=$sum+$s;
+                        $loopValue=$loop->iteration;
+
+                            if($loop->iteration == 1){
+                                $toal1=$toal1+$s;
+                            }elseif ($loop->iteration == 2){
+                             $toal2=$toal2+$s;
+                             }elseif ($loop->iteration == 3){
+                             $toal3=$toal3+$s;
+                             }elseif ($loop->iteration == 4){
+                             $toal4=$toal4+$s;
+                             }elseif ($loop->iteration == 5){
+                             $toal5=$toal5+$s;
+                             }elseif ($loop->iteration == 6){
+                             $toal6=$toal6+$s;
+                             }
+                        $sum=$sum+$s;
                     @endphp
                 @endforeach
                 @if($countSalaryHead == $counts)
@@ -104,10 +149,48 @@
                 @endif
                 <td>0</td>
                 <td>{{$sum}}</td>
+                @php
+                $totalsum=$totalsum+$sum;
+                        @endphp
                 @foreach(json_decode($b->salary_head) as $s)
+                    @if($b->salary_flag == "Per Day")
                     <td>{{round($s*$b->Total,0)}}</td>
+                    @else
+                    <td>{{round($s/$b->assignDay*$b->Total,0)}}</td>
+                    @endif
                     @php
-                        $wages=$wages+round($s*$b->Total,0);
+                    if($b->salary_flag == "Per Day"){
+                       $wages=$wages+round($s*$b->Total,0);
+                            if($loop->iteration == 1){
+                             $totalWages1=$totalWages1+(round($s*$b->Total,0));
+                            }elseif ($loop->iteration == 2){
+                             $totalWages2=$totalWages2+(round($s*$b->Total,0));
+                             }elseif ($loop->iteration == 3){
+                             $totalWages3=$totalWages3+(round($s*$b->Total,0));
+                             }elseif ($loop->iteration == 4){
+                             $totalWages4=$totalWages4+(round($s*$b->Total,0));
+                             }elseif ($loop->iteration == 5){
+                             $totalWages5=$totalWages5+(round($s*$b->Total,0));
+                             }elseif ($loop->iteration == 6){
+                             $totalWages6=$totalWages6+(round($s*$b->Total,0));
+                             }
+
+                    }else{
+                        $wages=$wages+round($s/$b->assignDay*$b->Total,0);
+                       if($loop->iteration == 1){
+                             $totalWages1=$totalWages1+(round($s/$b->assignDay*$b->Total,0));
+                            }elseif ($loop->iteration == 2){
+                             $totalWages2=$totalWages2+(round($s/$b->assignDay*$b->Total,0));
+                             }elseif ($loop->iteration == 3){
+                             $totalWages3=$totalWages3+(round($s/$b->assignDay*$b->Total,0));
+                             }elseif ($loop->iteration == 4){
+                             $totalWages4=$totalWages4+(round($s/$b->assignDay*$b->Total,0));
+                             }elseif ($loop->iteration == 5){
+                             $totalWages5=$totalWages5+(round($s/$b->assignDay*$b->Total,0));
+                             }elseif ($loop->iteration == 6){
+                             $totalWages6=$totalWages6+(round($s/$b->assignDay*$b->Total,0));
+                             }
+                    }
                     @endphp
                 @endforeach
                 @if($countSalaryHead == $counts)
@@ -118,6 +201,8 @@
                 <td>{{round($sum/4*$b->OT,0)}}</td>
                 <td>{{$wages+round($sum/4*$b->OT,0)}}</td>
                 @php
+                $totalOverTime=$totalOverTime+(round($sum/4*$b->OT,0));
+                $totalEarned=$totalEarned+($wages+round($sum/4*$b->OT,0));
                 $basic=json_decode($b->salary_head,true);
                 $totalCash=$wages+round($sum/4*$b->OT,0);
                 //Pf flags
@@ -164,17 +249,104 @@
                 $loan=$b->Loan;
                 $Deduction=$b->Deduction;
                 $totalDeduction=$PF+$ESIC+$PTax+$loan+$Deduction;
+                $lwf=0;
+    $current_month=date('m');
+    if($current_month ==  "05" || $current_month ==  "06")
+    {
+    $lwf=6;
+    }else{
+    $lwf=0;
+    }
                 @endphp
                 <td>{{$PF}}</td>
                 <td>{{$ESIC}}</td>
                 <td>{{$PTax}}</td>
-                <td>0</td>
+                <td>{{$lwf}}</td>
                 <td>{{$b->Loan}}</td>
                 <td>{{$b->Deduction}}</td>
                 <td>{{$totalDeduction}}</td>
                 <td>{{$totalCash-$totalDeduction}}</td>
            </tr>
+            @php
+            $OTTotal=$OTTotal+$b->OT;
+            $PR_DayTotal=$PR_DayTotal+$b->PR_Day;
+            $PLTotal=$PLTotal+$b->PL;
+            $PHTotal=$PHTotal+$b->PH;
+            $TotalTotal=$TotalTotal+$b->Total;
+            $TotalPF=$TotalPF+$PF;
+            $TotalESIC = $TotalESIC + $ESIC;
+            $TotalPTax = $TotalPTax + $PTax;
+            $Totallwf = $Totallwf + $lwf;
+            $TotalLoan = $TotalLoan + ($b->Loan);
+            $TotalDeduction = $TotalDeduction + ($b->Deduction);
+            $FinalDeduction = $FinalDeduction + ($totalDeduction);
+            $FinalCash = $FinalCash +($totalCash-$totalDeduction);
+            @endphp
         @endforeach
+        <tr>
+            <td>Total</td>
+            <td>{{$OTTotal}}</td>
+            <td>{{$PR_DayTotal}}</td>
+            <td>{{$PLTotal}}</td>
+            <td>{{$PHTotal}}</td>
+            <td>{{$TotalTotal}}</td>
+
+            @if($loopValue >= 1)
+            <td>{{$toal1}}</td>
+            @endif
+            @if($loopValue >= 2)
+            <td>{{$toal2}}</td>
+            @endif
+            @if($loopValue >= 3)
+            <td>{{$toal3}}</td>
+            @endif
+            @if($loopValue >= 4)
+            <td>{{$toal4}}</td>
+            @endif
+            @if($loopValue >= 5)
+            <td>{{$toal5}}</td>
+            @endif
+            @if($loopValue >= 6)
+            <td>{{$toal6}}</td>
+            @endif
+            <td>0</td>
+            <td>{{$totalsum}}</td>
+
+            @if($loopValue >= 1)
+                <td>{{$totalWages1}}</td>
+            @endif
+            @if($loopValue >= 2)
+                <td>{{$totalWages2}}</td>
+            @endif
+            @if($loopValue >= 3)
+                <td>{{$totalWages3}}</td>
+            @endif
+            @if($loopValue >= 4)
+                <td>{{$totalWages4}}</td>
+            @endif
+            @if($loopValue >= 5)
+                <td>{{$totalWages5}}</td>
+            @endif
+            @if($loopValue >= 6)
+                <td>{{$totalWages6}}</td>
+            @endif
+            <td>0</td>
+
+
+            <td>{{$totalOverTime}}</td>
+            <td>{{$totalEarned}}</td>
+            <td>{{$TotalPF}}</td>
+            <td>{{$TotalESIC}}</td>
+            <td>{{$TotalPTax}}</td>
+            <td>{{$Totallwf}}</td>
+            <td>{{$TotalLoan}}</td>
+            <td>{{$TotalDeduction}}</td>
+            <td>{{$FinalDeduction}}</td>
+            <td>{{$FinalCash}}</td>
+
+
+
+        </tr>
         </tbody>
         <tfoot>
         </tfoot>

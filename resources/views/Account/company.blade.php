@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="Number">Phone Number</label>
+                                    <label for="Number">Mobile Number</label>
                                     <input type="text" class="form-control" id="Number" value="{{old('Number')}}" name="Number" placeholder="Enter Number">
                                     @if ($errors->has('Number'))
                                         <span class="danger">{{$errors->first('Number')}}</span>

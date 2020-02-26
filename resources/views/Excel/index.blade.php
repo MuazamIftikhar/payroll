@@ -23,7 +23,16 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="month" class="form-control" id="Month"  name="Month" >
+                                    <input type="month" class="form-control" id="Month"  name="Month" placeholder="dd-mm-Yy">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select name="setting" class="form-control">
+                                        @foreach($setting as $s)
+                                            <option value="{{$s->id}}">Form {{$s->id}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-7">
