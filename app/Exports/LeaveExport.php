@@ -45,7 +45,6 @@ class LeaveExport implements FromView,WithEvents
         $employee = Employee::select(DB::raw('*'))
             ->Join('attendances','employees.id','=','attendances.employee_id')
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
-            ->whereYear('salaries.created_at', '=', $year)->whereMonth('salaries.created_at', '=', $month)
             ->where('attendances.Month', '=', $this->month)
             ->where('employees.company_id','=',$this->id)->get();
         $company=Company::where('id','=',$company_id)->get();
@@ -135,7 +134,6 @@ class LeaveExport implements FromView,WithEvents
                 $getRows=Employee::select(DB::raw('*'))
                     ->Join('attendances','employees.id','=','attendances.employee_id')
                     ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
-                    ->whereYear('salaries.created_at', '=', $year)->whereMonth('salaries.created_at', '=', $month)
                     ->where('attendances.Month', '=', $this->month)
                     ->where('employees.company_id','=',$this->id)->get();
                 $getRowsCount=count($getRows)+9;
