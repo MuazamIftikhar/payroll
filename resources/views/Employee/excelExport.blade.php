@@ -26,6 +26,7 @@
         $TotalLoan = 0;
         $TotalDeduction = 0;
         $FinalCash = 0;
+        $loopValue = 0;
 $FinalDeduction=0;
 @endphp
     <table id="example1" class="table table-bordered table-striped">
