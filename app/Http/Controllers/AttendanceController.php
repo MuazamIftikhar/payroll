@@ -28,14 +28,14 @@ class AttendanceController extends Controller
                 ->leftjoin('leaves','employees.id','=','leaves.employee_id')
                 ->leftjoin('loans','employees.id','=','loans.employee_id')
                 ->where('employees.company_id',$company)
-                ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
+                ->whereDate('DOE', '>=',date('Y-m-d') )
                 ->whereNotIn('employees.id',$employee_ID)->get();
         }else{
             $employee=Employee::select(DB::raw('*,employees.id as e_id'))
                 ->leftjoin('leaves','employees.id','=','leaves.employee_id')
                 ->leftjoin('loans','employees.id','=','loans.employee_id')
                 ->where('employees.company_id',$company)
-                ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
+                ->whereDate('DOE', '>=',date('Y-m-d') )
                ->get();
         }
         $company=Company::where('user_id','=',Auth::user()->id)->get();
@@ -167,7 +167,7 @@ class AttendanceController extends Controller
         $attendance=Attendance::select(DB::raw('*,attendances.id as a_id,employees.id as e_id'))
             ->join('employees','attendances.employee_id','=','employees.id')
             ->where('employees.company_id',$companyName)
-            ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
+            ->whereDate('DOE', '>=',date('Y-m-d') )
             ->where('attendances.Month', '=', $month)
             ->get();
         return view('Attendance.manage',["attendance"=>$attendance,"company"=>$company]);

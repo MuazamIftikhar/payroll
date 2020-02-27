@@ -90,13 +90,17 @@ class SalaryController extends Controller
     public function salary()
     {
         $salary_ID = Salary::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('employee_id');
+        $salary_ID = Salary::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('created_at');
+
+
         $company=Company::where('user_id','=',Auth::user()->id)->first()->id;
+
         if (count($salary_ID) > 0) {
             $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$company)
-                ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))->whereNotIn('employees.id', $salary_ID)->get();
+                    ->whereDate('DOE', '>=',date('Y-m-d') )->whereNotIn('employees.id', $salary_ID)->get();
         }else{
             $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$company)
-            ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))->get();
+            ->whereDate('DOE', '>=',date('Y-m-d') )->get();
         }
         $company_id=Company::where('user_id','=',Auth::user()->id)->first()->id;
         $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
@@ -159,8 +163,9 @@ class SalaryController extends Controller
         $employee=DB::table('employees')->select(DB::raw('*,employees.id as e_id'))
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
             ->where('employees.company_id',$company)
-            ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
+            ->whereDate('DOE', '>=',date('Y-m-d') )
             ->get();
+
         $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
         if (count($user) > 0){
             $companyName=Company::all();
@@ -186,7 +191,7 @@ class SalaryController extends Controller
         $employee=DB::table('employees')->select(DB::raw('*,salaries.id as e_id,employees.id as employee_id'))
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
             ->where('salaries.id','=',$request->id)
-            ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
+            ->whereDate('DOE', '>=',date('Y-m-d') )
             ->get();
         $company=Company::where('id','=',$request->Name)->first()->id;
         $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
@@ -279,11 +284,11 @@ class SalaryController extends Controller
         $salary_ID = Salary::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('employee_id');
         if (count($salary_ID) > 0) {
             $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$request->Name)
-                ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))->whereNotIn('employees.id', $salary_ID)
+                ->whereDate('DOE', '>=',date('Y-m-d') )->whereNotIn('employees.id', $salary_ID)
                 ->get();
         } else {
             $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$request->Name)
-                ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))->get();
+                ->whereDate('DOE', '>=',date('Y-m-d') )->get();
         }
         $company_id=Company::where('user_id','=',Auth::user()->id)->where('id','=',$request->Name)->first()->id;
         $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
@@ -317,7 +322,7 @@ class SalaryController extends Controller
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
             ->where('employees.company_id',$company)
             ->whereYear('salaries.created_at', '=', $year)->whereMonth('salaries.created_at', '=', $month)
-            ->whereYear('DOE', '>=', date('Y'))->whereMonth('DOE', '>=', date('m'))
+            ->whereDate('DOE', '>=',date('Y-m-d') )
             ->get();
         $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
             if (count($user) > 0){
