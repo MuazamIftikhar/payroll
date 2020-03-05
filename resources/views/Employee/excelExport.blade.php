@@ -202,62 +202,66 @@ $FinalDeduction=0;
                 <td>{{round($sum/4*$b->OT,0)}}</td>
                 <td>{{$wages+round($sum/4*$b->OT,0)}}</td>
                 @php
-                $totalOverTime=$totalOverTime+(round($sum/4*$b->OT,0));
-                $totalEarned=$totalEarned+($wages+round($sum/4*$b->OT,0));
-                $basic=json_decode($b->salary_head,true);
-                $totalCash=$wages+round($sum/4*$b->OT,0);
-                //Pf flags
-                if($b->PFFlag == "Yes"){
-
-                    if($b->PFSaturating == "Yes"){
-
                     if($b->salary_flag == "Per Day"){
-                    if($basic['Basic'] >576){ $PF=0; }else { $PF=round(round($basic['Basic']*$b->Total,0)*12/100,0);}
-                    }else{
-                     if($basic['Basic'] >15000){ $PF=0; }else {$PF=round(round($basic['Basic']*$b->Total,0)*12/100,0);}
-                    }
+                   $totalOverTime=$totalOverTime+(round($sum/4*$b->OT,0));
+                   }else{
+                   $totalOverTime=$totalOverTime+(round($sum/$b->assignDay/4*$b->OT,0));
+                   }
+                   $totalEarned=$totalEarned+($wages+round($sum/4*$b->OT,0));
+                   $basic=json_decode($b->salary_head,true);
+                   $totalCash=$wages+round($sum/4*$b->OT,0);
+                   //Pf flags
+                   if($b->PFFlag == "Yes"){
 
-                    }else{
+                       if($b->PFSaturating == "Yes"){
 
-                     if($b->salary_flag == "Per Day"){
-                    if($basic['Basic'] >576){ $PF=0; }else { $PF=round(576*12/100,0);}
-                    }else{
-                     if($basic['Basic'] >15000){ $PF=0; }else {$PF=round(15000*12/100,0);}
-                    }
+                       if($b->salary_flag == "Per Day"){
+                       if($basic['Basic'] >576){ $PF=0; }else { $PF=round(round($basic['Basic']*$b->Total,0)*12/100,0);}
+                       }else{
+                        if($basic['Basic'] >15000){ $PF=0; }else {$PF=round(round($basic['Basic']*$b->Total,0)*12/100,0);}
+                       }
 
-                    }
-                }else{
+                       }else{
 
-                $PF=0;
+                        if($b->salary_flag == "Per Day"){
+                       if($basic['Basic'] >576){ $PF=0; }else { $PF=round(576*12/100,0);}
+                       }else{
+                        if($basic['Basic'] >15000){ $PF=0; }else {$PF=round(15000*12/100,0);}
+                       }
 
-                }
-                //ESIC Flag
-                if($b->esicFlag == "Yes"){
-                    if($b->salary_flag == "Per Day"){
-                    if($sum>807){ $ESIC=0; }else {$ESIC=ceil(($wages+round($sum/4*$b->OT,0))*1.75/100);}
-                    }else{
-                    if($sum>21000){ $ESIC=0; }else {$ESIC=ceil(($wages+round($sum/4*$b->OT,0))*1.75/100);}
-                    }
-                }else{
-                $ESIC=0;
-                }
+                       }
+                   }else{
 
-                if($b->PTFlag == "Yes"){
-                if($totalCash==0){ $PTax=$ptax->value1; }elseif($totalCash < 6000) { $PTax=$ptax->value2;} elseif($totalCash < 9000) { $PTax=$ptax->value3;} elseif($totalCash < 12000){ $PTax=$ptax->value4;} else{ $PTax=$ptax->value5;}
-                }else{
-                $PTax=0;
-                }
-                $loan=$b->Loan;
-                $Deduction=$b->Deduction;
-                $totalDeduction=$PF+$ESIC+$PTax+$loan+$Deduction;
-                $lwf=0;
-    $current_month=date('m');
-    if($current_month ==  "05" || $current_month ==  "06")
-    {
-    $lwf=6;
-    }else{
-    $lwf=0;
-    }
+                   $PF=0;
+
+                   }
+                   //ESIC Flag
+                   if($b->esicFlag == "Yes"){
+                       if($b->salary_flag == "Per Day"){
+                       if($sum>807){ $ESIC=0; }else {$ESIC=ceil(($wages+round($sum/4*$b->OT,0))*0.75/100);}
+                       }else{
+                       if($sum>21000){ $ESIC=0; }else {$ESIC=ceil(($wages+round($sum/4*$b->OT,0))*0.75/100);}
+                       }
+                   }else{
+                   $ESIC=0;
+                   }
+
+                   if($b->PTFlag == "Yes"){
+                   if($totalCash==0){ $PTax=$ptax->value1; }elseif($totalCash < 6000) { $PTax=$ptax->value2;} elseif($totalCash < 9000) { $PTax=$ptax->value3;} elseif($totalCash < 12000){ $PTax=$ptax->value4;} else{ $PTax=$ptax->value5;}
+                   }else{
+                   $PTax=0;
+                   }
+                   $loan=$b->Loan;
+                   $Deduction=$b->Deduction;
+                   $totalDeduction=$PF+$ESIC+$PTax+$loan+$Deduction;
+                   $lwf=0;
+       $current_month=date('m');
+       if($current_month ==  "05" || $current_month ==  "06")
+       {
+       $lwf=6;
+       }else{
+       $lwf=0;
+       }
                 @endphp
                 <td>{{$PF}}</td>
                 <td>{{$ESIC}}</td>

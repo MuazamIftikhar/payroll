@@ -78,7 +78,7 @@ class AttendanceController extends Controller
                 ->update(['Balance' => $amount,'numberInstallment'=>$numberInstallment]);
         }
         }
-        return redirect()->route('attendance');
+        return back();
     }
 
     public function manage_attendance()

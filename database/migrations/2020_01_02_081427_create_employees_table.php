@@ -59,6 +59,7 @@ class CreateEmployeesTable extends Migration
             $table->string('family_permanentAddress');
             $table->string('family_Nominee');
             $table->string('family_DOB');
+            $table->string('family_State');
             $table->string('family_adharNumber');
             $table->string('Witness');
             $table->string('witnessAddress');

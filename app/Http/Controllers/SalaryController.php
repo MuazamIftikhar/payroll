@@ -90,7 +90,7 @@ class SalaryController extends Controller
     public function salary()
     {
         $salary_ID = Salary::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('employee_id');
-        $salary_ID = Salary::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('created_at');
+
 
 
         $company=Company::where('user_id','=',Auth::user()->id)->first()->id;

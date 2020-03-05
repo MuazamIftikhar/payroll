@@ -93,6 +93,7 @@ class EmployeeController extends Controller
         $employee->family_permanentAddress=json_encode($request->family_permanentAddress);
         $employee->family_Nominee=json_encode($request->family_Nominee);
         $employee->family_DOB=json_encode($request->family_DOB);
+        $employee->family_State=json_encode($request->family_State);
         $employee->family_adharNumber=json_encode($request->family_adharNumber);
         $employee->Witness=json_encode($request->Witness);
         $employee->witnessAddress=json_encode($request->witnessAddress);

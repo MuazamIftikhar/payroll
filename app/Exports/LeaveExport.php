@@ -137,6 +137,20 @@ class LeaveExport implements FromView,WithEvents
                     ->where('attendances.Month', '=', $this->month)
                     ->where('employees.company_id','=',$this->id)->get();
                 $getRowsCount=count($getRows)+9;
+//$getAlphabetCount="U";
+//                $company_id=Company::where('id','=',$this->id)->first()->id;
+//                $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
+//                $decodeIDs = json_decode($getIds);
+//                $namesOfsalaryHead=array();
+//                foreach ($decodeIDs as $i){
+//                    $GetName = SalaryHead::where('id', '=', $i)->first();
+//                    $namesOfsalaryHead[]=$GetName;
+//                }
+//                $i=1;
+//                $val=count($namesOfsalaryHead)*2;
+//for ($i;$i=$val;$i++){
+//$getAlphabetCount++;
+//}
 
                 $event->writer->getDelegate()->getActiveSheet()->getStyle("A7:X$getRowsCount")->applyFromArray($styleArray = [
                          'borders' => [

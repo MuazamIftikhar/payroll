@@ -452,13 +452,19 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Date of Birth</label>
                                             <input type="date" required="required" class="form-control" name="family_DOB[]"/>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">State</label>
+                                            <input type="text" required="required" class="form-control" name="family_State[]"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Adhar Number</label>
                                             <input type="text" required="required" class="form-control" name="family_adharNumber[]" placeholder="Enter Adhar Number"/>

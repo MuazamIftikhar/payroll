@@ -415,6 +415,7 @@
                                 $family_adharNumber=json_decode($e->family_adharNumber);
                                 $family_DOB=json_decode($e->family_DOB);
                                 $family_Nominee=json_decode($e->family_Nominee);
+                                $family_State=json_decode($e->family_State);
                                 $Witness=json_decode($e->Witness);
                                 $witnessAddress=json_decode($e->witnessAddress);
                                     @endphp
@@ -470,13 +471,19 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Date of Birth</label>
                                             <input type="edit" required="required" class="form-control" value="{{$family_DOB[$i]}}"  name="family_DOB[]"/>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">State</label>
+                                            <input type="text" required="required" class="form-control"  value="{{$family_State[$i]}}" name="family_State[]"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Adhar Number</label>
                                             <input type="text" required="required" class="form-control" value="{{$family_adharNumber[$i]}}" name="family_adharNumber[]"/>

@@ -32,8 +32,6 @@ class ExcelController extends Controller
         $id=$request->id;
         $month=$request->Month;
         $setting=$request->setting;
-
-
         return Excel::download(new LeaveExport($id,$month,$setting),'Salary_sheet.xlsx');
     }
 
