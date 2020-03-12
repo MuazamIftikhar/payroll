@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Employee;
+use App\Imports\EmployeeImport;
 use App\SalaryHead;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeController extends Controller
 {
@@ -134,6 +136,21 @@ class EmployeeController extends Controller
     {
         Employee::where('id','=',$request->id)->delete();
         return back();
+    }
+
+    function import_index()
+    {
+        return view('Employee.importEmployee');
+
+    }
+    function import(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        Excel::import(new EmployeeImport(),$request->file('select_file'));
+        return back()->with('success', 'Excel Data Imported successfully.');
     }
 
     /**

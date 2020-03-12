@@ -55,7 +55,7 @@
                             <td>{{$b->Name}}<input type="hidden" required="required" class="form-control" value="{{$b->e_id}}" name="id" /><input type="hidden" class="form-control" value="{{$b->company_id}}" name="Name"/></td>
                             <td>{{$b->fatherName}}</td>
                             @foreach($salaryHead as $s)
-                            <td><input maxlength="100" type="text" required="required"class="form-control" style="width: 100%" name="{{$s->name}}"/></td>
+                            <td><input maxlength="100" type="text" required="required"class="form-control" style="width: 100%" name="{{$s->id}}"/></td>
                             @endforeach
                             <td><select  class="form-control" name="salaryFlag" >
                                     <option>Per Day</option>

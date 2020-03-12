@@ -7,6 +7,9 @@ use App\company_basic;
 use App\CompanyDeduction;
 use App\Deduction;
 use App\Employee;
+use App\Esic;
+use App\Overtime;
+use App\Pf;
 use App\Salary;
 use App\SalaryHead;
 use Carbon\Carbon;
@@ -91,8 +94,6 @@ class SalaryController extends Controller
     {
         $salary_ID = Salary::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('employee_id');
 
-
-
         $company=Company::where('user_id','=',Auth::user()->id)->first()->id;
 
         if (count($salary_ID) > 0) {
@@ -134,7 +135,7 @@ class SalaryController extends Controller
     {
         $company=Company::where('id','=',$request->Name)->where('user_id',Auth::user()->id)->first()->id;
         $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
-        $salarHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->pluck('name');
+        $salarHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->pluck('id');
         $vs=array();
         foreach($salarHead as $n)
         {
@@ -245,8 +246,7 @@ class SalaryController extends Controller
     public function company_basic(Request $request)
     {
         $salaryHead=SalaryHead::all();
-        $deduction=Deduction::all();
-        return view('Salary.assign',[ 'salaryHead'=>$salaryHead,'id'=>$request->id,'deduction'=>$deduction]);
+        return view('Salary.assign',[ 'salaryHead'=>$salaryHead,'id'=>$request->id]);
     }
     public function save_company_basic(Request $request)
     {
@@ -258,6 +258,50 @@ class SalaryController extends Controller
             $salary->save();
         }else{
             company_basic::where('id', '=', $id[0]->id)
+                ->update(['company_id' => $request->id, 'salary_head' => json_encode($request->salaryHead)]);
+        }
+        return redirect()->route('manage_company_basic');
+    }
+
+    public function save_esic_basic(Request $request)
+    {
+        $id=Esic::where('company_id','=',$request->id)->get();
+        if (count($id)  <=  0) {
+            $salary = new Esic();
+            $salary->company_id = $request->id;
+            $salary->salary_head = json_encode($request->salaryHead);
+            $salary->save();
+        }else{
+            Esic::where('id', '=', $id[0]->id)
+                ->update(['company_id' => $request->id, 'salary_head' => json_encode($request->salaryHead)]);
+        }
+        return redirect()->route('manage_company_basic');
+    }
+    public function save_pf_basic(Request $request)
+    {
+        $id=Pf::where('company_id','=',$request->id)->get();
+        if (count($id)  <=  0) {
+            $salary = new Pf();
+            $salary->company_id = $request->id;
+            $salary->salary_head = json_encode($request->salaryHead);
+            $salary->save();
+        }else{
+            Pf::where('id', '=', $id[0]->id)
+                ->update(['company_id' => $request->id, 'salary_head' => json_encode($request->salaryHead)]);
+        }
+        return redirect()->route('manage_company_basic');
+    }
+
+    public function save_overtime_basic(Request $request)
+    {
+        $id=Overtime::where('company_id','=',$request->id)->get();
+        if (count($id)  <=  0) {
+            $salary = new Overtime();
+            $salary->company_id = $request->id;
+            $salary->salary_head = json_encode($request->salaryHead);
+            $salary->save();
+        }else{
+            Overtime::where('id', '=', $id[0]->id)
                 ->update(['company_id' => $request->id, 'salary_head' => json_encode($request->salaryHead)]);
         }
         return redirect()->route('manage_company_basic');

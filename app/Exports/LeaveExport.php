@@ -42,11 +42,15 @@ class LeaveExport implements FromView,WithEvents
             $namesOfsalaryHead[]=$GetName;
         }
         $ptax=Ptax::first();
-        $employee = Employee::select(DB::raw('*'))
+        $employee = Employee::select(DB::raw('*,salaries.salary_head as salary_head, overtimes.salary_head as overtime_salary_head,esics.salary_head as esics_salary_head,pfs.salary_head as pfs_salary_head'))
             ->Join('attendances','employees.id','=','attendances.employee_id')
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
+            ->Join('overtimes', 'employees.company_id', '=', 'overtimes.company_id')
+            ->Join('esics', 'employees.company_id', '=', 'esics.company_id')
+            ->Join('pfs', 'employees.company_id', '=', 'pfs.company_id')
             ->where('attendances.Month', '=', $this->month)
             ->where('employees.company_id','=',$this->id)->get();
+
         $company=Company::where('id','=',$company_id)->get();
         $setting=Setting::where('id','=',$this->setting)->get();
         return view('Employee.excelExport', [
@@ -58,13 +62,7 @@ class LeaveExport implements FromView,WithEvents
             AfterSheet::class    => function(AfterSheet $event) {
                 $event->getDelegate()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
                 $event->getDelegate()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
-//                $pageMargins = new \PhpOffice\PhpSpreadsheet\Worksheet\PageMargins();
-//                $pageMargins->setTop(0.16);
-//                $pageMargins->setRight(0.04);
-//                $pageMargins->setBottom(0.04);
-//                $pageMargins->setLeft(0.04);
-//
-//                Sheet::macro('setPageMargins', function($event, $pageMargins){});
+                $event->getDelegate()->getPageSetup()->setScale(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4_PLUS_PAPER);
             },
 
             BeforeWriting::class => function(BeforeWriting $event) {
@@ -74,7 +72,7 @@ class LeaveExport implements FromView,WithEvents
                 $event->writer->getDelegate()->getActiveSheet()->mergeCells('A5:B6');
                 $event->writer->getDelegate()->getActiveSheet()->mergeCells('D1:G3');
                 $event->writer->getDelegate()->getActiveSheet()->mergeCells('D4:G6');
-                $event->writer->getDelegate()->getActiveSheet()->mergeCells('H1:P5');
+                $event->writer->getDelegate()->getActiveSheet()->mergeCells('H1:P6');
 
 
 
@@ -103,7 +101,31 @@ class LeaveExport implements FromView,WithEvents
                         'size' => 12
                     ],
                 ])->getAlignment()->setWrapText(true);
-                $event->writer->getDelegate()->getActiveSheet()->getStyle("H1:P5")->applyFromArray($styleArray = [
+                $event->writer->getDelegate()->getActiveSheet()->getStyle("C1")->applyFromArray($styleArray = [
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                            'text-align' => 'center'
+                        ],
+                    ],
+                    'font' => [
+                        'size' => 12
+                    ],
+                ])->getAlignment()->setWrapText(true);
+                $event->writer->getDelegate()->getActiveSheet()->getStyle("C2")->applyFromArray($styleArray = [
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                            'text-align' => 'center'
+                        ],
+                    ],
+                    'font' => [
+                        'size' => 12
+                    ],
+                ])->getAlignment()->setWrapText(true);
+                $event->writer->getDelegate()->getActiveSheet()->getStyle("H1:P6")->applyFromArray($styleArray = [
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -152,7 +174,7 @@ class LeaveExport implements FromView,WithEvents
 //$getAlphabetCount++;
 //}
 
-                $event->writer->getDelegate()->getActiveSheet()->getStyle("A7:X$getRowsCount")->applyFromArray($styleArray = [
+                $event->writer->getDelegate()->getActiveSheet()->getStyle("A7:Y$getRowsCount")->applyFromArray($styleArray = [
                          'borders' => [
                              'allBorders' => [
                                  'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -164,25 +186,25 @@ class LeaveExport implements FromView,WithEvents
                         'size' => 12
                     ],
 
-                     'alignment' => [
-                         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-                     ],
-                ]);
+//                     'alignment' => [
+//                         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+//                         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+//                     ],
+                ])->getAlignment()->setWrapText(true);
                 ////Setting Width of Coulmns
-                $cols=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X'];
-                foreach($cols as $col)
-                {
-                    if($col == 'X')
-                    {
-                        $event->writer->getDelegate()->getActiveSheet()->getColumnDimension($col)->setWidth(30);
-                    }
-                    else
-                    {
-                        $event->writer->getDelegate()->getActiveSheet()->getColumnDimension($col)->setAutoSize($col);
-                    }
-
-                }
+//                $cols=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'];
+//                foreach($cols as $col)
+//                {
+//                    if($col <= 'Y')
+//                    {
+//                        $event->writer->getDelegate()->getActiveSheet()->getColumnDimension($col)->setWidth(10);
+//                    }
+//                    else
+//                    {
+//                        $event->writer->getDelegate()->getActiveSheet()->getColumnDimension($col)->setAutoSize($col);
+//                    }
+//
+//                }
 
 //
 

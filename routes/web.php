@@ -90,6 +90,9 @@ Route::group([ 'middleware' => ['auth']], function() {
     Route::GET('/manage_company_basic', 'SalaryController@manage_company_basic')->name('manage_company_basic');
     Route::GET('/company_basic', 'SalaryController@company_basic')->name('company_basic');
     Route::POST('/save_company_basic', 'SalaryController@save_company_basic')->name('save_company_basic');
+    Route::POST('/save_esic_basic', 'SalaryController@save_esic_basic')->name('save_esic_basic');
+    Route::POST('/save_pf_basic', 'SalaryController@save_pf_basic')->name('save_pf_basic');
+    Route::POST('/save_overtime_basic', 'SalaryController@save_overtime_basic')->name('save_overtime_basic');
     Route::POST('/save_company_deduction', 'SalaryController@save_company_deduction')->name('save_company_deduction');
 
 
@@ -97,5 +100,7 @@ Route::group([ 'middleware' => ['auth']], function() {
     Route::POST('/save_setting', 'SettingController@save_setting')->name('save_setting');
 
     Route::GET('/excel', 'ExcelController@index')->name('excel');
+    Route::GET('/import', 'EmployeeController@import_index')->name('import');
+    Route::POST('printImport', 'EmployeeController@import')->name('printImport');
     Route::GET('/salary_excel', 'ExcelController@salary_excel')->name('salary_excel');
 });

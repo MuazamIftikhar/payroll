@@ -11,12 +11,12 @@
         $toal5=0;
         $toal6=0;
         $Totallwf=0;
-         $totalWages1=0;
-         $totalWages2=0;
-         $totalWages3=0;
-         $totalWages4=0;
-         $totalWages5=0;
-         $totalWages6=0;
+        $totalWages1=0;
+        $totalWages2=0;
+        $totalWages3=0;
+        $totalWages4=0;
+        $totalWages5=0;
+        $totalWages6=0;
         $totalsum=0;
         $totalOverTime=0;
         $totalEarned=0;
@@ -27,7 +27,7 @@
         $TotalDeduction = 0;
         $FinalCash = 0;
         $loopValue = 0;
-$FinalDeduction=0;
+        $FinalDeduction=0;
 @endphp
     <table id="example1" class="table table-bordered table-striped">
         <thead>
@@ -110,6 +110,7 @@ $FinalDeduction=0;
         </thead>
         <tbody>
         @foreach($employee as $b)
+
             @php
                 $countSalaryHeads=json_decode($b->salary_head,true);
                 $counts=count($countSalaryHeads);
@@ -127,21 +128,22 @@ $FinalDeduction=0;
                 <td>{{$s}}</td>
                     @php
                         $loopValue=$loop->iteration;
-
-                            if($loop->iteration == 1){
-                                $toal1=$toal1+$s;
-                            }elseif ($loop->iteration == 2){
-                             $toal2=$toal2+$s;
-                             }elseif ($loop->iteration == 3){
-                             $toal3=$toal3+$s;
-                             }elseif ($loop->iteration == 4){
-                             $toal4=$toal4+$s;
-                             }elseif ($loop->iteration == 5){
-                             $toal5=$toal5+$s;
-                             }elseif ($loop->iteration == 6){
-                             $toal6=$toal6+$s;
-                             }
+                         if($loop->iteration == 1){
+                            $toal1=$toal1+$s;
+                         }elseif ($loop->iteration == 2){
+                         $toal2=$toal2+$s;
+                         }elseif ($loop->iteration == 3){
+                         $toal3=$toal3+$s;
+                         }elseif ($loop->iteration == 4){
+                         $toal4=$toal4+$s;
+                         }elseif ($loop->iteration == 5){
+                         $toal5=$toal5+$s;
+                         }elseif ($loop->iteration == 6){
+                         $toal6=$toal6+$s;
+                         }
                         $sum=$sum+$s;
+
+
                     @endphp
                 @endforeach
                 @if($countSalaryHead == $counts)
@@ -149,6 +151,34 @@ $FinalDeduction=0;
                 <td>0</td>
                 @endif
                 <td>0</td>
+                @php
+                    $newSumVar=0;
+                    $newSumEsic=0;
+                    $newSumPf=0;
+                    $jsonDecodeFirstArray=json_decode($b->salary_head);
+                    $jsonDecodeSecondArray=json_decode($b->overtime_salary_head);
+                    $jsonDecodeThirdArray=json_decode($b->esics_salary_head);
+                    $jsonDecodeFourthArray=json_decode($b->pfs_salary_head);
+                        foreach($jsonDecodeSecondArray as $key1){
+                            foreach(json_decode($b->salary_head) as $key => $value){
+                            if($key1 == $key){
+                                $newSumVar += $value;
+                            }
+                        }
+                    }foreach($jsonDecodeThirdArray as $key2){
+                            foreach(json_decode($b->salary_head) as $key => $value1){
+                            if($key2 == $key){
+                                $newSumEsic += $value1;
+                            }
+                        }
+                    }foreach($jsonDecodeSecondArray as $key3){
+                            foreach(json_decode($b->salary_head) as $key => $value2){
+                            if($key3 == $key){
+                                $newSumPf += $value2;
+                            }
+                        }
+                    }
+                 @endphp
                 <td>{{$sum}}</td>
                 @php
                 $totalsum=$totalsum+$sum;
@@ -199,13 +229,20 @@ $FinalDeduction=0;
                     <td>0</td>
                 @endif
                 <td>0</td>
-                <td>{{round($sum/4*$b->OT,0)}}</td>
-                <td>{{$wages+round($sum/4*$b->OT,0)}}</td>
                 @php
                     if($b->salary_flag == "Per Day"){
-                   $totalOverTime=$totalOverTime+(round($sum/4*$b->OT,0));
+                   $ot=round($newSumVar/4*$b->OT,0);
                    }else{
-                   $totalOverTime=$totalOverTime+(round($sum/$b->assignDay/4*$b->OT,0));
+                   $ot=round($newSumVar/$b->assignDay/4*$b->OT,0);
+                   }
+                   @endphp
+                <td>{{$ot}}</td>
+                <td>{{$wages+$ot}}</td>
+                @php
+                    if($b->salary_flag == "Per Day"){
+                   $totalOverTime=$totalOverTime+(round($newSumVar/4*$b->OT,0));
+                   }else{
+                   $totalOverTime=$totalOverTime+(round($newSumVar/$b->assignDay/4*$b->OT,0));
                    }
                    $totalEarned=$totalEarned+($wages+round($sum/4*$b->OT,0));
                    $basic=json_decode($b->salary_head,true);
@@ -216,17 +253,17 @@ $FinalDeduction=0;
                        if($b->PFSaturating == "Yes"){
 
                        if($b->salary_flag == "Per Day"){
-                       if($basic['Basic'] >576){ $PF=0; }else { $PF=round(round($basic['Basic']*$b->Total,0)*12/100,0);}
+                       if($basic['1'] >576){ $PF=0; }else { $PF=round(round($newSumPf*$b->Total,0)*12/100,0);}
                        }else{
-                        if($basic['Basic'] >15000){ $PF=0; }else {$PF=round(round($basic['Basic']*$b->Total,0)*12/100,0);}
+                        if($basic['1'] >15000){ $PF=0; }else {$PF=round(round($newSumPf*$b->Total,0)*12/100,0);}
                        }
 
                        }else{
 
                         if($b->salary_flag == "Per Day"){
-                       if($basic['Basic'] >576){ $PF=0; }else { $PF=round(576*12/100,0);}
+                       if($basic['1'] >576){ $PF=0; }else { $PF=round(576*12/100,0);}
                        }else{
-                        if($basic['Basic'] >15000){ $PF=0; }else {$PF=round(15000*12/100,0);}
+                        if($basic['1'] >15000){ $PF=0; }else {$PF=round(15000*12/100,0);}
                        }
 
                        }
@@ -238,9 +275,9 @@ $FinalDeduction=0;
                    //ESIC Flag
                    if($b->esicFlag == "Yes"){
                        if($b->salary_flag == "Per Day"){
-                       if($sum>807){ $ESIC=0; }else {$ESIC=ceil(($wages+round($sum/4*$b->OT,0))*0.75/100);}
+                       if($sum>807){ $ESIC=0; }else {$ESIC=ceil(($wages+round($newSumEsic/4*$b->OT,0))*0.75/100);}
                        }else{
-                       if($sum>21000){ $ESIC=0; }else {$ESIC=ceil(($wages+round($sum/4*$b->OT,0))*0.75/100);}
+                       if($sum>21000){ $ESIC=0; }else {$ESIC=ceil(($wages+round($newSumEsic/4*$b->OT,0))*0.75/100);}
                        }
                    }else{
                    $ESIC=0;
