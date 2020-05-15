@@ -217,7 +217,7 @@
                                     <label class="control-label">Company Name</label>
                                     <select class="form-control" name="companyName">
                                         @foreach($company as $n)
-                                            <option value="{{$n->id}}" selected {{$e->company_id == $n->id ? "selected" : ""}}>{{$n->companyName}}</option>
+                                            <option value="{{$n->id}}"  {{$e->company_id == $n->id ? "selected" : ""}}>{{$n->companyName}}</option>
                                         @endforeach
                                     </select>
                                 </div>

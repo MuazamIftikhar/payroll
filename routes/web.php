@@ -14,6 +14,7 @@
 Auth::routes();
 Route::group([ 'middleware' => ['auth']], function() {
     Route::GET('/', 'HomeController@index')->name('home');
+    Route::GET('/home', 'HomeController@index')->name('home');
     //Account
     Route::GET('/add_account', 'AccountController@index')->name('add_account');
     Route::GET('/add_company', 'AccountController@company')->name('add_company');
@@ -99,8 +100,53 @@ Route::group([ 'middleware' => ['auth']], function() {
     Route::GET('/setting', 'SettingController@index')->name('setting');
     Route::POST('/save_setting', 'SettingController@save_setting')->name('save_setting');
 
+    Route::GET('/findEmployee', 'ExcelController@findEmployee')->name('findEmployee');
+
     Route::GET('/excel', 'ExcelController@index')->name('excel');
     Route::GET('/import', 'EmployeeController@import_index')->name('import');
     Route::POST('printImport', 'EmployeeController@import')->name('printImport');
     Route::GET('/salary_excel', 'ExcelController@salary_excel')->name('salary_excel');
+
+    Route::GET('/declaration_excel_form', 'ExcelController@declaration_excel_form')->name('declaration_excel_form');
+    Route::GET('/declaration_excel', 'ExcelController@declaration_excel')->name('declaration_excel');
+
+    Route::GET('/employeeCard_excel_form', 'ExcelController@employeeCard_excel_form')->name('employeeCard_excel_form');
+    Route::GET('/employeeCard_excel', 'ExcelController@employeeCard_excel')->name('employeeCard_excel');
+
+    Route::GET('/formI_excel_form', 'ExcelController@formI_excel_form')->name('formI_excel_form');
+    Route::GET('/formI_excel', 'ExcelController@formI_excel')->name('formI_excel');
+
+    Route::GET('/form35_excel_form', 'ExcelController@form35_excel_form')->name('form35_excel_form');
+    Route::GET('/form35_excel', 'ExcelController@form35_excel')->name('form35_excel');
+
+    Route::GET('/form2R_excel_form', 'ExcelController@form2R_excel_form')->name('form2R_excel_form');
+    Route::GET('/form2R_excel', 'ExcelController@form2R_excel')->name('form2R_excel');
+
+    Route::GET('/form11_excel_form', 'ExcelController@form11_excel_form')->name('form11_excel_form');
+    Route::GET('/form11_excel', 'ExcelController@form11_excel')->name('form11_excel');
+
+    Route::GET('/formF_excel_form', 'ExcelController@formF_excel_form')->name('formF_excel_form');
+    Route::GET('/formF_excel', 'ExcelController@formF_excel')->name('formF_excel');
+
+    Route::GET('/Recr_excel_form', 'ExcelController@Recr_excel_form')->name('Recr_excel_form');
+    Route::GET('/Recr_excel', 'ExcelController@Recr_excel')->name('Recr_excel');
+
+    Route::GET('/APT_excel_form', 'ExcelController@APT_excel_form')->name('APT_excel_form');
+    Route::GET('/APT_excel', 'ExcelController@APT_excel')->name('APT_excel');
+
+    Route::GET('/Icard_excel_form', 'ExcelController@Icard_excel_form')->name('Icard_excel_form');
+    Route::GET('/Icard_excel', 'ExcelController@Icard_excel')->name('Icard_excel');
+
+    Route::GET('/IcardReg_excel_form', 'ExcelController@IcardReg_excel_form')->name('IcardReg_excel_form');
+    Route::GET('/IcardReg_excel', 'ExcelController@IcardReg_excel')->name('IcardReg_excel');
+
+    Route::GET('/Form13_excel_form', 'ExcelController@Form13_excel_form')->name('Form13_excel_form');
+    Route::GET('/Form13_excel', 'ExcelController@Form13_excel')->name('Form13_excel');
+
+
+
+
+
+
+
 });

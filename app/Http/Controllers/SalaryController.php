@@ -227,7 +227,7 @@ class SalaryController extends Controller
             $salary->salary_flag=$request->salaryFlag;
             $salary->save();
         }
-        return redirect()->route('manage_salary');
+        return back();
     }
     public function manage_salary_month( Request $request)
     {

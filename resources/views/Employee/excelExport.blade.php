@@ -121,7 +121,7 @@
                 <td>{{$b->Name}}</td>
                 <td>{{$b->OT}}</td>
                 <td>{{$b->PR_Day}}</td>
-                <td>{{$b->PL}}</td>
+                <td>{{$b->PL+$b->SL+$b->CL}}</td>
                 <td>{{$b->PH}}</td>
                 <td>{{$b->Total}}</td>
                 @foreach(json_decode($b->salary_head) as $s)
@@ -159,19 +159,21 @@
                     $jsonDecodeSecondArray=json_decode($b->overtime_salary_head);
                     $jsonDecodeThirdArray=json_decode($b->esics_salary_head);
                     $jsonDecodeFourthArray=json_decode($b->pfs_salary_head);
-                        foreach($jsonDecodeSecondArray as $key1){
+                    foreach($jsonDecodeSecondArray as $key1){
                             foreach(json_decode($b->salary_head) as $key => $value){
                             if($key1 == $key){
                                 $newSumVar += $value;
+                                }
                             }
                         }
-                    }foreach($jsonDecodeThirdArray as $key2){
+                    foreach($jsonDecodeThirdArray as $key2){
                             foreach(json_decode($b->salary_head) as $key => $value1){
                             if($key2 == $key){
                                 $newSumEsic += $value1;
+                                }
                             }
                         }
-                    }foreach($jsonDecodeSecondArray as $key3){
+                    foreach($jsonDecodeFourthArray as $key3){
                             foreach(json_decode($b->salary_head) as $key => $value2){
                             if($key3 == $key){
                                 $newSumPf += $value2;
@@ -205,7 +207,6 @@
                              }elseif ($loop->iteration == 6){
                              $totalWages6=$totalWages6+(round($s*$b->Total,0));
                              }
-
                     }else{
                         $wages=$wages+round($s/$b->assignDay*$b->Total,0);
                        if($loop->iteration == 1){
@@ -239,31 +240,28 @@
                 <td>{{$ot}}</td>
                 <td>{{$wages+$ot}}</td>
                 @php
-                    if($b->salary_flag == "Per Day"){
-                   $totalOverTime=$totalOverTime+(round($newSumVar/4*$b->OT,0));
-                   }else{
-                   $totalOverTime=$totalOverTime+(round($newSumVar/$b->assignDay/4*$b->OT,0));
-                   }
-                   $totalEarned=$totalEarned+($wages+round($sum/4*$b->OT,0));
+                   $totalOverTime=$totalOverTime+$ot;
+                   $totalEarned=$totalEarned+($wages+$ot);
                    $basic=json_decode($b->salary_head,true);
-                   $totalCash=$wages+round($sum/4*$b->OT,0);
+                   $totalCash=$wages+$ot;
                    //Pf flags
+                   dd($newSumPf/$b->assignDay*$b->Total);
                    if($b->PFFlag == "Yes"){
 
                        if($b->PFSaturating == "Yes"){
 
                        if($b->salary_flag == "Per Day"){
-                       if($basic['1'] >576){ $PF=0; }else { $PF=round(round($newSumPf*$b->Total,0)*12/100,0);}
+                       if(($newSumPf*$b->Total) >576){ $PF=0; }else { $PF=round(round($newSumPf*$b->Total,0)*12/100,0);}
                        }else{
-                        if($basic['1'] >15000){ $PF=0; }else {$PF=round(round($newSumPf*$b->Total,0)*12/100,0);}
+                        if(($newSumPf/$b->assignDay*$b->Total) >15000){ $PF=0; }else {$PF=round(round($newSumPf/$b->assignDay*$b->Total,0)*12/100,0);}
                        }
 
                        }else{
 
                         if($b->salary_flag == "Per Day"){
-                       if($basic['1'] >576){ $PF=0; }else { $PF=round(576*12/100,0);}
+                       if(($newSumPf*$b->Total) >576){ $PF=0; }else { $PF=round(576*12/100,0);}
                        }else{
-                        if($basic['1'] >15000){ $PF=0; }else {$PF=round(15000*12/100,0);}
+                        if(($newSumPf/$b->assignDay*$b->Total) >15000){ $PF=0; }else {$PF=round(15000*12/100,0);}
                        }
 
                        }
@@ -275,14 +273,13 @@
                    //ESIC Flag
                    if($b->esicFlag == "Yes"){
                        if($b->salary_flag == "Per Day"){
-                       if($sum>807){ $ESIC=0; }else {$ESIC=ceil(($wages+round($newSumEsic/4*$b->OT,0))*0.75/100);}
+                       if($sum>807){ $ESIC=0; }else {$ESIC=ceil((round($newSumEsic*$b->Total,0))*0.75/100);}
                        }else{
-                       if($sum>21000){ $ESIC=0; }else {$ESIC=ceil(($wages+round($newSumEsic/4*$b->OT,0))*0.75/100);}
+                       if($sum>21000){ $ESIC=0; }else {$ESIC=ceil((round($newSumEsic/$b->assignDay*$b->Total,0))*0.75/100);}
                        }
                    }else{
                    $ESIC=0;
                    }
-
                    if($b->PTFlag == "Yes"){
                    if($totalCash==0){ $PTax=$ptax->value1; }elseif($totalCash < 6000) { $PTax=$ptax->value2;} elseif($totalCash < 9000) { $PTax=$ptax->value3;} elseif($totalCash < 12000){ $PTax=$ptax->value4;} else{ $PTax=$ptax->value5;}
                    }else{
@@ -293,7 +290,7 @@
                    $totalDeduction=$PF+$ESIC+$PTax+$loan+$Deduction;
                    $lwf=0;
        $current_month=date('m');
-       if($current_month ==  "05" || $current_month ==  "06")
+       if($current_month ==  "06" || $current_month ==  "12")
        {
        $lwf=6;
        }else{
@@ -312,7 +309,7 @@
             @php
             $OTTotal=$OTTotal+$b->OT;
             $PR_DayTotal=$PR_DayTotal+$b->PR_Day;
-            $PLTotal=$PLTotal+$b->PL;
+            $PLTotal=$PLTotal+($b->PL+$b->SL+$b->CL);
             $PHTotal=$PHTotal+$b->PH;
             $TotalTotal=$TotalTotal+$b->Total;
             $TotalPF=$TotalPF+$PF;

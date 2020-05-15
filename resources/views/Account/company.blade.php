@@ -168,6 +168,7 @@
     $(document).ready(function() {
     $(document).on('change','#EstType',function() {
     var est=$('#EstType').val();
+
     if(est == "Contractor" || est == "Both"){
     $('.appendRow').removeClass('hidden');
     }else{

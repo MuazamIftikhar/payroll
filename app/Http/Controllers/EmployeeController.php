@@ -32,6 +32,12 @@ class EmployeeController extends Controller
      */
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'checkBook' => 'mimes:jpeg,pdf|size:120',
+            'adharProof' => 'mimes:jpeg,pdf|size:120',
+            'panProof' => 'mimes:jpeg,pdf|size:110',
+        ]);
+
         $employee=new Employee();
         $employee->Name=$request->Name;
         $employee->fatherName=$request->fatherName;
@@ -70,6 +76,7 @@ class EmployeeController extends Controller
         $employee->PTFlag=$request->PTFlag;
         $employee->PFSaturating=$request->PFSaturating;
         $employee->PFFlag=$request->PFFlag;
+        $employee->LWFFlag=$request->LWFFlag;
         $employee->NameAsAdhar=$request->NameAsAdhar;
         $employee->adharNumber=$request->adharNumber;
         if ($request->hasFile('adharProof')) {
@@ -92,7 +99,11 @@ class EmployeeController extends Controller
         $employee->family_lastName=json_encode($request->family_lastName);
         $employee->family_Relation=json_encode($request->family_Relation);
         $employee->family_presentAddress=json_encode($request->family_presentAddress);
+        $employee->familyPresentDistrict=json_encode($request->familyPresentDistrict);
+        $employee->familyPresentState=json_encode($request->familyPresentState);
         $employee->family_permanentAddress=json_encode($request->family_permanentAddress);
+        $employee->familyPermanentDistrict=json_encode($request->familyPermanentDistrict);
+        $employee->familyPermanentState=json_encode($request->familyPermanentState);
         $employee->family_Nominee=json_encode($request->family_Nominee);
         $employee->family_DOB=json_encode($request->family_DOB);
         $employee->family_State=json_encode($request->family_State);

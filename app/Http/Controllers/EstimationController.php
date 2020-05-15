@@ -194,10 +194,20 @@ class EstimationController extends Controller
      */
     public function manage_estimation()
     {
-        $estimation=Estimation::select(DB::raw('*,estimations.id as e_id'))
-            ->join('companies','estimations.user_id','=','companies.id')
-            ->join('company_infos','estimations.user_id','=','company_infos.user_id')
-            ->get();
+        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+        if (count($user) > 0) {
+            $estimation = Estimation::select(DB::raw('*,estimations.id as e_id'))
+                ->join('companies', 'estimations.user_id', '=', 'companies.user_id')
+                ->join('company_infos', 'estimations.user_id', '=', 'company_infos.user_id')
+                ->get();
+        }else{
+            $estimation = Estimation::select(DB::raw('*,estimations.id as e_id'))
+                ->join('companies', 'estimations.user_id', '=', 'companies.user_id')
+                ->join('company_infos', 'estimations.user_id', '=', 'company_infos.user_id')
+                ->where('estimations.user_id','=',Auth::user()->id)
+                ->get();
+
+        }
         return view('Est.manage',compact('estimation'));
     }
 

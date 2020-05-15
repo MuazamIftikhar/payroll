@@ -397,13 +397,13 @@
         "                                        <div class=\"col-md-6\">\n" +
         "                                            <div class=\"form-group\">\n" +
         "                                                <label class=\"control-label\">Name</label>\n" +
-        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"ownerName[]\" placeholder=\"Enter  Name\" />\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"ownerName[]\" placeholder="Enter  Name"/>\n" +
         "                                            </div>\n" +
         "                                        </div>\n" +
         "                                        <div class=\"col-md-6\">\n" +
         "                                            <div class=\"form-group\">\n" +
         "                                                <label class=\"control-label\">Mobile</label>\n" +
-        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\"  name=\"ownerMobile[]\"  placeholder=\"Enter Mobile\" />\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\"  name=\"ownerMobile[]\"  placeholder="Enter Mobile" />\n" +
         "                                            </div>\n" +
         "                                        </div>\n" +
         "                                    </div>\n" +
@@ -411,13 +411,13 @@
         "                                        <div class=\"col-md-6\">\n" +
         "                                            <div class=\"form-group\">\n" +
         "                                                <label class=\"control-label\">Email</label>\n" +
-        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"ownerEmail[]\" placeholder=\"Enter Email\" />\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"ownerEmail[]\" placeholder="Enter Email" />\n" +
         "                                            </div>\n" +
         "                                        </div>\n" +
         "                                        <div class=\"col-md-6\">\n" +
         "                                            <div class=\"form-group\">\n" +
         "                                                <label class=\"control-label\">Pan Number</label>\n" +
-        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"Pan[]\" placeholder=\"Enter Pan Number\" />\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"Pan[]\" placeholder="Enter Pan Number" />\n" +
         "                                            </div>\n" +
         "                                        </div>\n" +
         "                                    </div>\n" +
@@ -425,16 +425,17 @@
         "                                        <div class=\"col-md-6\">\n" +
         "                                            <div class=\"form-group\">\n" +
         "                                                <label class=\"control-label\">Remarks</label>\n" +
-        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"ownerRemarks[]\" placeholder=\"Enter Remarks\" />\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"ownerRemarks[]\" placeholder="Enter Remarks" />\n" +
         "                                            </div>\n" +
         "                                        </div>\n" +
         "                                        <div class=\"col-md-6\">\n" +
         "                                            <div class=\"form-group\">\n" +
         "                                                <label class=\"control-label\">Designation</label>\n" +
-        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"Designation[]\" placeholder=\"Enter Designation\" />\n" +
+        "                                                <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"Designation[]\" placeholder="Enter Designation" />\n" +
         "                                            </div>\n" +
         "                                        </div>\n" +
         "                                    </div>").insertAfter("#appendDiv");
     });
+
 @endsection
 

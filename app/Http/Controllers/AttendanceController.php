@@ -134,22 +134,28 @@ class AttendanceController extends Controller
      */
     public function searchByCompany_attendance(Request $request)
     {
-        $month=$request->Month;
-        $employee_ID=Attendance::where('Month',$month)->pluck('employee_id');
+        $checkmonth=$request->Month;
+        $date=explode('-',$checkmonth);
+        $year=$date[0];
+        $month=$date[1];
+        $employee_ID=Attendance::where('Month',$checkmonth)->pluck('employee_id');
         $company=Company::where('user_id','=',Auth::user()->id)->where('id','=',$request->Name)->first()->id;
-        if(count($employee_ID) > 0){
-            $employee=Employee::select(DB::raw('*,employees.id as e_id'))
+//        if(count($employee_ID) > 0){
+               $employee=Employee::select(DB::raw('*,employees.id as e_id'))
                 ->leftjoin('leaves','employees.id','=','leaves.employee_id')
                 ->leftjoin('loans','employees.id','=','loans.employee_id')
                 ->where('employees.company_id',$company)
+                ->whereYear('DOJ','=',$year)
+                 ->whereMonth('DOJ','<=',$month)
                 ->whereNotIn('employees.id',$employee_ID)->get();
-        }else{
-            $employee=Employee::select(DB::raw('*,employees.id as e_id'))
-                ->leftjoin('leaves','employees.id','=','leaves.employee_id')
-                ->leftjoin('loans','employees.id','=','loans.employee_id')
-                ->where('employees.company_id',$company)
-                ->get();
-        }
+//        }else{
+//            $employee=Employee::select(DB::raw('*,employees.id as e_id'))
+//                ->leftjoin('leaves','employees.id','=','leaves.employee_id')
+//                ->leftjoin('loans','employees.id','=','loans.employee_id')
+//                ->where('employees.company_id',$company)
+//                ->where('DOJ','<=',$month)
+//                ->get();
+//        }
         $company=Company::where('user_id','=',Auth::user()->id)->get();
         return view('Attendance.index',["employee"=>$employee,"company"=>$company,"month"=>$month]);
     }

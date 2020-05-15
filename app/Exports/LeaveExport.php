@@ -14,7 +14,6 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeWriting;
-use Maatwebsite\Excel\Sheet;
 
 
 class LeaveExport implements FromView,WithEvents
@@ -50,7 +49,6 @@ class LeaveExport implements FromView,WithEvents
             ->Join('pfs', 'employees.company_id', '=', 'pfs.company_id')
             ->where('attendances.Month', '=', $this->month)
             ->where('employees.company_id','=',$this->id)->get();
-
         $company=Company::where('id','=',$company_id)->get();
         $setting=Setting::where('id','=',$this->setting)->get();
         return view('Employee.excelExport', [

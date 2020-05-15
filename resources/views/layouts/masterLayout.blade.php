@@ -316,6 +316,16 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('excel')}}"><i class="fa fa-circle-o"></i> Salary Excel</a>
+                        <li><a href="{{route('declaration_excel_form')}}"><i class="fa fa-circle-o"></i> Declaration Excel</a>
+                        <li><a href="{{route('employeeCard_excel_form')}}"><i class="fa fa-circle-o"></i> Employee Card Excel</a>
+                        <li><a href="{{route('formI_excel_form')}}"><i class="fa fa-circle-o"></i> Form I Excel</a>
+                        <li><a href="{{route('form35_excel_form')}}"><i class="fa fa-circle-o"></i> Form 35 Excel</a>
+                        <li><a href="{{route('form2R_excel_form')}}"><i class="fa fa-circle-o"></i> Form 2R Excel</a>
+                        <li><a href="{{route('form11_excel_form')}}"><i class="fa fa-circle-o"></i> Form 11 Excel</a>
+                        <li><a href="{{route('formF_excel_form')}}"><i class="fa fa-circle-o"></i> Form F Excel</a>
+                        <li><a href="{{route('Recr_excel_form')}}"><i class="fa fa-circle-o"></i> Recr Excel</a>
+                        <li><a href="{{route('IcardReg_excel_form')}}"><i class="fa fa-circle-o"></i> IcardReg Excel</a>
+                        <li><a href="{{route('Form13_excel_form')}}"><i class="fa fa-circle-o"></i> Form13 Excel</a>
                         </li>
                     </ul>
                 </li>
