@@ -4,17 +4,17 @@
 <table>
     <tbody>
     <tr>
-        <td colspan="5">Name and Address of Contractor</td>
-        <td colspan="9" rowspan="2">Register of Employees of Contractor                                                 [See Rule-75]    Form 13</td>
-        <td colspan="4" >Name and Address of Principal Employer</td>
+        <td colspan="6">Name and Address of Contractor</td>
+        <td colspan="10" rowspan="2">Register of Employees of Contractor [See Rule-75] Form 13</td>
+        <td colspan="7" >Name and Address of Principal Employer</td>
     </tr>
     <tr>
-        <td colspan="5" rowspan="2"></td>
-        <td colspan="4" ></td>
+        <td colspan="6" rowspan="2"></td>
+        <td colspan="7" ></td>
     </tr>
     <tr>
-        <td colspan="9" >Name & Add of Establ. In/under Which Contract is carried on</td>
-        <td colspan="4" >Name and Location of Work</td>
+        <td colspan="10" >Name & Add of Establ. In/under Which Contract is carried on</td>
+        <td colspan="7" >Name and Location of Work</td>
     </tr>
     <tr></tr>
     <tr>
@@ -29,7 +29,7 @@
         <td colspan="2" rowspan="2">Signature or Thumb Imression of Workmen</td>
         <td colspan="2" rowspan="2">Date of Termination of Employment</td>
         <td colspan="2" rowspan="2">Reason for Termination</td>
-        <td colspan="2" rowspan="2">Remarks</td>
+        <td colspan="3" rowspan="2">Remarks</td>
     </tr>
     <tr></tr>
     @foreach($declaration as $d)
@@ -45,7 +45,7 @@
         <td colspan="2" rowspan="2"></td>
         <td colspan="2" rowspan="2"></td>
         <td colspan="2" rowspan="2"></td>
-        <td colspan="2" rowspan="2"></td>
+        <td colspan="3" rowspan="2"></td>
     </tr>
     <tr></tr>
         @endforeach

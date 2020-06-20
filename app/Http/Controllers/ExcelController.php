@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Employee;
 use App\Exports\APTExport;
+use App\Exports\BonusExport;
 use App\Exports\DeclarationExport;
 use App\Exports\EmployeecardExport;
+use App\Exports\EsicExport;
 use App\Exports\Form11Export;
 use App\Exports\Form13Export;
 use App\Exports\Form2RExport;
@@ -16,6 +18,7 @@ use App\Exports\FORMIExport;
 use App\Exports\ICardExport;
 use App\Exports\IcardRegExport;
 use App\Exports\LeaveExport;
+use App\Exports\PFExport;
 use App\Exports\RecrExport;
 use App\Setting;
 use Illuminate\Http\Request;
@@ -216,6 +219,40 @@ class ExcelController extends Controller
     {
         $employee_id=$request->employee_id;
         return Excel::download(new Form13Export($employee_id),'Form13.xlsx');
+    }
+    public function Report_esic_form(){
+        $company=Company::all();
+        return view('Excel.ReportEsic',['company'=>$company]);
+    }
+
+    public function Report_esic_excel(Request $request)
+    {
+        $id=$request->id;
+        $month=$request->Month;
+        return Excel::download(new EsicExport($id,$month),'Report_esic.xlsx');
+    }
+    public function Report_pf_form(){
+        $company=Company::all();
+        return view('Excel.ReportPf',['company'=>$company]);
+    }
+
+    public function Report_pf_excel(Request $request)
+    {
+        $id=$request->id;
+        $month=$request->Month;
+        return Excel::download(new PFExport($id,$month),'Report_pf.xlsx');
+    }
+    public function Bonus_form(){
+        $company=Company::all();
+        return view('Excel.bonus',['company'=>$company]);
+    }
+
+    public function Bonus_form_excel(Request $request)
+    {
+        $id=$request->company_id;
+        $fromMonth=$request->fromMonth;
+        $toMonth=$request->toMonth;
+        return Excel::download(new BonusExport($id,$fromMonth,$toMonth),'Bonus.xlsx');
     }
 
 }

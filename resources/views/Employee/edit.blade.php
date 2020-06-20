@@ -415,7 +415,10 @@
                                 $family_adharNumber=json_decode($e->family_adharNumber);
                                 $family_DOB=json_decode($e->family_DOB);
                                 $family_Nominee=json_decode($e->family_Nominee);
-                                $family_State=json_decode($e->family_State);
+                                $familyPresentState=json_decode($e->familyPresentState);
+                                $familyPermanentState=json_decode($e->familyPermanentState);
+                                $familyPermanentDistrict=json_decode($e->familyPermanentDistrict);
+                                $familyPresentDistrict=json_decode($e->familyPresentDistrict);
                                 $Witness=json_decode($e->Witness);
                                 $witnessAddress=json_decode($e->witnessAddress);
                                     @endphp
@@ -455,10 +458,40 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
+                                            <label class="control-label">District</label>
+                                            <input type="text" required="required" class="form-control" value="{{$familyPresentDistrict[$i]}}"  name="familyPresentDistrict[]"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">State</label>
+                                            <input type="text" required="required" class="form-control" value="{{$familyPresentState[$i]}}"  name="familyPresentState[]"/>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
                                             <label class="control-label">Permanent Address</label>
                                             <input type="text" required="required" class="form-control" value="{{$family_permanentAddress[$i]}}"  name="family_permanentAddress[]"/>
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">District</label>
+                                            <input type="text" required="required" class="form-control" value="{{$familyPermanentDistrict[$i]}}"  name="familyPermanentDistrict[]"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">State</label>
+                                            <input type="text" required="required" class="form-control" value="{{$familyPermanentState[$i]}}"  name="familyPermanentState[]"/>
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Nominee / Family Member</label>
@@ -469,18 +502,10 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Date of Birth</label>
                                             <input type="edit" required="required" class="form-control" value="{{$family_DOB[$i]}}"  name="family_DOB[]"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="control-label">State</label>
-                                            <input type="text" required="required" class="form-control"  value="{{$family_State[$i]}}" name="family_State[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -500,13 +525,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Witness Name {{$i}}</label>
+                                        <label class="control-label">Witness Name {{$i+1}}</label>
                                         <input type="text" required="required" class="form-control" value="{{$Witness[$i]}}" name="Witness[]" placeholder="Enter Witness Name"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Witness Address {{$i}}</label>
+                                        <label class="control-label">Witness Address {{$i+1}}</label>
                                         <input type="text" required="required" class="form-control" value="{{$witnessAddress[$i]}}" name="witnessAddress[]" placeholder="Enter Witness Address"/>
                                     </div>
                                 </div>

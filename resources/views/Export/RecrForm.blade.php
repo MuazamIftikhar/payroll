@@ -89,6 +89,7 @@
         <td colspan="2">Relation</td>
         <td colspan="2">{{$family_Relation[$i]}}</td>
     </tr>
+    @endfor
     <tr>
         <td colspan="2">2</td>
         <td colspan="3"></td>
@@ -189,3 +190,4 @@
     </tr>
     </tbody>
 </table>
+    @endforeach

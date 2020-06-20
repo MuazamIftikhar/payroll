@@ -9,8 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title> Payroll</title>
-    <script>window.csrfToken = "{{csrf_token()}}"</script>
-
     <link rel="stylesheet" href="{{URL::asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
@@ -326,6 +324,9 @@
                         <li><a href="{{route('Recr_excel_form')}}"><i class="fa fa-circle-o"></i> Recr Excel</a>
                         <li><a href="{{route('IcardReg_excel_form')}}"><i class="fa fa-circle-o"></i> IcardReg Excel</a>
                         <li><a href="{{route('Form13_excel_form')}}"><i class="fa fa-circle-o"></i> Form13 Excel</a>
+                        <li><a href="{{route('Bonus_form')}}"><i class="fa fa-circle-o"></i> Bonus Excel</a>
+                        <li><a href="{{route('Report_esic_form')}}"><i class="fa fa-circle-o"></i> Esic Report</a>
+                        <li><a href="{{route('Report_pf_form')}}"><i class="fa fa-circle-o"></i> Pf Report</a>
                         </li>
                     </ul>
                 </li>
@@ -579,7 +580,6 @@
 <script src="{{URL::asset('plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
 <script src="{{URL::asset('plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
 <script src="{{URL::asset('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
-
 
 <script>
     $('.timepicker').timepicker({

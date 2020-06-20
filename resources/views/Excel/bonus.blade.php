@@ -9,33 +9,32 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Search</h3>
                     </div>
-                    <form class="form" method="GET" action="{{route('salary_excel')}}">
+                    <form class="form" method="GET" action="{{route('Bonus_form_excel')}}">
                         <div class="box-body">
                             <div class="col-md-6">
                                 <div class="form-group">
-
-                                    <select name="id" class="form-control">
+                                    <label>Company Name</label>
+                                    <select id="companyName" name="company_id" class="form-control companyName">
+                                        <option>Select</option>
                                         @foreach($company as $c)
                                             <option value="{{$c->id}}">{{$c->companyName}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="month" class="form-control" id="Month"  name="Month" placeholder="dd-mm-YY">
+                                    <label>From </label>
+                                    <input type="month" class="form-control"  name="fromMonth" placeholder="dd-mm-YY">
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <select name="setting" class="form-control">
-                                        @foreach($setting as $s)
-                                            <option value="{{$s->id}}">Form {{$s->id}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label>To</label>
+                                    <input type="month" class="form-control"  name="toMonth" placeholder="dd-mm-YY">
                                 </div>
                             </div>
+
                             <div class="col-md-7">
                                 <div class="box-footer">
                                     <button type="submit" class="btn btn-primary pull-right">Search</button>
@@ -51,4 +50,5 @@
 
 @endsection
 @section('script')
+
 @endsection

@@ -245,7 +245,7 @@
                    $basic=json_decode($b->salary_head,true);
                    $totalCash=$wages+$ot;
                    //Pf flags
-                   dd($newSumPf/$b->assignDay*$b->Total);
+                  // dd($newSumPf/$b->assignDay*$b->Total);
                    if($b->PFFlag == "Yes"){
 
                        if($b->PFSaturating == "Yes"){

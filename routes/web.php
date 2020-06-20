@@ -143,7 +143,16 @@ Route::group([ 'middleware' => ['auth']], function() {
     Route::GET('/Form13_excel_form', 'ExcelController@Form13_excel_form')->name('Form13_excel_form');
     Route::GET('/Form13_excel', 'ExcelController@Form13_excel')->name('Form13_excel');
 
+    Route::GET('/Report_esic_form', 'ExcelController@Report_esic_form')->name('Report_esic_form');
+    Route::GET('/Report_esic_excel', 'ExcelController@Report_esic_excel')->name('Report_esic_excel');
 
+    Route::GET('/Report_pf_form', 'ExcelController@Report_pf_form')->name('Report_pf_form');
+    Route::GET('/Report_pf_excel', 'ExcelController@Report_pf_excel')->name('Report_pf_excel');//
+
+//    Route::POST('saveToken', 'UserController@saveToken')->name('saveToken');
+
+    Route::GET('/Bonus_form', 'ExcelController@Bonus_form')->name('Bonus_form');
+    Route::GET('/Bonus_form_excel', 'ExcelController@Bonus_form_excel')->name('Bonus_form_excel');
 
 
 

@@ -5,7 +5,7 @@
     <tbody>
     <tr>
         <td colspan="12">Name and Address of Factory</td>
-        <td colspan="9" rowspan="3">IDENTITY CARD REGISTER</td>
+        <td colspan="11" rowspan="3">IDENTITY CARD REGISTER</td>
     </tr>
     <tr>
         <td colspan="12" rowspan="2"></td>
@@ -21,7 +21,7 @@
         <td colspan="2" rowspan="2">Signature of Thum Impression of the Worker</td>
         <td colspan="2" rowspan="2">Signature of Manager or Authorised Agent</td>
         <td colspan="2" rowspan="2">Identity Card Issue Date</td>
-        <td colspan="2" rowspan="2">Remarks</td>
+        <td colspan="3" rowspan="2">Remarks</td>
     </tr>
     <tr></tr>
     @foreach($declaration as $d)
@@ -35,7 +35,7 @@
         <td colspan="2" rowspan="2"></td>
         <td colspan="2" rowspan="2"></td>
         <td colspan="2" rowspan="2"></td>
-        <td colspan="2" rowspan="2"></td>
+        <td colspan="3" rowspan="2"></td>
     </tr>
     <tr></tr>
     @endforeach

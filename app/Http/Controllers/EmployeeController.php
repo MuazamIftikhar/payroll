@@ -32,11 +32,11 @@ class EmployeeController extends Controller
      */
     public function create(Request $request)
     {
-        $this->validate($request, [
-            'checkBook' => 'mimes:jpeg,pdf|size:120',
-            'adharProof' => 'mimes:jpeg,pdf|size:120',
-            'panProof' => 'mimes:jpeg,pdf|size:110',
-        ]);
+//        $this->validate($request, [
+//            'checkBook' => 'mimes:jpeg,pdf|size:1200',
+//            'adharProof' => 'mimes:jpeg,pdf|size:1200',
+//            'panProof' => 'mimes:jpeg,pdf|size:1100',
+//        ]);
 
         $employee=new Employee();
         $employee->Name=$request->Name;
