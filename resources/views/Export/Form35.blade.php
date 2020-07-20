@@ -60,36 +60,27 @@
         <td colspan="1"> Witness</td>
         <td colspan="8"></td>
     </tr>
+    @php
+        $witness=json_decode($d->Witness);
+        $address=json_decode($d->witnessAddress);
+    @endphp
+    @for($i=0 ; $i < 2 ; $i++)
     <tr>
-        <td colspan="1" rowspan="5">1</td>
+        <td colspan="1" rowspan="5">{{$i+1}}</td>
         <td colspan="1" rowspan="2">signature</td>
         <td colspan="7" rowspan="2"></td>
     </tr>
     <tr></tr>
     <tr>
         <td colspan="1" >Name</td>
-        <td colspan="7" ></td>
+        <td colspan="7" >{{$witness[$i]}}</td>
     </tr>
     <tr>
         <td colspan="1" rowspan="2">Address</td>
-        <td colspan="7" rowspan="2"></td>
+        <td colspan="7" rowspan="2">{{$address[$i]}}</td>
     </tr>
     <tr></tr>
-    <tr>
-        <td colspan="1" rowspan="5">2</td>
-        <td colspan="1" rowspan="2">signature</td>
-        <td colspan="7" rowspan="2"></td>
-    </tr>
-    <tr></tr>
-    <tr>
-        <td colspan="1" >Name</td>
-        <td colspan="7" ></td>
-    </tr>
-    <tr>
-        <td colspan="1" rowspan="2">Address</td>
-        <td colspan="7" rowspan="2"></td>
-    </tr>
-    <tr></tr>
+    @endfor
     <tr></tr>
     <tr></tr>
     <tr>

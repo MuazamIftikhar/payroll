@@ -14,7 +14,7 @@
         <td colspan="5">(To be retained by the Employer for future reference)</td>
     </tr>
     <tr>
-        <td colspan="5">Employees’ Provident Fund Organization</td>
+        <td colspan="5">{{$d->companyName}}</td>
         <td colspan="1">Emp Code</td>
         <td colspan="3"></td>
     </tr>
@@ -72,14 +72,14 @@
         <td colspan="1">07*</td>
         <td colspan="4">Whether earlier a member of Employees ‘provident Fund Scheme 1952
         </td>
-        <td colspan="4">Yes     &#01;              No       &#01;
+        <td colspan="4">
         </td>
     </tr>
     <tr>
         <td colspan="1">08*</td>
         <td colspan="4">Whether earlier a member of Employees ‘Pension Scheme ,1995
         </td>
-        <td colspan="4">Yes     &#01;               No        &#01;
+        <td colspan="4">
         </td>
     </tr>
     <tr>

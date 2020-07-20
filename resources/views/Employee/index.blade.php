@@ -92,39 +92,39 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Name</label>
-                                        <input maxlength="100" type="text" required="required" class="form-control" value="{{old('Name')}}" onkeypress="return /[a-z]/i.test(event.key)" name="Name" placeholder="Enter  Name" />
+                                        <label class="control-label">Name <span style="color: red" >*</span></label>
+                                        <input  type="text" required="required" class="form-control" value="{{old('Name')}}" onkeypress="return /[a-z]/i.test(event.key)" name="Name" placeholder="Enter  Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Father Name</label>
-                                        <input maxlength="100" type="text" required="required" class="form-control" value="{{old('fatherName')}}" onkeypress="return /[a-z]/i.test(event.key)" name="fatherName" placeholder="Enter Father Name" />
+                                        <label class="control-label">Father Name <span style="color: red" >*</span></label>
+                                        <input  type="text" required="required" class="form-control" value="{{old('fatherName')}}" onkeypress="return /[a-z]/i.test(event.key)" name="fatherName" placeholder="Enter Father Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Last Name</label>
-                                        <input maxlength="100" type="text" required="required" class="form-control" value="{{old('lastName')}}" onkeypress="return /[a-z]/i.test(event.key)" name="lastName" placeholder="Enter Last Name" />
+                                        <label class="control-label">Last Name <span style="color: red" >*</span></label>
+                                        <input type="text" required="required" class="form-control" value="{{old('lastName')}}" onkeypress="return /[a-z]/i.test(event.key)" name="lastName" placeholder="Enter Last Name" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Date Of Birth</label>
+                                        <label class="control-label">Date Of Birth <span style="color: red" >*</span></label>
                                         <input type="date" required="required" class="form-control" value="{{old('DOB')}}" name="DOB"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Joining Date</label>
+                                        <label class="control-label">Joining Date <span style="color: red" >*</span></label>
                                         <input type="date" required="required" min="<?php echo date("Y-m-d"); ?>"  class="form-control" value="{{old('DOJ')}}" name="DOJ"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Date of Leaving</label>
+                                        <label class="control-label">Date of Leaving <span style="color: red" >*</span></label>
                                         <input type="date" required="required" min="<?php echo date("Y-m-d"); ?>" class="form-control" value="{{old('DOE')}}" name="DOE"/>
                                     </div>
                                 </div>
@@ -135,20 +135,20 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Religion</label>
-                                        <input maxlength="100" type="text" required="required" class="form-control" value="{{old('Religion')}}" name="Religion" placeholder="Enter Religion" />
+                                        <label class="control-label">Religion <span style="color: red" >*</span></label>
+                                        <input   type="text" required="required" class="form-control" value="{{old('Religion')}}" name="Religion" placeholder="Enter Religion" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Mobile Number</label>
-                                        <input maxlength="100" type="text"  class="form-control" value="{{old('Phone')}}" name="Phone" placeholder="Enter Phone" />
+                                        <label class="control-label">Mobile Number <span style="color: red" >*</span></label>
+                                        <input maxlength="10" type="text"  class="form-control"  value="{{old('Phone')}}" name="Phone" placeholder="Enter Phone" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Email</label>
-                                        <input maxlength="100" type="text" class="form-control" value="{{old('Email')}}" name="Email" placeholder="Enter Email" />
+                                        <label class="control-label">Email <span style="color: red" >*</span></label>
+                                        <input   type="text" class="form-control" value="{{old('Email')}}" name="Email" placeholder="Enter Email" />
                                     </div>
                                 </div>
                             </div>
@@ -156,27 +156,27 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label class="control-label">Street Address</label>
-                                        <input type="text" required="required" class="form-control" value="{{old('streetAddress')}}" name="streetAddress" placeholder="Enter Street Address" />
+                                        <label class="control-label">Street Address  <span style="color: red" >*</span></label>
+                                        <input type="text" required="required" class="form-control" value="{{old('streetAddress')}}" id="streetAddress" name="streetAddress" placeholder="Enter Street Address" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">City</label>
-                                        <input maxlength="100" type="text" required="required" class="form-control" value="{{old('City')}}" name="City" placeholder="Enter City" />
+                                        <label class="control-label">City <span style="color: red" >*</span></label>
+                                        <input   type="text" required="required" class="form-control" value="{{old('City')}}" name="City" placeholder="Enter City" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Enter State</label>
+                                        <label class="control-label">Enter State <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control" value="{{old('State')}}" name="State"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Postal / Zip code</label>
+                                        <label class="control-label">Postal / Zip code <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control" value="{{old('zipCode')}}" name="zipCode" maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                     </div>
                                 </div>
@@ -185,27 +185,27 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label class="control-label">Street Address</label>
-                                        <input type="text" required="required" class="form-control" value="{{old('per_streetAddress')}}" name="per_streetAddress" placeholder="Enter Street Address" />
+                                        <label class="control-label">Street Address  <span style="color: red" >*</span> <a class="copyLink"> Same as Present</a></label>
+                                        <input type="text" required="required" class="form-control" value="{{old('per_streetAddress')}}" id="per_streetAddress" name="per_streetAddress" placeholder="Enter Street Address" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">City</label>
-                                        <input maxlength="100" type="text" required="required" class="form-control" value="{{old('per_City')}}" name="per_City" placeholder="Enter City" />
+                                        <label class="control-label">City <span style="color: red" >*</span></label>
+                                        <input   type="text" required="required" class="form-control" value="{{old('per_City')}}" name="per_City" placeholder="Enter City" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Enter State</label>
+                                        <label class="control-label">Enter State <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control" value="{{old('per_State')}}" name="per_State"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Postal / Zip code</label>
+                                        <label class="control-label">Postal / Zip code <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control" value="{{old('per_zipCode')}}" name="per_zipCode" maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                                     </div>
                                 </div>
@@ -213,13 +213,13 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Designation</label>
+                                        <label class="control-label">Designation <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control" value="{{old('Designation')}}" name="Designation"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Company Name</label>
+                                        <label class="control-label">Company Name <span style="color: red" >*</span></label>
                                         <select class="form-control"  name="companyName">
                                             @foreach($name as $n)
                                             <option value="{{$n->id}}" {{old('companyName') == $n->id ? "selected" : ""}}>{{$n->companyName}}</option>
@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label class="control-label">Marital Status</label>
+                                        <label class="control-label">Marital Status <span style="color: red" >*</span></label>
                                         <div class="radio">
                                             <label>
                                                 <input type="radio" name="Status" value="Married" {{old('Status') == "Married" ? "checked" : ""}} checked="">
@@ -244,7 +244,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label class="control-label">Gender</label>
+                                        <label class="control-label">Gender <span style="color: red" >*</span></label>
                                         <div class="radio">
                                             <label>
                                                 <input type="radio" name="Gender" value="Male" {{old('Gender') == "Male" ? "checked" : ""}} checked="">
@@ -275,13 +275,13 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Employee Esic Number</label>
+                                        <label class="control-label">Employee Esic Number <span style="color: red" >*</span></label>
                                         <input type="text"  class="form-control" value="{{old('esicNumber')}}" maxlength="10" name="esicNumber" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Esic Flag</label>
+                                        <label class="control-label">Esic Flag <span style="color: red" >*</span></label>
                                         <select class="form-control"   name="esicFlag">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -290,7 +290,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">PT Flag</label>
+                                        <label class="control-label">PT Flag <span style="color: red" >*</span></label>
                                         <select class="form-control"  name="PTFlag">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -307,7 +307,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">PF Saturating Ceilling</label>
+                                        <label class="control-label">PF Saturating Ceilling <span style="color: red" >*</span></label>
                                         <select class="form-control"   name="PFSaturating">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -316,7 +316,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">PF Flag</label>
+                                        <label class="control-label">PF Flag <span style="color: red" >*</span></label>
                                         <select class="form-control"   name="PFFlag">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -327,7 +327,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">LWf Flag</label>
+                                        <label class="control-label">LWf Flag <span style="color: red" >*</span></label>
                                         <select class="form-control"   name="LWFFlag">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -338,22 +338,22 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Name As Per Bank</label>
-                                        <input type="text"  class="form-control" value="{{old('bankName')}}" name="bankName" placeholder="Enter Bank Name" />
+                                        <label class="control-label">Name As Per Bank <span style="color: red" >*</span></label>
+                                        <input type="text"  class="form-control" value="{{old('bankName')}}" onkeypress="return /[a-z]/i.test(event.key)" name="bankName" placeholder="Enter Bank Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Bank Account Number</label>
-                                        <input maxlength="100" type="text"  class="form-control" value="{{old('accountNumber')}}" name="accountNumber" placeholder="Enter Number" />
+                                        <label class="control-label">Bank Account Number <span style="color: red" >*</span></label>
+                                        <input   type="text"  class="form-control" value="{{old('accountNumber')}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="accountNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">ISFC Code</label>
-                                        <input type="text"  class="form-control" value="{{old('ISFC')}}" name="ISFC" maxlength="11" placeholder="Enter ISFC" />
+                                        <label class="control-label">ISFC Code <span style="color: red" >*</span></label>
+                                        <input type="text"  class="form-control" value="{{old('ISFC')}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="ISFC" maxlength="11" placeholder="Enter ISFC" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -370,40 +370,40 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Name As Per Adhar</label>
-                                        <input type="text" class="form-control" value="{{old('required')}}" required="required" name="NameAsAdhar" placeholder="Enter Adhar Name" />
+                                        <label class="control-label">Name As Per Adhar <span style="color: red" >*</span></label>
+                                        <input type="text" maxlength="12" class="form-control" value="{{old('required')}}" required="required" name="NameAsAdhar" placeholder="Enter Adhar Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Adhar Number</label>
-                                        <input maxlength="100" type="text" required="required" class="form-control" value="{{old('adharNumber')}}" name="adharNumber" placeholder="Enter Number" />
+                                        <label class="control-label">Adhar Number <span style="color: red" >*</span></label>
+                                        <input   type="text" required="required" class="form-control" value="{{old('adharNumber')}}" name="adharNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Adhar Proof</label>
-                                        <input maxlength="100" type="file"  class="form-control" value="{{old('adharProof')}}" name="adharProof" />
+                                        <input   type="file"  class="form-control" value="{{old('adharProof')}}" name="adharProof" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Name As Per Pan</label>
+                                        <label class="control-label">Name As Per Pan <span style="color: red" >*</span></label>
                                         <input type="text"  class="form-control" value="{{old('NameAsPan')}}" name="NameAsPan" placeholder="Enter Pan Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Pan Number</label>
-                                        <input maxlength="100" type="text"  class="form-control" value="{{old('panNumber')}}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="panNumber" placeholder="Enter Number" />
+                                        <label class="control-label">Pan Number <span style="color: red" >*</span></label>
+                                        <input maxlength="6" type="text"  class="form-control" maxlength="10" value="{{old('panNumber')}}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="panNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Pan Proof</label>
-                                        <input maxlength="100" type="file" class="form-control" value="{{old('panProof')}}" name="panProof" />
+                                        <input  type="file" class="form-control" value="{{old('panProof')}}" name="panProof" />
                                     </div>
                                 </div>
                             </div>
@@ -419,19 +419,19 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">First Name</label>
+                                            <label class="control-label">First Name <span style="color: red" >*</span></label>
                                             <input type="text" required="required" class="form-control" name="family_firstName[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">Last Name</label>
+                                            <label class="control-label">Last Name <span style="color: red" >*</span></label>
                                             <input type="text" required="required" class="form-control" name="family_lastName[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">Relation</label>
+                                            <label class="control-label">Relation <span style="color: red" >*</span></label>
                                             <select class="form-control"   name="family_Relation[]">
                                                 <option >Spouse</option>
                                                 <option>Mother</option>
@@ -444,19 +444,19 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">Present Address</label>
+                                            <label class="control-label">Present Address <span style="color: red" >*</span></label>
                                             <input type="text" required="required" class="form-control"  name="family_presentAddress[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">District</label>
+                                            <label class="control-label">District <span style="color: red" >*</span></label>
                                             <input type="text" required="required" class="form-control"  name="familyPresentDistrict[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">State</label>
+                                            <label class="control-label">State <span style="color: red" >*</span></label>
                                             <input type="text" required="required" class="form-control"  name="familyPresentState[]"/>
                                         </div>
                                     </div>
@@ -465,19 +465,19 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">Permanent Address</label>
+                                            <label class="control-label">Permanent Address <span style="color: red" >*</span> <a class="copyLink2"> Same as Present</a></label>
                                             <input type="text" required="required" class="form-control"  name="family_permanentAddress[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">District</label>
+                                            <label class="control-label">District <span style="color: red" >*</span></label>
                                             <input type="text" required="required" class="form-control"  name="familyPermanentDistrict[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">State</label>
+                                            <label class="control-label">State <span style="color: red" >*</span></label>
                                             <input type="text" required="required" class="form-control"  name="familyPermanentState[]"/>
                                         </div>
                                     </div>
@@ -486,7 +486,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Nominee / Family Member</label>
+                                        <label class="control-label">Nominee / Family Member <span style="color: red" >*</span></label>
                                         <select class="form-control"   name="family_Nominee[]">
                                             <option>Nominee</option>
                                             <option>Family Address</option>
@@ -495,14 +495,14 @@
                                 </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">Date of Birth</label>
+                                            <label class="control-label">Date of Birth <span style="color: red" >*</span></label>
                                             <input type="date" required="required" class="form-control"  name="family_DOB[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">Adhar Number</label>
-                                            <input type="text" required="required" class="form-control"  name="family_adharNumber[]" placeholder="Enter Adhar Number"/>
+                                            <label class="control-label">Adhar Number <span style="color: red" >*</span></label>
+                                            <input type="text" required="required" maxlength="12" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control"  name="family_adharNumber[]" placeholder="Enter Adhar Number"/>
                                         </div>
                                     </div>
                                 </div>
@@ -516,13 +516,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Witness Name 1</label>
+                                        <label class="control-label">Witness Name 1 <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control"  name="Witness[]" placeholder="Enter Witness Name"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Witness Address 1</label>
+                                        <label class="control-label">Witness Address 1 <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control"  name="witnessAddress[]" placeholder="Enter Witness Address"/>
                                     </div>
                                 </div>
@@ -530,13 +530,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Witness Name 2</label>
+                                        <label class="control-label">Witness Name 2 <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control"  name="Witness[]" placeholder="Enter Witness Name"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Witness Address 2</label>
+                                        <label class="control-label">Witness Address 2 <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control"  name="witnessAddress[]" placeholder="Enter Witness Address"/>
                                     </div>
                                 </div>
@@ -556,6 +556,13 @@
 @section('script')
 
     $(document).ready(function () {
+
+    $( ".copyLink" ).click(function() {
+
+    var previous=$("#streetAddress").val();
+    $("#per_streetAddress").val(previous);
+    });
+
     var navListItems = $('div.setup-box div a'),
     allWells = $('.setup-content'),
     allNextBtn = $('.nextBtn');
@@ -600,19 +607,19 @@
     $(' <div class="row">\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">First Name</label>\n' +
+                '                                            <label class="control-label">First Name <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="text"  class="form-control" name="family_firstName[]"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">Last Name</label>\n' +
+                '                                            <label class="control-label">Last Name <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="text" class="form-control" name="family_lastName[]"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">Relation</label>\n' +
+                '                                            <label class="control-label">Relation <span style="color: red" >*</span> </label>\n' +
                 '                                            <select class="form-control"  name="family_Relation[]">\n' +
                     '                                                <option>Spouse</option>\n' +
                     '                                                <option>Mother</option>\n' +
@@ -625,19 +632,19 @@
     '                                <div class="row">\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">Present Address</label>\n' +
+                '                                            <label class="control-label">Present Address <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="text" class="form-control" name="family_presentAddress[]"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">District</label>\n' +
+                '                                            <label class="control-label">District <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="text" class="form-control" name="familyPresentDistrict[]"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">State</label>\n' +
+                '                                            <label class="control-label">State <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="text" class="form-control" name="familyPresentState[]"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +
@@ -646,19 +653,19 @@
     '                                <div class="row">\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">Permanent Address</label>\n' +
+                '                                            <label class="control-label">Permanent Address <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="text" class="form-control" name="family_permanentAddress[]"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">District</label>\n' +
+                '                                            <label class="control-label">District <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="text" class="form-control" name="familyPermanentDistrict[]"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">State</label>\n' +
+                '                                            <label class="control-label">State <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="text" class="form-control" name="familyPermanentState[]"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +
@@ -667,7 +674,7 @@
         '\n' +
         '                                <div class="col-md-4">\n' +
             '                                    <div class="form-group">\n' +
-                '                                        <label class="control-label">Nominee / Family Member</label>\n' +
+                '                                        <label class="control-label">Nominee / Family Member <span style="color: red" >*</span> </label>\n' +
                 '                                        <select class="form-control"  name="family_Nominee[]">\n' +
                     '                                            <option>Nominee</option>\n' +
                     '                                            <option>Family Address</option>\n' +
@@ -676,13 +683,13 @@
             '                                </div>\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">Date of Birth</label>\n' +
+                '                                            <label class="control-label">Date of Birth <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="date" class="form-control" name="family_DOB[]"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +
         '                                    <div class="col-md-4">\n' +
             '                                        <div class="form-group">\n' +
-                '                                            <label class="control-label">Adhar Number</label>\n' +
+                '                                            <label class="control-label">Adhar Number <span style="color: red" >*</span> </label>\n' +
                 '                                            <input type="text" class="form-control" name="family_adharNumber[]" placeholder="Enter Adhar Number"/>\n' +
                 '                                        </div>\n' +
             '                                    </div>\n' +

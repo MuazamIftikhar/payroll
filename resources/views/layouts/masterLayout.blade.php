@@ -169,7 +169,24 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    @role('Super Admin')
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning count"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have  notifications</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu notifications">
 
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#" class="noti-footer" >View all</a></li>
+                        </ul>
+                    </li>
+                    @endrole
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -177,7 +194,9 @@
                             <span class="hidden-xs">{{Auth::user()->name}}</span>
                         </a>
                         <ul class="dropdown-menu">
+
                             <!-- User image -->
+
                             <li class="user-header">
                                 <img src="dist/img/user2-160x160.png" class="img-circle" alt="User Image">
 
@@ -308,25 +327,43 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-users"></i> <span> Excel </span>
-                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    <a href="#"><i class="fa fa-users"></i> Excel
+                        <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('excel')}}"><i class="fa fa-circle-o"></i> Salary Excel</a>
-                        <li><a href="{{route('declaration_excel_form')}}"><i class="fa fa-circle-o"></i> Declaration Excel</a>
-                        <li><a href="{{route('employeeCard_excel_form')}}"><i class="fa fa-circle-o"></i> Employee Card Excel</a>
-                        <li><a href="{{route('formI_excel_form')}}"><i class="fa fa-circle-o"></i> Form I Excel</a>
-                        <li><a href="{{route('form35_excel_form')}}"><i class="fa fa-circle-o"></i> Form 35 Excel</a>
-                        <li><a href="{{route('form2R_excel_form')}}"><i class="fa fa-circle-o"></i> Form 2R Excel</a>
-                        <li><a href="{{route('form11_excel_form')}}"><i class="fa fa-circle-o"></i> Form 11 Excel</a>
-                        <li><a href="{{route('formF_excel_form')}}"><i class="fa fa-circle-o"></i> Form F Excel</a>
-                        <li><a href="{{route('Recr_excel_form')}}"><i class="fa fa-circle-o"></i> Recr Excel</a>
-                        <li><a href="{{route('IcardReg_excel_form')}}"><i class="fa fa-circle-o"></i> IcardReg Excel</a>
-                        <li><a href="{{route('Form13_excel_form')}}"><i class="fa fa-circle-o"></i> Form13 Excel</a>
-                        <li><a href="{{route('Bonus_form')}}"><i class="fa fa-circle-o"></i> Bonus Excel</a>
-                        <li><a href="{{route('Report_esic_form')}}"><i class="fa fa-circle-o"></i> Esic Report</a>
-                        <li><a href="{{route('Report_pf_form')}}"><i class="fa fa-circle-o"></i> Pf Report</a>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-circle-o"></i> Rport
+                                <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{route('excel')}}"><i class="fa fa-circle-o"></i> Salary Excel</a></li>
+                                <li><a href="{{route('declaration_excel_form')}}"><i class="fa fa-circle-o"></i> Declaration Excel</a></li>
+                                <li><a href="{{route('employeeCard_excel_form')}}"><i class="fa fa-circle-o"></i> Employee Card Excel</a></li>
+                                <li><a href="{{route('formI_excel_form')}}"><i class="fa fa-circle-o"></i> Form I Excel</a></li>
+                                <li><a href="{{route('form35_excel_form')}}"><i class="fa fa-circle-o"></i> Form 35 Excel</a></li>
+                                <li><a href="{{route('form2R_excel_form')}}"><i class="fa fa-circle-o"></i> Form 2R Excel</a></li>
+                                <li><a href="{{route('form11_excel_form')}}"><i class="fa fa-circle-o"></i> Form 11 Excel</a></li>
+                                <li><a href="{{route('formF_excel_form')}}"><i class="fa fa-circle-o"></i> Form F Excel</a></li>
+                                <li><a href="{{route('Recr_excel_form')}}"><i class="fa fa-circle-o"></i> Recr Excel</a></li>
+                                <li><a href="{{route('IcardReg_excel_form')}}"><i class="fa fa-circle-o"></i> IcardReg Excel</a></li>
+                                <li><a href="{{route('Form13_excel_form')}}"><i class="fa fa-circle-o"></i> Form13 Excel</a></li>
+                                <li><a href="{{route('Bonus_form')}}"><i class="fa fa-circle-o"></i> Bonus Excel</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-circle-o"></i> Returns
+                                <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{route('Report_esic_form')}}"><i class="fa fa-circle-o"></i> Esic Report</a></li>
+                                <li><a href="{{route('Report_pf_form')}}"><i class="fa fa-circle-o"></i> Pf Report</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
@@ -582,6 +619,54 @@
 <script src="{{URL::asset('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
 
 <script>
+    $(document).ready(function() {
+// updating the view with notifications using ajax
+        $(".noti-footer").click(function () {
+            $.ajax({
+                type: "POST",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                url: "{{route('read')}}",
+                data: {},
+                success: function (data) {
+
+
+                },
+            });
+        });
+        load_unseen_notification();
+        setInterval(function(){
+            load_unseen_notification();
+        }, 5000);
+        function load_unseen_notification() {
+            $.ajax({
+                type: "POST",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                url: "{{route('Notification')}}",
+                data:{},
+                dataType:"json",
+                success: function (data) {
+                    $('.notifications').empty();
+                    if (data.length == 0) {
+                        $('.count').replaceWith('<span class="label label-warning count"></span>');
+                        $('.notifications').append('<p style="text-align: center">No New Notification</p>');
+
+                    }
+                    else {
+                        $('.count').replaceWith('<span class="label label-warning count">'+data.length+'</span>');
+                        for (var i=0; i < data.length; i++){
+                            $('.notifications').append('<li> <a href="#">\n' +
+                                '                                        <i class="fa fa-users text-aqua"></i> '+data[i].Subject+' \n' +
+                                '                                        </a></li>')
+                        }
+                    }
+
+
+                },
+            });
+        }
+    });
+
+
     $('.timepicker').timepicker({
         showInputs: false
     });

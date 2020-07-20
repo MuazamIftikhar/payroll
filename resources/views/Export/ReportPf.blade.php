@@ -35,8 +35,9 @@
             @foreach(json_decode($e->salary_head) as $s)
                 @php
                     $loopValue=$loop->iteration;
-                            if($loop->iteration == 1)
+
                 @endphp
+                @if($loop->iteration == 1)
                    @if($e->salary_flag == "Per Day")
                        <td colspan="2">{{round($s*$e->Total,0)}}</td>
                        <td colspan="2">{{round($s*$e->Total,0)}}</td>
@@ -52,13 +53,15 @@
                        <td colspan="2">{{round(round($s/$e->assignDay*$e->Total,0)*8.33/100,0)}}</td>
                        <td colspan="2">{{round(round($s/$e->assignDay*$e->Total,0)*12/100,0)-round(round($s/$e->assignDay*$e->Total,0)*8.33/100,0)}}</td>
                    @endif
+                @endif
+
 
                 <td colspan="2"></td>
                 <td colspan="2"></td>
 
              @endforeach
         </tr>
+    <tr></tr>
     @endforeach
-
     </tbody>
 </table>

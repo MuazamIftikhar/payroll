@@ -15,6 +15,7 @@ use App\Exports\Form2RExport;
 use App\Exports\Form35Export;
 use App\Exports\FormFExport;
 use App\Exports\FORMIExport;
+use App\Exports\HalfYearExport;
 use App\Exports\ICardExport;
 use App\Exports\IcardRegExport;
 use App\Exports\LeaveExport;
@@ -253,6 +254,30 @@ class ExcelController extends Controller
         $fromMonth=$request->fromMonth;
         $toMonth=$request->toMonth;
         return Excel::download(new BonusExport($id,$fromMonth,$toMonth),'Bonus.xlsx');
+    }
+    public function HalfYear_form(){
+        $company=Company::all();
+        return view('Excel.HalfYear',['company'=>$company]);
+    }
+
+    public function HalfYear_form_excel(Request $request)
+    {
+        $id=$request->company_id;
+        $fromMonth=$request->fromMonth;
+        $toMonth=$request->toMonth;
+        return Excel::download(new HalfYearExport($id,$fromMonth,$toMonth),'HalfYear.xlsx');
+    }
+    public function FullYear_form(){
+        $company=Company::all();
+        return view('Excel.HalfYear',['company'=>$company]);
+    }
+
+    public function FullYear_form_excel(Request $request)
+    {
+        $id=$request->company_id;
+        $fromMonth=$request->fromMonth;
+        $toMonth=$request->toMonth;
+        return Excel::download(new HalfYearExport($id,$fromMonth,$toMonth),'HalfYear.xlsx');
     }
 
 }

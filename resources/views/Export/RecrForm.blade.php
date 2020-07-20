@@ -6,11 +6,13 @@
 <table>
     <tbody>
     <tr>
-        <td colspan="5">PAViTRA Enterprises</td>
+        <td colspan="5">{{$d->companyName}}</td>
         <td colspan="1">1</td>
         <td colspan="3" rowspan="6">1</td>
     </tr>
-    <tr><td colspan="5" rowspan="2"></td></tr>
+    <tr><td colspan="5" rowspan="2">
+            {{$d->Address}}
+        </td></tr>
     <tr></tr>
     <tr><td colspan="5">RECRUITMENT FORM</td></tr>
     <tr><td colspan="1">Date</td>

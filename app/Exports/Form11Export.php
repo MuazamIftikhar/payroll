@@ -6,12 +6,14 @@ use App\Employee;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeWriting;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
 
-class Form11Export implements FromView,WithEvents
+class Form11Export implements FromView,WithEvents,WithDrawings
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -19,6 +21,26 @@ class Form11Export implements FromView,WithEvents
     public function __construct($employee_id)
     {
         $this->id = $employee_id;
+    }
+
+    public function drawings()
+    {
+        $drawing = new Drawing();
+        $drawing->setName('Logo');
+        $drawing->setDescription('This is my logo');
+        $drawing->setPath(public_path('images\yes.png'));
+        $drawing->setHeight(20);
+        $drawing->setCoordinates('F13');
+
+        $drawing2 = new Drawing();
+        $drawing2->setName('Other image');
+        $drawing2->setDescription('This is a second image');
+        $drawing2->setPath(public_path('images\yes.png'));
+        $drawing2->setHeight(20);
+        $drawing2->setCoordinates('F14');
+
+        return [$drawing, $drawing2];
+
     }
 
 

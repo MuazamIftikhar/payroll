@@ -93,9 +93,7 @@ class SalaryController extends Controller
     public function salary()
     {
         $salary_ID = Salary::whereYear('created_at', '>=', date('Y'))->whereMonth('created_at', '>=', date('m'))->pluck('employee_id');
-
         $company=Company::where('user_id','=',Auth::user()->id)->first()->id;
-
         if (count($salary_ID) > 0) {
             $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$company)
                     ->whereDate('DOE', '>=',date('Y-m-d') )->whereNotIn('employees.id', $salary_ID)->get();
@@ -103,22 +101,29 @@ class SalaryController extends Controller
             $employee = Employee::select(DB::raw('*,employees.id as e_id'))->where('company_id','=',$company)
             ->whereDate('DOE', '>=',date('Y-m-d') )->get();
         }
-        $company_id=Company::where('user_id','=',Auth::user()->id)->first()->id;
-        $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
-        $decodeIDs = json_decode($getIds);
-        $namesOfsalaryHead=array();
-        foreach ($decodeIDs as $i){
-            $GetName = SalaryHead::where('id', '=', $i)->first();
-            $namesOfsalaryHead[]=$GetName;
-        }
 
-        $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
-        if (count($user) > 0){
-            $companyName=Company::all();
-        }else{
-            $companyName=Company::where('user_id','=',Auth::user()->id)->get();
+        $company_id=Company::where('user_id','=',Auth::user()->id)->first()->id;
+        //Checking If Slary Present for this comapnay
+        $CountSalary = company_basic::where('company_id', '=',$company_id)->get();
+        if(count($CountSalary) > 0){
+            $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
+            $decodeIDs = json_decode($getIds);
+            $namesOfsalaryHead=array();
+            foreach ($decodeIDs as $i){
+                $GetName = SalaryHead::where('id', '=', $i)->first();
+                $namesOfsalaryHead[]=$GetName;
+            }
+
+            $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
+            if (count($user) > 0){
+                $companyName=Company::all();
+            }else{
+                $companyName=Company::where('user_id','=',Auth::user()->id)->get();
+            }
+            return view('Salary.basicSalary',['employee'=>$employee, 'salaryHead'=>$namesOfsalaryHead,'company'=>$companyName]);
+        }else {
+            return view('errors.fill')->with("error" , "You need to request admin to add Salary Head  first!");
         }
-        return view('Salary.basicSalary',['employee'=>$employee, 'salaryHead'=>$namesOfsalaryHead,'company'=>$companyName]);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Employee;
 use App\Imports\EmployeeImport;
+use App\Notification;
 use App\SalaryHead;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -106,11 +107,16 @@ class EmployeeController extends Controller
         $employee->familyPermanentState=json_encode($request->familyPermanentState);
         $employee->family_Nominee=json_encode($request->family_Nominee);
         $employee->family_DOB=json_encode($request->family_DOB);
-        $employee->family_State=json_encode($request->family_State);
         $employee->family_adharNumber=json_encode($request->family_adharNumber);
         $employee->Witness=json_encode($request->Witness);
         $employee->witnessAddress=json_encode($request->witnessAddress);
         $employee->save();
+        $notification=new Notification();
+        $companuName=Company::where('user_id',Auth::user()->id)->first()->companyName;
+        $notification->Subject=$companuName." add new employee";
+        $notification->Status=0;
+        $notification->user_id=Auth::user()->id;
+        $notification->save();
         return redirect()->back()->with("success" , "User Added Successfully!");
     }
 

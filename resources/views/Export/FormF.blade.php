@@ -107,8 +107,8 @@
     </tr>
 
     <tr>
-        <td colspan="1" >{{$family_presentAddress[$i]}}</td>
-        <td colspan="3" ></td>
+        <td colspan="1" ></td>
+        <td colspan="3" >{{$family_presentAddress[$i]}}</td>
         <td colspan="1" ></td>
         <td colspan="2" ></td>
         <td colspan="2" ></td>
@@ -186,7 +186,7 @@
     <tr>
         <td colspan="1">5</td>
         <td colspan="4">Department Branch/Section where employed</td>
-        <td colspan="4"></td>
+        <td colspan="4">{{$d->Designation}}</td>
     </tr>
     <tr></tr>
     <tr>
@@ -229,16 +229,16 @@
         <td colspan="4">Nomination signed/Thumb impressed before me</td>
         <td colspan="4">Name in full and full address of witnesses :</td>
     </tr>
+    $name=json_decode($d->Witness);
+    @endphp
+    @for($i=0 ; $i < 2 ; $i++)
     <tr>
         <td colspan="1"></td>
         <td colspan="4"></td>
-        <td colspan="4"></td>
+        <td colspan="1">{{$i+1}}x</td>
+        <td colspan="3">{{$name[$i]}}</td>
     </tr>
-    <tr>
-        <td colspan="1"></td>
-        <td colspan="4"></td>
-        <td colspan="4"></td>
-    </tr>
+    @endfor
     <tr>
         <td colspan="1">Place</td>
         <td colspan="4"></td>
@@ -308,7 +308,7 @@
         <td colspan="1">Date</td>
         <td colspan="1"></td>
         <td colspan="3"></td>
-        <td colspan="4">X</td>
+        <td colspan="4">XX</td>
     </tr>
     <tr>
         <td colspan="1"></td>

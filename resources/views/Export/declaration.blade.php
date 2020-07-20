@@ -128,8 +128,8 @@
         @for($i=0 ; $i < 1 ; $i++)
     <tr>
         <td colspan="5">{{$family_firstName[$i]}}</td>
-        <td colspan="6">{{$family_Relation[$i]}}</td>
         <td colspan="6">{{$family_presentAddress[$i]}}</td>
+        <td colspan="6">{{$family_Relation[$i]}}</td>
     </tr>
         @endfor
     <tr>

@@ -66,6 +66,9 @@ Route::group([ 'middleware' => ['auth']], function() {
     Route::GET('/manage_deduction', 'DeductionController@manage_deduction')->name('manage_deduction');
     Route::GET('/delete_deduction', 'DeductionController@delete_deduction')->name('delete_deduction');
 
+    Route::POST('Notification','NotificationController@index')->name('Notification');
+    Route::POST('read','NotificationController@read')->name('read');
+
 //    //Company Deduction
 //    Route::GET('/company_deduction', 'DeductionController@company_deduction')->name('company_deduction');
 //    Route::POST('/save_company_deduction', 'DeductionController@save_company_deduction')->name('save_company_deduction');
@@ -153,6 +156,12 @@ Route::group([ 'middleware' => ['auth']], function() {
 
     Route::GET('/Bonus_form', 'ExcelController@Bonus_form')->name('Bonus_form');
     Route::GET('/Bonus_form_excel', 'ExcelController@Bonus_form_excel')->name('Bonus_form_excel');
+
+    Route::GET('/HalfYear_form', 'ExcelController@HalfYear_form')->name('HalfYear_form');
+    Route::GET('/HalfYear_form_excel', 'ExcelController@HalfYear_form_excel')->name('HalfYear_form_excel');
+
+    Route::GET('/FullYear_form', 'ExcelController@FullYear_form')->name('FullYear_form');
+    Route::GET('/FullYear_form_excel', 'ExcelController@FullYear_form_excel')->name('FullYear_form_excel');
 
 
 

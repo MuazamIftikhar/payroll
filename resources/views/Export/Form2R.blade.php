@@ -32,7 +32,7 @@
     <tr>
         <td colspan="1">1</td>
         <td colspan="2">Name (in Block letters)</td>
-        <td colspan="2">{{$d->Nmae}}</td>
+        <td colspan="2">{{$d->Name}}</td>
         <td colspan="1"></td>
         <td colspan="1">4</td>
         <td colspan="1">Sex</td>
@@ -270,7 +270,7 @@
     <tr>
         <td colspan="2" >Date</td>
         <td colspan="4"></td>
-        <td colspan="1">X</td>
+        <td colspan="1">XX</td>
     </tr>
     <tr>
         <td colspan="5" ></td>
