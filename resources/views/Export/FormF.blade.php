@@ -229,6 +229,7 @@
         <td colspan="4">Nomination signed/Thumb impressed before me</td>
         <td colspan="4">Name in full and full address of witnesses :</td>
     </tr>
+    @php
     $name=json_decode($d->Witness);
     @endphp
     @for($i=0 ; $i < 2 ; $i++)

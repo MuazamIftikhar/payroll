@@ -59,7 +59,7 @@
             Name and address of contractor
         </td>
         <td colspan="4" rowspan="5">
-            {{$d->ccompanyName.' '.$d->Address}}
+            {{$d->companyName.' '.$d->Address}}
         </td>
         <td>
 
@@ -68,7 +68,7 @@
             Name and address of contractor
         </td>
         <td colspan="4" rowspan="5">
-            {{$d->ccompanyName.' '.$d->Address}}
+            {{$d->companyName.' '.$d->Address}}
         </td>
     </tr>
     <tr>
