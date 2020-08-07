@@ -69,7 +69,7 @@
                             <td>{{$b->CL}}</td>
                             <td>{{$b->PH}}</td>
                             <td>{{$b->Total}}</td>
-                            <td class="text-center"><a href="{{route('edit_attendance',["id" => $b->e_id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>  <a href="{{route('delete_attendance',["id" => $b->a_id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
+                            <td class="text-center"><a href="{{route('edit_attendance',["id" => $b->a_id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>  <a href="{{route('delete_attendance',["id" => $b->a_id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>

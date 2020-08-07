@@ -50,6 +50,7 @@ class AttendanceController extends Controller
 
     public function save_attendance(Request $request)
     {
+
         $attendance=new Attendance();
         $attendance->employee_id=$request->id;
         $attendance->assignDay=$request->assignDay;
@@ -99,9 +100,9 @@ class AttendanceController extends Controller
     public function edit_attendance(Request $request)
     {
         $employee_ID=$request->id;
-        $employee=Employee::select(DB::raw('*,employees.id as e_id'))
+        $employee=Employee::select(DB::raw('*,employees.id as e_id,attendances.id as a_id'))
             ->join('attendances','employees.id','=','attendances.employee_id')
-            ->where('employees.id',$employee_ID)
+            ->where('attendances.id',$employee_ID)
             ->get();
         return view('Attendance.edit',["employee"=>$employee]);
     }
@@ -120,9 +121,9 @@ class AttendanceController extends Controller
     public function update_attendance(Request $request)
     {
         Attendance::where('id','=',$request->id)
-            ->update(['assignDay' => $request->assignDay,'PR_Day' => $request->PR_Day,'PL' => $request->PL,'SL' => $request->SL,'CL' => $request->CL,'PH' => $request->PH,'Total' => $request->Total,'Advance' => $request->Advance,
-                'Loan' => $request->Loan,'Deduction' => $request->Deduction,'OT' => $request->OT]);
-        return back();
+            ->update(['assignDay' => $request->assignDay,'PR_Day' => $request->PR_Day,'PL' => $request->PL,'SL' => $request->SL,'CL' => $request->CL,
+                'PH' => $request->PH,'Total' => $request->Total,'Advance' => $request->Advance,'Loan' => $request->Loan,'Deduction' => $request->Deduction,'OT' => $request->OT]);
+        return redirect()->route('manage_attendance');
     }
 
     /**
@@ -134,28 +135,16 @@ class AttendanceController extends Controller
      */
     public function searchByCompany_attendance(Request $request)
     {
-        $checkmonth=$request->Month;
-        $date=explode('-',$checkmonth);
-        $year=$date[0];
-        $month=$date[1];
-        $employee_ID=Attendance::where('Month',$checkmonth)->pluck('employee_id');
+        $month=$request->Month;
+        $employee_ID=Attendance::where('Month',$month)->pluck('employee_id');
         $company=Company::where('user_id','=',Auth::user()->id)->where('id','=',$request->Name)->first()->id;
-//        if(count($employee_ID) > 0){
-               $employee=Employee::select(DB::raw('*,employees.id as e_id'))
-                ->leftjoin('leaves','employees.id','=','leaves.employee_id')
-                ->leftjoin('loans','employees.id','=','loans.employee_id')
-                ->where('employees.company_id',$company)
-                ->whereYear('DOJ','=',$year)
-                 ->whereMonth('DOJ','<=',$month)
-                ->whereNotIn('employees.id',$employee_ID)->get();
-//        }else{
-//            $employee=Employee::select(DB::raw('*,employees.id as e_id'))
-//                ->leftjoin('leaves','employees.id','=','leaves.employee_id')
-//                ->leftjoin('loans','employees.id','=','loans.employee_id')
-//                ->where('employees.company_id',$company)
-//                ->where('DOJ','<=',$month)
-//                ->get();
-//        }
+        $employee=Employee::select(DB::raw('*,employees.id as e_id'))
+            ->leftjoin('leaves','employees.id','=','leaves.employee_id')
+            ->leftjoin('loans','employees.id','=','loans.employee_id')
+            ->where('employees.company_id',$company)
+            ->where('joining','<=',$month)
+            ->where('ending','>=',$month)
+            ->whereNotIn('employees.id',$employee_ID)->get();
         $company=Company::where('user_id','=',Auth::user()->id)->get();
         return view('Attendance.index',["employee"=>$employee,"company"=>$company,"month"=>$month]);
     }
@@ -173,9 +162,9 @@ class AttendanceController extends Controller
         $attendance=Attendance::select(DB::raw('*,attendances.id as a_id,employees.id as e_id'))
             ->join('employees','attendances.employee_id','=','employees.id')
             ->where('employees.company_id',$companyName)
-            ->whereDate('DOE', '>=',date('Y-m-d') )
-            ->where('attendances.Month', '=', $month)
-            ->get();
+            ->where('joining','<=',$month)
+            ->where('ending', '>=',$month)
+            ->where('attendances.Month', '=', $month)->get();
         return view('Attendance.manage',["attendance"=>$attendance,"company"=>$company]);
     }
 

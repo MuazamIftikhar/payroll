@@ -21,6 +21,8 @@ class CreateEmployeesTable extends Migration
             $table->string('DOB');
             $table->string('DOJ');
             $table->string('DOE');
+            $table->string('joining');
+            $table->string('ending');
             $table->string('Gender');
             $table->string('Religion');
             $table->string('Phone')->nullable();

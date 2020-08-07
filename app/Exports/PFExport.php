@@ -7,9 +7,9 @@ use App\company_basic;
 use App\Employee;
 use App\Ptax;
 use App\SalaryHead;
-use App\Setting;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
+// use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
@@ -45,7 +45,6 @@ class PFExport implements FromView,WithEvents
             ->where('attendances.Month', '=', $this->month)
             ->where('employees.company_id','=',$this->id)->get();
         $company=Company::where('id','=',$company_id)->get();
-        //dd($employee);
         return view('Export.ReportPf', [
             'employee' => $employee,"salaryHead"=>$namesOfsalaryHead,"ptax"=>$ptax,'company'=>$company,]);
     }

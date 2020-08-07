@@ -111,7 +111,7 @@
         <td colspan="2"></td>
         <td colspan="2"></td>
         <td colspan="2">Date</td>
-        <td colspan="2">Db value</td>
+        <td colspan="2"></td>
     </tr>
 
 </table>

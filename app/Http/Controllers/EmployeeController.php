@@ -33,11 +33,12 @@ class EmployeeController extends Controller
      */
     public function create(Request $request)
     {
-//        $this->validate($request, [
+        $this->validate($request, [
+            'Email' => 'required|string|email|max:255|unique:employees',
 //            'checkBook' => 'mimes:jpeg,pdf|size:1200',
 //            'adharProof' => 'mimes:jpeg,pdf|size:1200',
 //            'panProof' => 'mimes:jpeg,pdf|size:1100',
-//        ]);
+        ]);
 
         $employee=new Employee();
         $employee->Name=$request->Name;
@@ -46,6 +47,8 @@ class EmployeeController extends Controller
         $employee->DOB=$request->DOB;
         $employee->DOJ=$request->DOJ;
         $employee->DOE=$request->DOE;
+        $employee->joining=date('Y-m', strtotime($request->DOJ));
+        $employee->ending=date('Y-m', strtotime($request->DOE));
         $employee->Gender=$request->Gender;
         $employee->Religion=$request->Religion;
         $employee->Phone=$request->Phone;
@@ -205,6 +208,8 @@ class EmployeeController extends Controller
         $DOB=$request->DOB;
         $DOJ=$request->DOJ;
         $DOE=$request->DOE;
+        $joining=date('Y-m', strtotime($request->DOJ));
+        $ending=date('Y-m', strtotime($request->DOE));
         $Gender=$request->Gender;
         $Religion=$request->Religion;
         $Phone=$request->Phone;
@@ -272,7 +277,7 @@ class EmployeeController extends Controller
         $family_DOB=json_encode($request->family_DOB);
         $family_adharNumber=json_encode($request->family_adharNumber);
 
-        $update=DB::table('employees')->where('id', '=', $request->id)->update(['Name' => $Name,'fatherName' => $fatherName,'lastName' => $lastName,'DOB' => $DOB,'DOJ' => $DOJ,'DOE' => $DOE,'Gender' => $Gender,
+        $update=DB::table('employees')->where('id', '=', $request->id)->update(['Name' => $Name,'fatherName' => $fatherName,'lastName' => $lastName,'DOB' => $DOB,'DOJ' => $DOJ,'DOE' => $DOE,'joining' => $joining,'ending' => $ending,'Gender' => $Gender,
             'Religion' => $Religion,'Phone' => $Phone,'Email' => $Email,'streetAddress' => $streetAddress,'City' => $City,'State' => $State,'zipCode' => $zipCode,'per_streetAddress' => $per_streetAddress,
             'per_City' => $per_City,'per_State' => $per_State,'per_zipCode' => $per_zipCode,'Designation' => $Designation,'company_id' => $companyName,'Status' => $Status,'bankName' => $bankName,
             'accountNumber' => $accountNumber,'ISFC' => $ISFC,'checkBook' => $checkBook,'esicNumber' => $esicNumber,'UAN' => $UAN,'esicFlag' => $esicFlag,'PTFlag' => $PTFlag,'PFSaturating' => $PFSaturating,

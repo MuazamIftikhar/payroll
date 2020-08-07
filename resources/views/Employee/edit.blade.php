@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Date Of Joining <span style="color: red" >*</span></label>
+                                        <label class="control-label">Joining Date <span style="color: red" >*</span></label>
                                         <input type="date" required="required" class="form-control" value="{{$e->DOJ}}" name="DOJ"/>
                                     </div>
                                 </div>
@@ -356,7 +356,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">ISFC Code <span style="color: red" >*</span></label>
-                                        <input type="text" required="required" class="form-control"  maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="{{$e->ISFC}}" name="ISFC" placeholder="Enter ISFC" />
+                                        <input type="text" required="required" class="form-control"  maxlength="11"  minlength="11" value="{{$e->ISFC}}" name="ISFC" placeholder="Enter ISFC" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -378,7 +378,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Adhar Number <span style="color: red" >*</span></label>
-                                        <input   type="text" required="required" class="form-control"  value="{{$e->adharNumber}}" name="adharNumber" placeholder="Enter Number" />
+                                        <input   type="text" required="required" minlength="10" maxlength="12" class="form-control"  value="{{$e->adharNumber}}" name="adharNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -398,7 +398,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Pan Number <span style="color: red" >*</span></label>
-                                        <input  type="text" required="required" maxlength="10" class="form-control"  value="{{$e->panNumber}}" name="panNumber" placeholder="Enter Number" />
+                                        <input  type="text" required="required" minlength="6" maxlength="10" class="form-control"  value="{{$e->panNumber}}" name="panNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">

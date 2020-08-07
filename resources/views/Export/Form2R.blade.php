@@ -277,7 +277,7 @@
         <td colspan="4" >Signature of the employer or other</td>
     </tr>
      <tr>
-            <td colspan="5" ></td>
+            <td colspan="5" >{{$d->companyName.' '.$d->Address}}</td>
             <td colspan="4" >Authoried Officers of the Establishment.</td>
      </tr>
     <tr>

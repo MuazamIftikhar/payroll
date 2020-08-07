@@ -119,13 +119,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Joining Date <span style="color: red" >*</span></label>
-                                        <input type="date" required="required" min="<?php echo date("Y-m-d"); ?>"  class="form-control" value="{{old('DOJ')}}" name="DOJ"/>
+                                        <input type="date" required="required"  class="form-control" value="{{old('DOJ')}}" name="DOJ"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Date of Leaving <span style="color: red" >*</span></label>
-                                        <input type="date" required="required" min="<?php echo date("Y-m-d"); ?>" class="form-control" value="{{old('DOE')}}" name="DOE"/>
+                                        <input type="date" required="required"  class="form-control" value="{{old('DOE')}}" name="DOE"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -148,7 +148,12 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Email <span style="color: red" >*</span></label>
-                                        <input   type="text" class="form-control" value="{{old('Email')}}" name="Email" placeholder="Enter Email" />
+                                        <input   type="text" required class="form-control" value="{{old('Email')}}" name="Email" placeholder="Enter Email" />
+                                        @if ($errors->has('Email'))
+                                            <span class="help-block" role="alert">
+                                        <strong>{{ $errors->first('Email') }}</strong>
+                                    </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -345,7 +350,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Bank Account Number <span style="color: red" >*</span></label>
-                                        <input   type="text"  class="form-control" value="{{old('accountNumber')}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="accountNumber" placeholder="Enter Number" />
+                                        <input   type="text"  class="form-control" maxlength="18" minlength="9" value="{{old('accountNumber')}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="accountNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                             </div>
@@ -353,7 +358,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">ISFC Code <span style="color: red" >*</span></label>
-                                        <input type="text"  class="form-control" value="{{old('ISFC')}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="ISFC" maxlength="11" placeholder="Enter ISFC" />
+                                        <input type="text"  class="form-control" value="{{old('ISFC')}}" name="ISFC" maxlength="11" minlength="11" placeholder="Enter ISFC" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -371,13 +376,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Name As Per Adhar <span style="color: red" >*</span></label>
-                                        <input type="text" maxlength="12" class="form-control" value="{{old('required')}}" required="required" name="NameAsAdhar" placeholder="Enter Adhar Name" />
+                                        <input type="text" maxlength="12" class="form-control" value="{{old('NameAsAdhar')}}" required="required" name="NameAsAdhar" placeholder="Enter Adhar Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Adhar Number <span style="color: red" >*</span></label>
-                                        <input   type="text" required="required" class="form-control" value="{{old('adharNumber')}}" name="adharNumber" placeholder="Enter Number" />
+                                        <input   type="text" required="required" minlength="10" maxlength="12" class="form-control" value="{{old('adharNumber')}}" name="adharNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -397,7 +402,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Pan Number <span style="color: red" >*</span></label>
-                                        <input maxlength="6" type="text"  class="form-control" maxlength="10" value="{{old('panNumber')}}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="panNumber" placeholder="Enter Number" />
+                                        <input maxlength="6" type="text"  class="form-control" minlength="6" maxlength="10" value="{{old('panNumber')}}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="panNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -432,7 +437,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Relation <span style="color: red" >*</span></label>
-                                            <select class="form-control"   name="family_Relation[]">
+                                            <select class="form-control" required   name="family_Relation[]">
                                                 <option >Spouse</option>
                                                 <option>Mother</option>
                                                 <option>Father</option>
@@ -487,7 +492,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Nominee / Family Member <span style="color: red" >*</span></label>
-                                        <select class="form-control"   name="family_Nominee[]">
+                                        <select class="form-control" required name="family_Nominee[]">
                                             <option>Nominee</option>
                                             <option>Family Address</option>
                                         </select>

@@ -194,7 +194,7 @@ class SalaryController extends Controller
     }
     public function edit_salary(Request $request)
     {
-        $employee=DB::table('employees')->select(DB::raw('*,salaries.id as e_id,employees.id as employee_id'))
+        $employee=DB::table('employees')->select(DB::raw('*,salaries.id as e_id,employees.id as employee_id,employees.company_id as c_id'))
             ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
             ->where('salaries.id','=',$request->id)
             ->whereDate('DOE', '>=',date('Y-m-d') )
@@ -208,7 +208,7 @@ class SalaryController extends Controller
     {
         $company=Company::where('id','=',$request->Name)->where('user_id',Auth::user()->id)->first()->id;
         $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
-        $salarHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->pluck('name');
+        $salarHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->pluck('id');
         $vs=array();
         foreach($salarHead as $n)
         {
@@ -219,11 +219,11 @@ class SalaryController extends Controller
         }
         $salary_head=json_encode($vs);
         $salary_flag=$request->salaryFlag;
-        $id=$request->id;
+        $id=$request->employee_id;
         $salary=Salary::where('employee_id', '=', $id)
             ->whereMonth('created_at', '=', date('m'))->get();
         if (count($salary) >0){
-        Salary::where('id', '=', $id)
+        Salary::where('id', '=', $request->id)
             ->update(['salary_head' => $salary_head,'salary_flag'=>$salary_flag]);
         }else{
             $salary=new Salary();
@@ -232,7 +232,7 @@ class SalaryController extends Controller
             $salary->salary_flag=$request->salaryFlag;
             $salary->save();
         }
-        return back();
+        return redirect()->route('manage_salary');
     }
     public function manage_salary_month( Request $request)
     {

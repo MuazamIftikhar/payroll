@@ -5,7 +5,7 @@
 <table>
     <tbody>
     <tr>
-        <td colspan="1"></td>
+        <td colspan="1">Sr. NO.</td>
         <td colspan="1">UAN  </td>
         <td colspan="1">Member Name </td>
         <td colspan="2">GROSS _ WAGES </td>
@@ -18,12 +18,12 @@
         <td colspan="2"> NCP_DAYS</td>
         <td colspan="2"> REFUND_OF_ADVANCES</td>
     </tr>
-    @foreach($employee as $e)
+    @foreach($employee as $i => $e)
         @php
             $sum=0;
         @endphp
         <tr>
-            <td colspan="1"></td>
+            <td colspan="1">{{$i+1}}</td>
             <td colspan="1">{{$e->UAN}}  </td>
             <td colspan="1">{{$e->salaryFlag}} </td>
             @foreach(json_decode($e->salary_head) as $s)
@@ -56,7 +56,7 @@
                 @endif
 
 
-                <td colspan="2"></td>
+                <td colspan="2">{{$e->Total}}</td>
                 <td colspan="2"></td>
 
              @endforeach

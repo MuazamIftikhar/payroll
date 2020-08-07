@@ -8,7 +8,7 @@
         <td colspan="11" rowspan="3">IDENTITY CARD REGISTER</td>
     </tr>
     <tr>
-        <td colspan="12" rowspan="2"></td>
+        <td colspan="12" rowspan="2">{{$d->companyName.' '.$d->Address}}</td>
     </tr>
     <tr></tr>
     <tr>
@@ -24,10 +24,10 @@
         <td colspan="3" rowspan="2">Remarks</td>
     </tr>
     <tr></tr>
-    @foreach($declaration as $d)
+    @foreach($declaration as $i => $d)
     <tr>
-        <td colspan="1" rowspan="2"></td>
-        <td colspan="3" rowspan="2">{{$d->Nmae}}</br>{{$d->streetAddress}}</td>
+        <td colspan="1" rowspan="2">{{$i+1}}</td>
+        <td colspan="3" rowspan="2">{{$d->Nmae.' '.$d->streetAddress}}</td>
         <td colspan="3" rowspan="2">{{$d->per_streetAddress}}</td>
         <td colspan="2" rowspan="2">{{$d->DOB}}</td>
         <td colspan="2" rowspan="2">{{$d->DOJ}}</td>

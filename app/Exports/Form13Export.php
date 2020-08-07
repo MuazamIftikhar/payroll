@@ -73,7 +73,7 @@ class Form13Export implements FromView,WithEvents
                 $getRows= Employee::select(DB::raw('*'))
                     ->Join('companies', 'employees.company_id', '=', 'companies.id')
                     ->where('employees.company_id', $this->id)->get();
-                $getRowsCount=count($getRows)+7;
+                $getRowsCount=count($getRows)+8;
 
                 $event->writer->getDelegate()->getActiveSheet()->getStyle("A7:W$getRowsCount")->applyFromArray($styleArray = [
                     'borders' => [

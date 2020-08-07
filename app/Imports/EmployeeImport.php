@@ -2,7 +2,6 @@
 
 namespace App\Imports;
 
-use App\Company;
 use App\Employee;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -16,6 +15,7 @@ class EmployeeImport implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
+
         //dd($row);
 //        return new Company([
 //            'user_id' => $row['name'],
@@ -23,6 +23,7 @@ class EmployeeImport implements ToModel,WithHeadingRow
 //            'Address' => json_encode($row['last_name']),
 //        ]);
         return new Employee([
+
             'Name' => $row['name'],
             'fatherName' => $row['father_name'],
             'lastName' => $row['last_name'],
@@ -58,21 +59,21 @@ class EmployeeImport implements ToModel,WithHeadingRow
             'adharNumber' => $row['adhar_number'],
             'NameAsPan' => $row['name_as_pan'],
             'panNumber' => $row['pan_number'],
-            'family_firstName' => $row['family_first_name'],
-            'family_lastName' => $row['family_last_name'],
-            'family_Relation' => $row['family_relation'],
-            'family_presentAddress' => $row['family_present_address'],
-            'familyPresentDistrict' => $row['family_present_district'],
-            'familyPresentState' => $row['family_present_state'],
-            'family_permanentAddress' => $row['family_permanent_address'],
-            'familyPermanentDistrict' => $row['family_permanent_district'],
-            'familyPermanentState' => $row['family_permanent_state'],
-            'family_Nominee' => $row['family_nominee'],
-            'family_DOB' => $row['family_dob'],
-            'family_State' => $row['family_state'],
-            'family_adharNumber' => $row['family_adhar_number'],
-            'Witness' => $row['witness'],
-            'witnessAddress' => $row['witness_address'],
+            'family_firstName' => json_encode(array($row['family_first_name'])),
+            'family_lastName' => json_encode(array($row['family_last_name'])),
+            'family_Relation' => json_encode(array($row['family_relation'])),
+            'family_presentAddress' => json_encode(array($row['family_present_address'])),
+            'familyPresentDistrict' => json_encode(array($row['family_present_district'])),
+            'familyPresentState' => json_encode(array($row['family_present_state'])),
+            'family_permanentAddress' => json_encode(array($row['family_permanent_address'])),
+            'familyPermanentDistrict' => json_encode(array($row['family_permanent_district'])),
+            'familyPermanentState' => json_encode(array($row['family_permanent_state'])),
+            'family_Nominee' => json_encode(array($row['family_nominee'])),
+            'family_DOB' => json_encode(array($row['family_dob'])),
+//            'family_State' => $row['family_state'],
+            'family_adharNumber' => json_encode(array($row['family_adhar_number'])),
+            'Witness' => json_encode(array($row['witness'])),
+            'witnessAddress' => json_encode(array($row['witness_address'])),
         ]);
     }
 }

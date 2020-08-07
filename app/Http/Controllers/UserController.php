@@ -118,13 +118,19 @@ class UserController extends Controller
 //        }
 //    }
     public static function getBasicSalary($id){
+
+        $row=Salary::where('employee_id','=',$id)->get();
+        if(count($row) > 0){
         $row=Salary::where('employee_id','=',$id)->first();
         $salary=json_decode($row->salary_head);
         foreach($salary  as $x => $x_value)
         {
-            if($x ==  "Basic"){
+            if($x ==  "1"){
                 return $x_value;
             }
+        }
+        }else{
+            return "0";
         }
     }
 

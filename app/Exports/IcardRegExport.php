@@ -90,7 +90,7 @@ class IcardRegExport implements FromView,WithEvents
                 $getRows= Employee::select(DB::raw('*'))
                     ->Join('companies', 'employees.company_id', '=', 'companies.id')
                     ->where('employees.id', $this->id)->get();
-                $getRowsCount=count($getRows)+6;
+                $getRowsCount=count($getRows)+8;
 
                 $event->writer->getDelegate()->getActiveSheet()->getStyle("A6:W$getRowsCount")->applyFromArray($styleArray = [
                     'borders' => [

@@ -9,7 +9,8 @@ use App\Ptax;
 use App\SalaryHead;
 use App\Setting;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
+// use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
@@ -29,9 +30,6 @@ class LeaveExport implements FromView,WithEvents
     public function view(): View
     {
         $printDate=$this->month;
-        $date=explode('-',$this->month);
-        $year=$date[0];
-        $month=$date[1];
         $company_id=Company::where('id','=',$this->id)->first()->id;
         $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
         $decodeIDs = json_decode($getIds);

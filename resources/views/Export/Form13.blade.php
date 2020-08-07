@@ -9,7 +9,7 @@
         <td colspan="7" >Name and Address of Principal Employer</td>
     </tr>
     <tr>
-        <td colspan="6" rowspan="2"></td>
+        <td colspan="6" rowspan="2">{{$d->companyName.' '.$d->Address}}</td>
         <td colspan="7" ></td>
     </tr>
     <tr>
@@ -32,9 +32,9 @@
         <td colspan="3" rowspan="2">Remarks</td>
     </tr>
     <tr></tr>
-    @foreach($declaration as $d)
+    @foreach($declaration as $i =>$d)
     <tr>
-        <td colspan="1" rowspan="2">.</td>
+        <td colspan="1" rowspan="2">{{$i+1}}</td>
         <td colspan="3" rowspan="2">{{$d->Name}}</td>
         <td colspan="1" rowspan="2">{{$d->DOB}}</td>
         <td colspan="1" rowspan="2">{{$d->Gender}}</td>
