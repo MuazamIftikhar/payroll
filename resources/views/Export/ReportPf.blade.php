@@ -54,12 +54,9 @@
                        <td colspan="2">{{round(round($s/$e->assignDay*$e->Total,0)*12/100,0)-round(round($s/$e->assignDay*$e->Total,0)*8.33/100,0)}}</td>
                    @endif
                 @endif
-
-
-                <td colspan="2">{{$e->Total}}</td>
-                <td colspan="2"></td>
-
              @endforeach
+            <td colspan="2">{{$e->Total}}</td>
+            <td colspan="2"></td>
         </tr>
     <tr></tr>
     @endforeach
