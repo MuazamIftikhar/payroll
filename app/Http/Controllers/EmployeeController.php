@@ -22,6 +22,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        dd(Carbon::now()->addYear(50));
         $name=Company::where('user_id','=',Auth::user()->id)->get();
         return view('Employee.index',compact('name'));
     }
@@ -46,9 +47,11 @@ class EmployeeController extends Controller
         $employee->lastName=$request->lastName;
         $employee->DOB=$request->DOB;
         $employee->DOJ=$request->DOJ;
-        $employee->DOE=$request->DOE;
+        $DOE=Carbon::now()->addYear(50);
+
+        $employee->DOE=$DOE;
         $employee->joining=date('Y-m', strtotime($request->DOJ));
-        $employee->ending=date('Y-m', strtotime($request->DOE));
+        $employee->ending=date('Y-m', strtotime($DOE));
         $employee->Gender=$request->Gender;
         $employee->Religion=$request->Religion;
         $employee->Phone=$request->Phone;

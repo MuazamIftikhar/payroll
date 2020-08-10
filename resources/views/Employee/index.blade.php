@@ -122,15 +122,12 @@
                                         <input type="date" required="required"  class="form-control" value="{{old('DOJ')}}" name="DOJ"/>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Date of Leaving <span style="color: red" >*</span></label>
-                                        <input type="date" required="required"  class="form-control" value="{{old('DOE')}}" name="DOE"/>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-
-                                </div>
+                                {{--<div class="col-md-4">--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label class="control-label">Date of Leaving <span style="color: red" >*</span></label>--}}
+                                        {{--<input type="date" required="required"  class="form-control" value="{{old('DOE')}}"  name="DOE"/>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
