@@ -22,7 +22,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        dd(Carbon::now()->addYear(50));
+        dd(date('Y-m', strtotime(Carbon::now()->addYear(50))));
         $name=Company::where('user_id','=',Auth::user()->id)->get();
         return view('Employee.index',compact('name'));
     }
