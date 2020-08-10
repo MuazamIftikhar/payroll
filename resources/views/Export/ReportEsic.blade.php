@@ -20,7 +20,7 @@
             @endphp
         <tr>
             <td colspan="1">{{$e->esicNumber}}</td>
-            <td colspan="1">{{$e->salaryFlag}} </td>
+            <td colspan="1">{{$e->salary_flag}} </td>
             <td colspan="2">{{$e->PR_Day}} </td>
             @foreach(json_decode($e->salary_head) as $s)
                 @php
