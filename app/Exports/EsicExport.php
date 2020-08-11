@@ -83,7 +83,7 @@ class EsicExport implements FromView,WithEvents
                     ->Join('pfs', 'employees.company_id', '=', 'pfs.company_id')
                     ->where('attendances.Month', '=', $this->month)
                     ->where('employees.company_id','=',$this->id)->get();
-                $getRowsCount=count($getRows)+4;
+                $getRowsCount=count($getRows)+3;
 
                 $event->writer->getDelegate()->getActiveSheet()->getStyle("A4:I$getRowsCount")->applyFromArray($styleArray = [
                     'borders' => [
