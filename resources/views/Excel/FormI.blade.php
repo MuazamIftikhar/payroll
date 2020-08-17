@@ -24,7 +24,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <select id="employee_id" name="employee_id" class="form-control ">
-                                        <option >0</option>
+                                        <option >No Employee Found</option>
                                     </select>
                                 </div>
                             </div>

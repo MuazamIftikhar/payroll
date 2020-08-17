@@ -47,7 +47,7 @@
                                     <td><input  type ="text" required="required" value="{{$b->SL}}" id="SL" name="SL" ></td>
                                     <td><input  type ="text" required="required" value="{{$b->CL}}" id="CL" name="CL" ></td>
                                     <td><input  type ="text" required="required" value="{{$b->PH }}" id="PH" name="PH" ></td>
-                                    <td><input  type ="text" required="required" value="{{$b->Total}}" name="Total"></td>
+                                    <td><input  type ="text" required="required" value="{{$b->Total}}" id="Total" name="Total"></td>
                                     <td><input  type ="text" required="required" value="{{$b->Advance}}" name="Advance" ></td>
                                     <td><input  type ="text" required="required" readonly value="{{$b->Loan}}" name="Loan"></td>
                                     <td><input  type ="text" required="required" value="{{$b->Deduction}}" name="Deduction"></td>

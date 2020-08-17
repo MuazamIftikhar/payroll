@@ -64,7 +64,7 @@
         <td colspan="2">Designation</td>
         <td colspan="3">{{$d->Designation}}</td>
         <td colspan="2">Date of Leaving</td>
-        <td colspan="2">{{$d->DOE}}</td>
+        <td colspan="2"></td>
     </tr>
     <tr>
         <td colspan="2">Aadhar card No</td>
@@ -74,9 +74,9 @@
     </tr>
     <tr>
         <td colspan="2">Bank A/c No.</td>
-        <td colspan="3"></td>
+        <td colspan="3">{{$d->accountNumber}}</td>
         <td colspan="2">Bank & Branch Name</td>
-        <td colspan="2"></td>
+        <td colspan="2">{{$d->bankName}}</td>
     </tr>
     @php
         $family_firstName=json_decode($d->family_firstName);
