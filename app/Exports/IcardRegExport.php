@@ -27,7 +27,8 @@ class IcardRegExport implements FromView,WithEvents
         $declaration = Employee::select(DB::raw('*'))
             ->Join('companies', 'employees.company_id', '=', 'companies.id')
             ->where('employees.company_id', $this->id)->get();
-        return view('Export.ICardReg', ['declaration' => $declaration]);
+        $company=Company::where('id',$this->id)->get();
+        return view('Export.ICardReg', ['declaration' => $declaration,'company'=>$company]);
     }
 
     public function registerEvents(): array

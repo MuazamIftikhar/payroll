@@ -7,9 +7,11 @@
         <td colspan="12">Name and Address of Factory</td>
         <td colspan="11" rowspan="3">IDENTITY CARD REGISTER</td>
     </tr>
+    @foreach($company as $d)
     <tr>
         <td colspan="12" rowspan="2">{{$d->companyName.' '.$d->Address}}</td>
     </tr>
+    @endforeach
     <tr></tr>
     <tr>
         <td colspan="1" rowspan="2">SR. NO.</td>
