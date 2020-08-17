@@ -352,6 +352,7 @@
                                 <li><a href="{{route('IcardReg_excel_form')}}"><i class="fa fa-circle-o"></i> IcardReg Excel</a></li>
                                 <li><a href="{{route('Form13_excel_form')}}"><i class="fa fa-circle-o"></i> Form13 Excel</a></li>
                                 <li><a href="{{route('Bonus_form')}}"><i class="fa fa-circle-o"></i> Bonus Excel</a></li>
+                                <li><a href="{{route('Slip_form')}}"><i class="fa fa-circle-o"></i> Slip Excel</a></li>
                             </ul>
                         </li>
                         <li class="treeview">

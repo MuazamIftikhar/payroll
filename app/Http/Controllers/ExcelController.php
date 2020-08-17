@@ -21,6 +21,7 @@ use App\Exports\IcardRegExport;
 use App\Exports\LeaveExport;
 use App\Exports\PFExport;
 use App\Exports\RecrExport;
+use App\Exports\SlipExport;
 use App\Setting;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -280,4 +281,21 @@ class ExcelController extends Controller
         return Excel::download(new HalfYearExport($id,$fromMonth,$toMonth),'HalfYear.xlsx');
     }
 
+    public function Slip_form()
+    {
+        $company=Company::all();
+        return view('Excel.slip',['company'=>$company]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function Slip_excel(Request $request)
+    {
+        $id=$request->id;
+        $month=$request->Month;
+        return Excel::download(new SlipExport($id,$month),'Slip.xlsx');
+    }
 }

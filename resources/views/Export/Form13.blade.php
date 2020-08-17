@@ -8,10 +8,12 @@
         <td colspan="10" rowspan="2">Register of Employees of Contractor [See Rule-75] Form 13</td>
         <td colspan="7" >Name and Address of Principal Employer</td>
     </tr>
+    @foreach($company as $d)
     <tr>
         <td colspan="6" rowspan="2">{{$d->companyName.' '.$d->Address}}</td>
         <td colspan="7" ></td>
     </tr>
+    @endforeach
     <tr>
         <td colspan="10" >Name & Add of Establ. In/under Which Contract is carried on</td>
         <td colspan="7" >Name and Location of Work</td>

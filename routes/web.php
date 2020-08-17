@@ -163,6 +163,9 @@ Route::group([ 'middleware' => ['auth']], function() {
     Route::GET('/FullYear_form', 'ExcelController@FullYear_form')->name('FullYear_form');
     Route::GET('/FullYear_form_excel', 'ExcelController@FullYear_form_excel')->name('FullYear_form_excel');
 
+    Route::GET('/Slip_form', 'ExcelController@Slip_form')->name('Slip_form');
+    Route::GET('/Slip_excel', 'ExcelController@Slip_excel')->name('Slip_excel');
+
 
 
 

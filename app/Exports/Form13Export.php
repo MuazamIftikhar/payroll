@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Company;
 use App\Employee;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,8 @@ class Form13Export implements FromView,WithEvents
         $declaration = Employee::select(DB::raw('*'))
             ->Join('companies', 'employees.company_id', '=', 'companies.id')
             ->where('employees.company_id', $this->id)->get();
-        return view('Export.Form13', ['declaration' => $declaration]);
+        $company=Company::where('id',$this->id)->get();
+        return view('Export.Form13', ['declaration' => $declaration,'company'=>$company]);
     }
 
     public function registerEvents(): array
