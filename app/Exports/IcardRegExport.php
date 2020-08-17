@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Employee;
+use App\Company;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromView;
