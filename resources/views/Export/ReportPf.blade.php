@@ -58,7 +58,6 @@
             <td colspan="2">{{$e->Total}}</td>
             <td colspan="2"></td>
         </tr>
-    <tr></tr>
     @endforeach
     </tbody>
 </table>
