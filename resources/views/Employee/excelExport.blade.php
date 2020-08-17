@@ -247,22 +247,18 @@
                    //Pf flags
                   // dd($newSumPf/$b->assignDay*$b->Total);
                    if($b->PFFlag == "Yes"){
-                       if($b->PFSaturating == "Yes"){
                        if($b->salary_flag == "Per Day"){
-                       if(($newSumPf*$b->Total) >576){ $PF=0; }else { $PF=round(round($newSumPf*$b->Total,0)*12/100,0);}
+                        $PF=round(round($newSumPf*$b->Total,0)*12/100,0);
                        }else{
-                        if(($newSumPf/$b->assignDay*$b->Total) >15000){ $PF=0; }else {$PF=round(round($newSumPf/$b->assignDay*$b->Total,0)*12/100,0);}
-                       }
-                       }else{
-                        if($b->salary_flag == "Per Day"){
-                       if(($newSumPf*$b->Total) >576){ $PF=0; }else { $PF=round(576*12/100,0);}
-                       }else{
-                        if(($newSumPf/$b->assignDay*$b->Total) >15000){ $PF=0; }else {$PF=round(15000*12/100,0);}
-                       }
+                            if($b->PFSaturating == "Yes"){
+                                 if(($newSumPf/$b->assignDay*$b->Total) >15000){ $PF=round(round($newSumPf/$b->assignDay*$b->Total,0)*12/100,0); }else {   $PF=round(15000*12/100,0); }
+                            }else{
+                                 $PF=0;
+                            }
                        }
                    }else{
-                   $PF=0;
-                   }
+                       $PF=0;
+                       }
                    //ESIC Flag
                    if($b->esicFlag == "Yes"){
                        if($b->salary_flag == "Per Day"){
