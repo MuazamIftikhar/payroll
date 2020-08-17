@@ -43,6 +43,7 @@ class PFExport implements FromView,WithEvents
             ->Join('esics', 'employees.company_id', '=', 'esics.company_id')
             ->Join('pfs', 'employees.company_id', '=', 'pfs.company_id')
             ->where('attendances.Month', '=', $this->month)
+            ->where('employees.PFFlag','=','Yes')
             ->where('employees.company_id','=',$this->id)->get();
         $company=Company::where('id','=',$company_id)->get();
         return view('Export.ReportPf', [
@@ -83,6 +84,7 @@ class PFExport implements FromView,WithEvents
                     ->Join('esics', 'employees.company_id', '=', 'esics.company_id')
                     ->Join('pfs', 'employees.company_id', '=', 'pfs.company_id')
                     ->where('attendances.Month', '=', $this->month)
+                    ->where('employees.PFFlag','=','Yes')
                     ->where('employees.company_id','=',$this->id)->get();
                 $getRowsCount=count($getRows)+1;
 

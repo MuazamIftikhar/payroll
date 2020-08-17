@@ -112,11 +112,12 @@
                                     <input maxlength="100" type="text" required="required" class="form-control" name="State" placeholder="Enter State" />
                                 </div>
                             </div>
-                                <div id="po">
+                                <div  id="po">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Company Name</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" name="companyName[]" placeholder="Enter Company Name" />
+
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -125,7 +126,7 @@
                                     <input maxlength="100" type="text" required="required" class="form-control" name="Address[]" placeholder="Enter Address" />
                                 </div>
                             </div>
-                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Est Type</label>

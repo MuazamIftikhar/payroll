@@ -41,6 +41,11 @@ class AccountController extends Controller
             'Password' => 'required|confirmed',
             'Role' => 'required',
         ]);
+
+        $company=Company::whereIn('companyName',$request->companyName)->get();
+        if(count($company) > 0){
+            return redirect()->back()->with("error" , "Company Name Already Present");
+        }else{
         $user=new User();
         $user->name=$request->Name;
         $user->number=$request->Number;
@@ -78,6 +83,7 @@ class AccountController extends Controller
         else
         {
             return redirect()->back()->with("error" , "User Adding Failed!");
+        }
         }
 
     }
