@@ -138,7 +138,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Mobile Number <span style="color: red" >*</span></label>
-                                        <input maxlength="10" type="text" required="required" class="form-control"  value="{{$e->Phone}}" name="Phone" placeholder="Enter Phone" />
+                                        <input maxlength="10" type="text" required="required" class="form-control"  value="{{$e->Phone}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="Phone" placeholder="Enter Phone" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -173,7 +173,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Postal / Zip code <span style="color: red" >*</span></label>
-                                        <input type="text" required="required" class="form-control"  value="{{$e->zipCode}}" name="zipCode"/>
+                                        <input type="text" required="required" maxlength="6" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$e->zipCode}}" name="zipCode"/>
                                     </div>
                                 </div>
                             </div>

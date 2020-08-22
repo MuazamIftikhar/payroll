@@ -163,7 +163,6 @@ class UserController extends Controller
             $salary=0;
         }
 
-
         return $salary;
     }
 

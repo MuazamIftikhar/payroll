@@ -139,7 +139,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Mobile Number <span style="color: red" >*</span></label>
-                                        <input maxlength="10" type="text"  class="form-control"  value="{{old('Phone')}}" name="Phone" placeholder="Enter Phone" />
+                                        <input maxlength="10" type="text"  class="form-control"  value="{{old('Phone')}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"   name="Phone" placeholder="Enter Phone" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
