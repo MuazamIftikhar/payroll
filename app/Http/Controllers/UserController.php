@@ -150,7 +150,11 @@ class UserController extends Controller
         $row=Attendance::select(DB::raw('SUM(Total) AS Total,SUM(assignDay) as a_today'))->where('employee_id','=',$id)
             ->where('Month','>=',$fromMonth)
             ->where('Month','<=',$toMonth)->groupBy('employee_id')->get();
-dd($salary_flag);
+        $total = $row[0]->Total;
+        $assignDay = $row[0]->a_today;
+
+        dd($total. ' '. $assignDay . ''.$basic);
+
         if (count($row) > 0) {
             $total = $row[0]->Total;
             $assignDay = $row[0]->a_today;
