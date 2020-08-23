@@ -147,40 +147,23 @@ class UserController extends Controller
         return $days;
     }
     public static function getSalary($id,$basic,$salary_flag,$fromMonth,$toMonth){
-//        $row=Attendance::select(DB::raw('SUM(Total) AS Total,SUM(assignDay) as a_today'))->where('employee_id','=',$id)
-//            ->where('Month','>=',$fromMonth)
-//            ->where('Month','<=',$toMonth)->groupBy('employee_id')->get();
-//
-//        $row_count=Attendance::where('employee_id','=',$id)
-//            ->where('Month','>=',$fromMonth)
-//            ->where('Month','<=',$toMonth)->get();
-
-        $row=Attendance::where('employee_id','=',$id)
+        $row=Attendance::select(DB::raw('SUM(Total) AS Total,SUM(assignDay) as a_today'))->where('employee_id','=',$id)
             ->where('Month','>=',$fromMonth)
-            ->where('Month','<=',$toMonth)
-            ->get();
-        //$total=$row->Total;
-        //$assignDay=$row[0]->assignDay;
-        $salary=0;
+            ->where('Month','<=',$toMonth)->groupBy('employee_id')->get();
+
+        $row_count=Attendance::where('employee_id','=',$id)
+            ->where('Month','>=',$fromMonth)
+            ->where('Month','<=',$toMonth)->get();
+
         if (count($row) > 0) {
-            foreach ($row as $s) {
-                if ($salary_flag == "Per Day") {
-                    $salary = round($s->Total * $basic, 0);
-                } else {
-                    $salary = round($basic / $s->assignDay * $s->Total, 0);
-                }
-                $salary+=$salary;
+            $total = $row[0]->Total;
+            $assignDay = $row[0]->a_today;
+            $count_row=count($row_count);
+            if($salary_flag == "Per Day"){
+                $salary=round($total*($basic*$count_row),0);}
+            else{
+                $salary=round(($basic*$count_row)/$assignDay*$total,0);
             }
-//        if (count($row) > 0) {
-//            $total = $row[0]->Total;
-//            $assignDay = $row[0]->a_today;
-//            $count_row=count($row_count);
-//            if($salary_flag == "Per Day"){
-//                $salary=round($total*($basic*$count_row),0);}
-//            else{
-//                $salary=round(($basic*$count_row)/$assignDay*$total,0);
-//            }
-//        }
         }else{
             $salary=0;
         }
