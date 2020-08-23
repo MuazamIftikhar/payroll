@@ -154,7 +154,6 @@ class UserController extends Controller
         if (count($row) > 0) {
             $total = $row[0]->Total;
             $assignDay = $row[0]->a_today;
-            dd($salary_flag);
             if($salary_flag == "Per Day"){
                 $salary=round($total*$basic,0);}
             else{

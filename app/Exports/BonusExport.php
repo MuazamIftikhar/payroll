@@ -38,6 +38,7 @@ class BonusExport implements FromView,WithEvents
             $namesOfsalaryHead[]=$GetName;
         }
         $employee = Employee::select(DB::raw('*,employees.id as a_id'))
+            ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
             ->where('employees.company_id','=',$this->id)
             ->get();
         $company=Company::where('id','=',$company_id)->get();
