@@ -154,7 +154,7 @@ class UserController extends Controller
         $row_count=Attendance::where('employee_id','=',$id)
             ->where('Month','>=',$fromMonth)
             ->where('Month','<=',$toMonth)->get();
-        dd($row_count);
+        dd(count($row_count));
 
         if (count($row) > 0) {
             $total = $row[0]->Total;
