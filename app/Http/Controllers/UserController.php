@@ -169,7 +169,7 @@ class UserController extends Controller
                 } else {
                     $salary = round($basic / $s->assignDay * $s->Total, 0);
                 }
-                $salary=$salary+$salary;
+                $salary+=$salary;
             }
 //        if (count($row) > 0) {
 //            $total = $row[0]->Total;
