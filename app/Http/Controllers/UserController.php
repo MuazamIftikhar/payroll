@@ -154,15 +154,16 @@ class UserController extends Controller
         $row_count=Attendance::where('employee_id','=',$id)
             ->where('Month','>=',$fromMonth)
             ->where('Month','<=',$toMonth)->get();
-        dd(count($row_count));
+        dd();
 
         if (count($row) > 0) {
             $total = $row[0]->Total;
             $assignDay = $row[0]->a_today;
+            $count_row=count($row_count);
             if($salary_flag == "Per Day"){
-                $salary=round($total*$basic,0);}
+                $salary=round($total*($basic*$count_row),0);}
             else{
-                $salary=round($basic/$assignDay*$total,0);
+                $salary=round(($basic*$count_row)/$assignDay*$total,0);
             }
         }else{
             $salary=0;
