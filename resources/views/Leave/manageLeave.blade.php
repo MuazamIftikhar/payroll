@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Leave & Loan
+    <small>Manage Leaave</small>
+@endsection
 @section('content')
     <section class="content">
 
@@ -41,8 +44,10 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
+                        <th>Father Name</th>
+                        <th>DOB</th>
+                        <th>DOJ</th>
+                        <th>Mobile Number</th>
                         <th>City</th>
                         <th>Action</th>
                     </tr>
@@ -51,7 +56,9 @@
                     @foreach($employee as $b)
                         <tr>
                             <td>{{$b->Name}}</td>
-                            <td>{{$b->Email}}</td>
+                            <td>{{$b->fatherName}}</td>
+                            <td>{{$b->DOB}}</td>
+                            <td>{{$b->DOJ}}</td>
                             <td>{{$b->Phone}}</td>
                             <td>{{$b->City}}</td>
                             <td class="text-center"><a href="{{route('leave',["id" => $b->id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>  </td>

@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Salary
+    <small>Manage Salary</small>
+@endsection
 @section('content')
     <section class="content">
         <div class="row">
@@ -7,7 +10,7 @@
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Search</h3>
+                        <h3 class="box-title">Establishmnet Search</h3>
                     </div>
                     <form class="form" method="GET" action="{{route('searchByCompany_manageSalary')}}">
                         <div class="box-body">
@@ -23,7 +26,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                <input type="month" class="form-control" id="Month"  name="Month" >
+                                    <input type="month" class="form-control" id="Month"  name="Month" value="{{$monthShow}}" >
                                 </div>
                             </div>
                             <div class="col-md-7">
@@ -49,6 +52,8 @@
                     <tr>
                         <th>Name</th>
                         <th>Father Name</th>
+                        <th>DOJ</th>
+                        <th>DOB</th>
                         @foreach($salaryHead as $s)
                             <th>{{$s->name}}</th>
                         @endforeach
@@ -68,6 +73,8 @@
                         <tr>
                         <td>{{$b->Name}}</td>
                         <td>{{$b->fatherName}}</td>
+                        <td>{{$b->DOJ}}</td>
+                        <td>{{$b->DOB}}</td>
                         @foreach(json_decode($b->salary_head) as $s)
                             <td><input maxlength="100" type="text" required="required"class="form-control" value="{{$s}}" disabled name="basicSalary[]"/></td>
                         @endforeach

@@ -31,6 +31,8 @@ class CreateEmployeesTable extends Migration
             $table->string('City');
             $table->string('State');
             $table->string('zipCode');
+            $table->string('District');
+            $table->string('per_District');
             $table->string('per_streetAddress');
             $table->string('per_City');
             $table->string('per_State');

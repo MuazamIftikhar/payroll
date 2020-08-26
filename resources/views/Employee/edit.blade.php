@@ -1,4 +1,8 @@
 @extends('layouts.masterLayout')
+@section('start')
+    Employee
+    <small>Manage Employee</small>
+@endsection
 @section('css')
     .stepwizard-step p {
     margin-top: 0px;
@@ -57,7 +61,7 @@
                         </div>
                         <div class="stepwizard-step col-xs-4">
                             <a href="#step-2" type="button" class="btn btn-default btn-circle">2</a>
-                            <p><small>Doccumnet</small></p>
+                            <p><small>Documnet</small></p>
                         </div>
                         <div class="stepwizard-step col-xs-4">
                             <a href="#step-3" type="button" class="btn btn-default btn-circle">3</a>
@@ -166,6 +170,12 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label class="control-label">Enter District <span style="color: red" >*</span></label>
+                                        <input type="text" required="required" class="form-control" value="{{$e->District}}" name="District"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label class="control-label">Enter State <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control"  value="{{$e->State}}" name="State"/>
                                     </div>
@@ -193,6 +203,12 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Enter District <span style="color: red" >*</span></label>
+                                        <input type="text" required="required" class="form-control" value="{{$e->per_District}}" name="per_District"/>
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Enter State <span style="color: red" >*</span></label>
@@ -270,7 +286,7 @@
 
                     <div class="box box-primary setup-content" id="step-2">
                         <div class="box-header">
-
+                            <h3 class="box-title">Document</h3>
                         </div>
                         <div class="box-body">
                             <div class="row">
@@ -309,7 +325,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">PF Saturaty Ceilling <span style="color: red" >*</span></label>
+                                        <label class="control-label">PF Statutory Ceiling <span style="color: red" >*</span></label>
                                         <select class="form-control"  value="{{$e->PFSaturating}}"  name="PFSaturating">
                                             <option {{$e->PFSaturating=="Yes" ? "selected" : ""}}>Yes</option>
                                             <option {{$e->PFSaturating=="No" ? "selected" : ""}}>No</option>
@@ -361,7 +377,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Check Book <span style="color: red" >*</span></label>
+                                        <label class="control-label">Upload Clear Pass Book / Cheque <span style="color: red" >*</span></label>
                                         <input type="file" class="form-control"  value="{{$e->checkBook}}" name="checkBook"/>
                                     </div>
                                 </div>
@@ -372,18 +388,18 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Name as Per Adhar <span style="color: red" >*</span></label>
-                                        <input type="text" required="required" maxlength="12" class="form-control"  value="{{$e->NameAsAdhar}}" name="NameAsAdhar" placeholder="Enter Adhar Name" />
+                                        <input type="text" required="required" maxlength="12" class="form-control" onkeypress="return /[a-z]/i.test(event.key)"  value="{{$e->NameAsAdhar}}" name="NameAsAdhar" placeholder="Enter Adhar Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Adhar Number <span style="color: red" >*</span></label>
-                                        <input   type="text" required="required" minlength="10" maxlength="12" class="form-control"  value="{{$e->adharNumber}}" name="adharNumber" placeholder="Enter Number" />
+                                        <input   type="text" required="required" minlength="10" maxlength="12" class="form-control"  value="{{$e->adharNumber}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="adharNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Adhar Proof</label>
+                                        <label class="control-label">Upload Clear Adhar Card</label>
                                         <input   type="file"  class="form-control"  value="{{$e->adharProof}}" name="adharProof" />
                                     </div>
                                 </div>
@@ -392,7 +408,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Name as Per Pan <span style="color: red" >*</span></label>
-                                        <input type="text" required="required" class="form-control"  value="{{$e->NameAsPan}}" name="NameAsPan" placeholder="Enter Pan Name" />
+                                        <input type="text" required="required" class="form-control" onkeypress="return /[a-z]/i.test(event.key)"  value="{{$e->NameAsPan}}" name="NameAsPan" placeholder="Enter Pan Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -403,7 +419,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Pan Proof</label>
+                                        <label class="control-label">Upload Clear Pan Card</label>
                                         <input  type="file" class="form-control"  value="{{$e->panProof}}" name="panProof" />
                                     </div>
                                 </div>
@@ -414,7 +430,7 @@
 
                     <div class="box box-primary setup-content" id="step-3">
                         <div class="box-header">
-                            <h3 class="box-title">Personal Details</h3>
+                            <h3 class="box-title">Family / Nominee Details</h3>
                         </div>
                         <div class="box-body">
                             <div id="po">
@@ -440,13 +456,13 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">First Name <span style="color: red" >*</span></label>
-                                            <input type="text" required="required" class="form-control"  value="{{$family_firstName[$i]}}" name="family_firstName[]"/>
+                                            <input type="text" required="required" class="form-control" onkeypress="return /[a-z]/i.test(event.key)"  value="{{$family_firstName[$i]}}" name="family_firstName[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Last Name <span style="color: red" >*</span></label>
-                                            <input type="text" required="required" class="form-control"  value="{{$family_lastName[$i]}}" name="family_lastName[]"/>
+                                            <input type="text" required="required" class="form-control" onkeypress="return /[a-z]/i.test(event.key)"  value="{{$family_lastName[$i]}}" name="family_lastName[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -511,7 +527,7 @@
                                             <select class="form-control"  name="family_Nominee[]">
                                                 <option>{{$family_Nominee[$i]}}</option>
                                                 <option>Nominee</option>
-                                                <option>Family Address</option>
+                                                <option>Family Member</option>
                                             </select>
                                         </div>
                                     </div>
@@ -539,7 +555,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Witness Name {{$i+1}} <span style="color: red" >*</span></label>
-                                        <input type="text" required="required" class="form-control" value="{{$Witness[$i]}}" name="Witness[]" placeholder="Enter Witness Name"/>
+                                        <input type="text" required="required" class="form-control" value="{{$Witness[$i]}}" onkeypress="return /[a-z]/i.test(event.key)" name="Witness[]" placeholder="Enter Witness Name"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

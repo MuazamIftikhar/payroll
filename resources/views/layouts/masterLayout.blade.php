@@ -156,7 +156,7 @@
         <!-- Logo -->
         <a href="#" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>S</b>T</span>
+            <span class="logo-mini"><b>P</b>R</span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>Payroll </b></span>
         </a>
@@ -542,8 +542,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Dashboard
-                <small>Control panel</small>
+                @yield('start')
+
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Salary
+    <small>Manage Salary</small>
+@endsection
 @section('content')
     <section class="content">
 

@@ -99,7 +99,7 @@ class AccountController extends Controller
 
     public function edit_user(Request $request)
     {
-        $roles=Role::all();
+        $roles=Role::where('id','!=',1)->get();
         $user=User::select(DB::raw('*,users.name as user_name,users.id as user_col_id,roles.name as role_name,roles.id as role_id'))
             ->join('role_user','users.id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
@@ -131,7 +131,7 @@ class AccountController extends Controller
                 'Name' => 'required',
                 'Number' => 'required',
                 'Email' => 'required',
-                'Role' => 'required',
+                'Password' => 'required|confirmed',
             ]);
             $password = $request->Password;
 
@@ -161,7 +161,7 @@ class AccountController extends Controller
                 }
             }
             if ($user) {
-                 DB::table('role_user')->where('user_id', '=', $request->id)->update(['role_id' => $request->Role]);
+//                 DB::table('role_user')->where('user_id', '=', $request->id)->update(['role_id' => $request->Role]);
                 return redirect()->back()->with("success", "User Updated Successfully!");
             }
             else {

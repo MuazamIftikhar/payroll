@@ -84,6 +84,7 @@ class AttendanceController extends Controller
 
     public function manage_attendance()
     {
+        $monthShow=date('Y-m');
         $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
         if (count($user) > 0){
             $companyName=Company::first()->id; 
@@ -95,7 +96,7 @@ class AttendanceController extends Controller
         $attendance=Attendance::select(DB::raw('*,attendances.id as a_id,employees.id as e_id'))
             ->join('employees','attendances.employee_id','=','employees.id')
             ->where('employees.company_id',$companyName)->get();
-        return view('Attendance.manage',["attendance"=>$attendance,"company"=>$company]);
+        return view('Attendance.manage',["attendance"=>$attendance,"company"=>$company,'monthShow'=>$monthShow]);
     }
     public function edit_attendance(Request $request)
     {
@@ -165,7 +166,7 @@ class AttendanceController extends Controller
             ->where('joining','<=',$month)
             ->where('ending', '>=',$month)
             ->where('attendances.Month', '=', $month)->get();
-        return view('Attendance.manage',["attendance"=>$attendance,"company"=>$company]);
+        return view('Attendance.manage',["attendance"=>$attendance,"company"=>$company,'monthShow'=>$month]);
     }
 
 }

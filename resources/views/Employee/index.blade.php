@@ -1,4 +1,8 @@
 @extends('layouts.masterLayout')
+@section('start')
+    Employee
+    <small>Create Employee</small>
+@endsection
 @section('css')
     .stepwizard-step p {
     margin-top: 0px;
@@ -57,7 +61,7 @@
                         </div>
                         <div class="stepwizard-step col-xs-4">
                             <a href="#step-2" type="button" class="btn btn-default btn-circle">2</a>
-                            <p><small>Doccument</small></p>
+                            <p><small>Document</small></p>
                         </div>
                         <div class="stepwizard-step col-xs-4">
                             <a href="#step-3" type="button" class="btn btn-default btn-circle">3</a>
@@ -172,6 +176,12 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label class="control-label">Enter District <span style="color: red" >*</span></label>
+                                        <input type="text" required="required" class="form-control" value="{{old('District')}}" name="District"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label class="control-label">Enter State <span style="color: red" >*</span></label>
                                         <input type="text" required="required" class="form-control" value="{{old('State')}}" name="State"/>
                                     </div>
@@ -199,6 +209,12 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Enter District <span style="color: red" >*</span></label>
+                                        <input type="text" required="required" class="form-control" value="{{old('per_District')}}" name="per_District"/>
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Enter State <span style="color: red" >*</span></label>
@@ -270,7 +286,7 @@
 
                     <div class="box box-primary setup-content" id="step-2">
                         <div class="box-header">
-
+                            <h3 class="box-title">Document</h3>
                         </div>
                         <div class="box-body">
                             <hr>
@@ -309,7 +325,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">PF Saturating Ceilling <span style="color: red" >*</span></label>
+                                        <label class="control-label">PF Statutory Ceiling <span style="color: red" >*</span></label>
                                         <select class="form-control"   name="PFSaturating">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -360,7 +376,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Check Book</label>
+                                        <label class="control-label">Upload Clear Pass Book / Cheque</label>
                                         <input type="file"  class="form-control" value="{{old('checkBook')}}" name="checkBook"  />
                                         @if ($errors->has('checkBook'))
                                             <span class="danger">{{$errors->first('checkBook')}}</span>
@@ -373,18 +389,18 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Name As Per Adhar <span style="color: red" >*</span></label>
-                                        <input type="text" maxlength="12" class="form-control" value="{{old('NameAsAdhar')}}" required="required" name="NameAsAdhar" placeholder="Enter Adhar Name" />
+                                        <input type="text" maxlength="12" class="form-control" value="{{old('NameAsAdhar')}}" onkeypress="return /[a-z]/i.test(event.key)" required="required" name="NameAsAdhar" placeholder="Enter Adhar Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Adhar Number <span style="color: red" >*</span></label>
-                                        <input   type="text" required="required" minlength="10" maxlength="12" class="form-control" value="{{old('adharNumber')}}" name="adharNumber" placeholder="Enter Number" />
+                                        <input   type="text" required="required" minlength="10" maxlength="12" class="form-control" value="{{old('adharNumber')}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="adharNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Adhar Proof</label>
+                                        <label class="control-label">Upload Clear Adhar Card</label>
                                         <input   type="file"  class="form-control" value="{{old('adharProof')}}" name="adharProof" />
                                     </div>
                                 </div>
@@ -393,18 +409,18 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Name As Per Pan <span style="color: red" >*</span></label>
-                                        <input type="text"  class="form-control" value="{{old('NameAsPan')}}" name="NameAsPan" placeholder="Enter Pan Name" />
+                                        <input type="text"  class="form-control" value="{{old('NameAsPan')}}" name="NameAsPan" onkeypress="return /[a-z]/i.test(event.key)" placeholder="Enter Pan Name" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Pan Number <span style="color: red" >*</span></label>
-                                        <input maxlength="6" type="text"  class="form-control" minlength="6" maxlength="10" value="{{old('panNumber')}}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="panNumber" placeholder="Enter Number" />
+                                        <input maxlength="6" type="text"  class="form-control" minlength="6" maxlength="10" value="{{old('panNumber')}}" maxlength="10"  name="panNumber" placeholder="Enter Number" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Pan Proof</label>
+                                        <label class="control-label">Upload Clear Pan Card</label>
                                         <input  type="file" class="form-control" value="{{old('panProof')}}" name="panProof" />
                                     </div>
                                 </div>
@@ -415,20 +431,20 @@
 
                     <div class="box box-primary setup-content" id="step-3">
                         <div class="box-header">
-                            <h3 class="box-title">Personal Details</h3>
+                            <h3 class="box-title">Family / Nominee Details</h3>
                         </div>
                         <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">First Name <span style="color: red" >*</span></label>
-                                            <input type="text" required="required" class="form-control" name="family_firstName[]"/>
+                                            <input type="text" required="required" class="form-control" onkeypress="return /[a-z]/i.test(event.key)" name="family_firstName[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Last Name <span style="color: red" >*</span></label>
-                                            <input type="text" required="required" class="form-control" name="family_lastName[]"/>
+                                            <input type="text" required="required" class="form-control" onkeypress="return /[a-z]/i.test(event.key)" name="family_lastName[]"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -491,7 +507,7 @@
                                         <label class="control-label">Nominee / Family Member <span style="color: red" >*</span></label>
                                         <select class="form-control" required name="family_Nominee[]">
                                             <option>Nominee</option>
-                                            <option>Family Address</option>
+                                            <option>Family Member</option>
                                         </select>
                                     </div>
                                 </div>
@@ -509,7 +525,7 @@
                                     </div>
                                 </div>
 
-                            <button type="button" class="btn  btn-info btn-flat remove-btn" id="appendRow">Add </button>
+                            <button type="button" class="btn  btn-info btn-flat remove-btn" id="appendRow">Add Another Family Member</button>
 
 
 
@@ -519,7 +535,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Witness Name 1 <span style="color: red" >*</span></label>
-                                        <input type="text" required="required" class="form-control"  name="Witness[]" placeholder="Enter Witness Name"/>
+                                        <input type="text" required="required" class="form-control" onkeypress="return /[a-z]/i.test(event.key)"  name="Witness[]" placeholder="Enter Witness Name"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -533,7 +549,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Witness Name 2 <span style="color: red" >*</span></label>
-                                        <input type="text" required="required" class="form-control"  name="Witness[]" placeholder="Enter Witness Name"/>
+                                        <input type="text" required="required" class="form-control"  name="Witness[]" onkeypress="return /[a-z]/i.test(event.key)" placeholder="Enter Witness Name"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Leave & Loan
+    <small>Add Leaave</small>
+@endsection
 @section('content')
     <section class="content">
         <div class="row">
@@ -8,7 +11,7 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add Leave</h3>
+                        {{--<h3 class="box-title">Add Leave</h3>--}}
                     </div>
                     @if(count($leave) > 0)
                         <form class="form" method="POST" action="{{route('save_leave',['id'=>$id])}}" enctype="multipart/form-data">

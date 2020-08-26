@@ -1,4 +1,8 @@
 @extends('layouts.masterLayout')
+@section('start')
+    Account
+    <small>Create Establishmnet</small>
+@endsection
 @section('css')
     body {
     margin-top:30px;
@@ -56,7 +60,7 @@
                             <div class="stepwizard-row setup-box">
                                 <div class="stepwizard-step col-xs-4">
                                     <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
-                                    <p><small>Estimation</small></p>
+                                    <p><small>Address</small></p>
                                 </div>
                                 <div class="stepwizard-step col-xs-4">
                                     <a href="#step-2" type="button" class="btn btn-default btn-circle">2</a>
@@ -72,9 +76,9 @@
                 <form class="form" method="POST" action="{{route('save_est')}}" enctype="multipart/form-data">
                     @csrf
                             <div class="box box-primary setup-content" id="step-1">
-                                <div class="box-header">
-                                    <h3 class="box-title">Estimation</h3>
-                                </div>
+                                {{--<div class="box-header">--}}
+                                    {{--<h3 class="box-title">Estimation</h3>--}}
+                                {{--</div>--}}
                                 <div class="box-body">
                                     @if (session('error'))
                                         <div class="alert alert-error" role="alert">
@@ -95,45 +99,34 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">Name</label>
+                                                <label class="control-label">Establishment Name</label>
                                                 <input maxlength="100" type="text" readonly class="form-control" value="{{$est->name}}" name="Phone" placeholder="Enter Phone" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">Factory</label>
+                                                <label class="control-label">Establishment Address</label>
                                                 <input maxlength="100" type="text" required="required" class="form-control" name="Factory" placeholder="Enter Factory" />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Est Type</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->EstType}}" name="Type" placeholder="Enter Est Type" />
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">City</label>
+                                                    <input maxlength="100" type="text" readonly class="form-control" value="{{$est->City}}" name="City" placeholder="Enter City" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">District</label>
+                                                    <input maxlength="100" type="text" readonly class="form-control" value="{{$est->District}}" name="District" placeholder="Enter District" />
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">OwnerShip Type</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->ownershipType}}" name="ownershipType" placeholder="Enter Type" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">City</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->City}}" name="City" placeholder="Enter City" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">District</label>
-                                                <input maxlength="100" type="text" readonly class="form-control" value="{{$est->District}}" name="District" placeholder="Enter District" />
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -148,13 +141,28 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Est Type</label>
+                                                    <input maxlength="100" type="text" readonly class="form-control" value="{{$est->EstType}}" name="Type" placeholder="Enter Est Type" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">OwnerShip Type</label>
+                                                    <input maxlength="100" type="text" readonly class="form-control" value="{{$est->ownershipType}}" name="ownershipType" placeholder="Enter Type" />
+                                                </div>
+                                            </div>
+                                        </div>
                                     <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
                                 </div>
                             </div>
 
                             <div class="box box-primary setup-content" id="step-2">
                                 <div class="box-header">
-                                    <h4 class="box-title">Owner</h4>
+                                    <h4 class="box-title">Owner/ Authorised Person</h4>
                                 </div>
                                 <div class="box-body">
                                   <div class="po">
@@ -201,7 +209,7 @@
                                         </div>
                                     </div>
                                   </div>
-                                    <button type="button" class="btn  btn-info btn-flat remove-btn" id="appendRow">Add </button>
+                                    <button type="button" class="btn  btn-info btn-flat remove-btn" id="appendRow">Add Another Owner </button>
 
 
                                     <div id="appendDiv"></div>
@@ -211,7 +219,7 @@
 
                             <div class="box box-primary setup-content" id="step-3">
                                 <div class="box-header">
-                                    <h3 class="box-title">Schedule</h3>
+                                    <h3 class="box-title">Doccuments For Reminder</h3>
                                 </div>
                                 <div class="box-body">
                                     <table  class="table table-bordered table-striped">
@@ -219,7 +227,7 @@
                                         <tr>
                                             <th>Sr. No</th>
                                             <th>Doc. Name Type</th>
-                                            <th>Doccument Number</th>
+                                            <th>Document Number</th>
                                             <th>Date of Applicable (DOA)</th>
                                             <th>Date of Expire (DOE)</th>
                                             <th>Date for Renewal/Reminder</th>

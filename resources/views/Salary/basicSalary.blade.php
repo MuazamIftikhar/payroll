@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Salary
+    <small>Manage Salary</small>
+@endsection
 @section('content')
     <section class="content">
         <div class="row">
@@ -40,6 +43,8 @@
                     <tr>
                         <th>Name</th>
                         <th>Father Name</th>
+                        <th>DOJ</th>
+                        <th>DOB</th>
                         @foreach($salaryHead as $s)
                         <th>{{$s->name}}</th>
                         @endforeach
@@ -54,6 +59,8 @@
                                 @csrf
                             <td>{{$b->Name}}<input type="hidden" required="required" class="form-control" value="{{$b->e_id}}" name="id" /><input type="hidden" class="form-control" value="{{$b->company_id}}" name="Name"/></td>
                             <td>{{$b->fatherName}}</td>
+                            <td>{{$b->DOJ}}</td>
+                            <td>{{$b->DOB}}</td>
                             @foreach($salaryHead as $s)
                             <td><input maxlength="100" type="text" required="required"class="form-control" style="width: 100%" name="{{$s->id}}"/></td>
                             @endforeach

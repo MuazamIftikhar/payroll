@@ -1,5 +1,9 @@
 @extends('layouts.masterLayout')
 
+@section('start')
+    Account
+    <small>Create Establishmnet</small>
+@endsection
 @section('content')
     <section class="content">
         <div class="row">
@@ -8,7 +12,7 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add Company</h3>
+                        <h3 class="box-title">Add Establishment</h3>
                     </div>
                     <form class="form" method="POST" action="{{route('save_account')}}">
                         @csrf
@@ -29,15 +33,50 @@
                                     <strong>{{ session('success') }}</strong>
                                 </div>
                             @endif
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Name">Name</label>
-                                    <input type="text" class="form-control" id="Name" value="{{old('Name')}}" name="Name" placeholder="Enter Name">
-                                    @if ($errors->has('Name'))
-                                        <span class="danger">{{$errors->first('Name')}}</span>
-                                    @endif
+
+                            <div  id="po">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Establishment Name</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" name="companyName[]" placeholder="Enter Establishment Name" />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Address</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" name="Address[]" placeholder="Enter Address" />
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">City</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" name="City" placeholder="Enter City" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">District</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" name="District" placeholder="Enter District" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">State</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" name="State" placeholder="Enter State" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Pin Code</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" name="Pin" placeholder="Enter Pin Code" />
+                                </div>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="Number">Mobile Number</label>
@@ -67,13 +106,24 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="Hotel">Confirm Password</label>
+                                    <label for="Password_confirmation">Confirm Password</label>
                                     <input type="text" class="form-control" value="{{old('Password_confirmation')}}" id="Password_confirmation" name="Password_confirmation" placeholder="Password">
                                     @if ($errors->has('Password_confirmation'))
                                         <span class="danger">{{$errors->first('Password_confirmation')}}</span>
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Name">Owner Name</label>
+                                    <input type="text" class="form-control" id="Name" value="{{old('Name')}}" name="Name" placeholder="Enter Name">
+                                    @if ($errors->has('Name'))
+                                        <span class="danger">{{$errors->first('Name')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="Hotel">Role</label>
@@ -88,45 +138,9 @@
                                     @endif
                                 </div>
                             </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Pin Code</label>
-                                        <input maxlength="100" type="text" required="required" class="form-control" name="Pin" placeholder="Enter Pin Code" />
-                                    </div>
-                                </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">City</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" name="City" placeholder="Enter City" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">District</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" name="District" placeholder="Enter District" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">State</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" name="State" placeholder="Enter State" />
-                                </div>
-                            </div>
-                                <div  id="po">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Company Name</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" name="companyName[]" placeholder="Enter Company Name" />
 
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Address</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" name="Address[]" placeholder="Enter Address" />
-                                </div>
-                            </div>
-                            </div>
+
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Est Type</label>
@@ -180,8 +194,8 @@
     $(document).on('click','.appendRow',function(){
     $(" <div class=\"col-md-6\">\n" +
         "                                <div class=\"form-group\">\n" +
-        "                                    <label class=\"control-label\">Company Name</label>\n" +
-        "                                    <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"companyName[]\" placeholder=\"Enter Company Name\" />\n" +
+        "                                    <label class=\"control-label\">Establishment Name</label>\n" +
+        "                                    <input maxlength=\"100\" type=\"text\" required=\"required\" class=\"form-control\" name=\"companyName[]\" placeholder=\"Enter Establishment Name\" />\n" +
         "                                </div>\n" +
         "                            </div>\n" +
         "                            <div class=\"col-md-6\">\n" +

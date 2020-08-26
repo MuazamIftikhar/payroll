@@ -31,7 +31,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input class="form-control" id="Month"  name="Month" type="text" placeholder="Month YYYY" value="" onfocus="(this.type='month')" >
+                                    <input class="form-control" id="Month"  name="Month" type="text" placeholder="Month YYYY"  onfocus="(this.type='month')" >
                                 </div>
                             </div>
                             <div class="col-md-7">

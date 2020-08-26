@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Account
+    <small>Manage Employee</small>
+@endsection
 @section('content')
     <section class="content">
         <div class="row">
@@ -38,8 +41,10 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
+                        <th>Father Name</th>
                         <th>Mobile Number</th>
+                        <th>DOJ</th>
+                        <th>DOB</th>
                         <th>City</th>
                         <th>Action</th>
                     </tr>
@@ -48,9 +53,11 @@
                     @foreach($employee as $b)
                         <tr>
                             <td>{{$b->Name}}</td>
-                            <td>{{$b->Email}}</td>
+                            <td>{{$b->fatherName}}</td>
                             <td>{{$b->Phone}}</td>
-                            <td>{{$b->City}}</td>
+                            <td>{{$b->DOJ}}</td>
+                            <td>{{$b->DOB}}</td>
+                            <td>{{$b->per_City}}</td>
                             <td class="text-center"><a href="{{route('edit_employee',["id" => $b->id ])}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> @role('Staff Admin') <a href="{{route('delete_employee',["id" => $b->id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> @endrole @role('Super Admin') <a href="{{route('delete_employee',["id" => $b->id ])}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> @endrole</td>
                         </tr>
                     @endforeach

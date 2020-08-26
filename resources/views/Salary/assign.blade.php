@@ -1,10 +1,12 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Salary Head
+    <small>Manage Salary Head</small>
+@endsection
 @section('content')
     <section class="content">
         <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -61,16 +63,11 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-2"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add ESIC Basic Salary</h3>
+                        <h3 class="box-title">Select Salary Head For ESIC</h3>
                     </div>
                     <form class="form" method="POST" action="{{route('save_esic_basic',['id'=>$id])}}">
                         @csrf
@@ -122,16 +119,14 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-2"></div>
         </div>
 
         <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add Pf Basic Salary</h3>
+                        <h3 class="box-title">Select Salary Head For PF</h3>
                     </div>
                     <form class="form" method="POST" action="{{route('save_pf_basic',['id'=>$id])}}">
                         @csrf
@@ -183,16 +178,11 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-2"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add OverTime Basic Salary</h3>
+                        <h3 class="box-title">Select Salary Head For OT</h3>
                     </div>
                     <form class="form" method="POST" action="{{route('save_overtime_basic',['id'=>$id])}}">
                         @csrf
@@ -244,7 +234,6 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-2"></div>
         </div>
 
     </section>

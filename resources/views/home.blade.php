@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Dashboard
+    {{--<small>Create Establishmnet</small>--}}
+@endsection
 @section('content')
     <section class="content">
         <div class="row">

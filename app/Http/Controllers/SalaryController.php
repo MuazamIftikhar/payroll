@@ -160,6 +160,7 @@ class SalaryController extends Controller
 
     public function manage_salary()
     {
+        $monthShow=date('Y-m');
         $user=DB::table('role_user')->where('user_id','=',Auth::user()->id)->where('role_id','!=','3')->get();
         if (count($user) > 0){
             $company=Company::first()->id;   
@@ -185,7 +186,7 @@ class SalaryController extends Controller
         $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
         $salaryHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->get();
        
-        return view('Salary.manageSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead,'company'=>$companyName]);
+        return view('Salary.manageSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead,'company'=>$companyName,'monthShow'=>$monthShow]);
     }
     public function delete_salary_head(Request $request)
     {
@@ -324,6 +325,7 @@ class SalaryController extends Controller
     {
         $company=Company::select(DB::raw('*,companies.id as c_id'))
             ->join('company_infos','companies.user_id','=','company_infos.user_id')
+            ->join('users','companies.user_id','=','users.id')
             ->get();
         return view('Salary.manageAssign',compact('company'));
     }
@@ -358,6 +360,7 @@ class SalaryController extends Controller
     }
     public function searchByCompany_manageSalary(Request $request)
     {
+        $monthShow=$request->Month;
         $date=explode('-',$request->Month);
         $year=$date[0];
         $month=$date[1];
@@ -385,7 +388,7 @@ class SalaryController extends Controller
         $getSalaryHaadIds=json_decode(company_basic::where('company_id','=',$company)->first()->salary_head);
         $salaryHead=SalaryHead::whereIn('id',$getSalaryHaadIds)->get();
        
-        return view('Salary.manageSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead,'company'=>$companyName]);
+        return view('Salary.manageSalary',['employee'=>$employee, 'salaryHead'=>$salaryHead,'company'=>$companyName,'monthShow'=>$monthShow]);
     }
 
 }

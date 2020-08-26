@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Account
+    <small>Update Staff</small>
+@endsection
 @section('content')
     <section class="content">
         <div class="row">
@@ -68,20 +71,16 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="Hotel">Role</label>
-                                        <select class="form-control" name="Role">
-                                            <option value="">--Select Role--</option>
-                                            @foreach($roles as$r)
-                                                <option {{$r->id == $user->role_id? 'selected' : ''}} value="{{$r->id}}">{{$r->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('Role'))
-                                            <span class="danger">{{$errors->first('Role')}}</span>
-                                        @endif
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Password_confirmation">Confirm Password</label>
+                                            <input type="text" class="form-control" value="{{old('Password_confirmation')}}" id="Password_confirmation" name="Password_confirmation" placeholder="Password">
+                                            @if ($errors->has('Password_confirmation'))
+                                                <span class="danger">{{$errors->first('Password_confirmation')}}</span>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
+
                             </div>
 
                             <div class="box-footer">

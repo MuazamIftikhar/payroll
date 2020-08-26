@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Leave & Loan
+    <small>Add Loan</small>
+@endsection
 @section('content')
     <section class="content">
         <div class="row">
@@ -8,7 +11,7 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add Loan</h3>
+                        {{--<h3 class="box-title">Add Loan</h3>--}}
                     </div>
                     @if(count($loan) > 0)
                         <form class="form" method="POST" action="{{route('save_loan',['id'=>$id])}}">
@@ -33,7 +36,7 @@
                                 @endif
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Name">Date of Amount</label>
+                                        <label for="Name">Date of Loan Issue</label>
                                         <input type="date" class="form-control" value="{{$l->Date}}" name="Date">
                                         @if ($errors->has('Date'))
                                             <span class="danger">{{$errors->first('Date')}}</span>
@@ -55,7 +58,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Staff">Deduction from which Month</label>
-                                        <input type="month"   min="{{$month}}" class="form-control" value="{{$l->Month}}" id="Month" name="Month">
+                                        <input type="month"   min="{{$month}}" class="form-control" value="{{$l->Month}}"  id="Month" name="Month">
                                         @if ($errors->has('Month'))
                                             <span class="danger">{{$errors->first('Month')}}</span>
                                         @endif
@@ -63,8 +66,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Hotel">Monthly installment</label>
-                                        <input type="text" class="form-control" value="{{$l->monthlyInstallment}}" id="monthlyInstallment" name="monthlyInstallment" placeholder="Enter Month">
+                                        <label for="Monthly">Monthly installment</label>
+                                        <input type="text" class="form-control" value="{{$l->monthlyInstallment}}" id="monthlyInstallment" name="monthlyInstallment" placeholder="Enter Amount">
                                         @if ($errors->has('monthlyInstallment'))
                                             <span class="danger">{{$errors->first('monthlyInstallment')}}</span>
                                         @endif
@@ -72,8 +75,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Hotel">Number Installment</label>
-                                        <input type="text" class="form-control" value="{{$l->numberInstallment}}" id="numberInstallment" name="numberInstallment" placeholder="Enter Nunmber">
+                                        <label for="Hotel">Number of Installment</label>
+                                        <input type="text" class="form-control" value="{{$l->numberInstallment}}" id="numberInstallment" name="numberInstallment" placeholder="Enter Number">
                                         @if ($errors->has('numberInstallment'))
                                             <span class="danger">{{$errors->first('numberInstallment')}}</span>
                                         @endif
@@ -117,7 +120,7 @@
                                 @endif
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Name">Date of Amount</label>
+                                        <label for="Name">Date of Loan Issue</label>
                                         <input type="date" class="form-control" value="{{old('Date')}}" name="Date">
                                         @if ($errors->has('Date'))
                                             <span class="danger">{{$errors->first('Date')}}</span>
@@ -136,7 +139,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Staff">Deduction from which Month</label>
-                                        <input type="month" class="form-control" value="{{old('Month')}}" id="Month" name="Month" >
+                                        <input type="text" class="form-control" value="{{old('Month')}}" placeholder="Month YYYY"  onfocus="(this.type='month')" id="Month" name="Month" >
                                         @if ($errors->has('Month'))
                                             <span class="danger">{{$errors->first('Month')}}</span>
                                         @endif
@@ -145,7 +148,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Hotel">Monthly installment</label>
-                                        <input type="text" class="form-control" value="{{old('monthlyInstallment')}}" id="monthlyInstallment" name="monthlyInstallment" placeholder="Enter Month">
+                                        <input type="text" class="form-control" value="{{old('monthlyInstallment')}}" id="monthlyInstallment" name="monthlyInstallment" placeholder="Enter Amount">
                                         @if ($errors->has('monthlyInstallment'))
                                             <span class="danger">{{$errors->first('monthlyInstallment')}}</span>
                                         @endif
@@ -153,8 +156,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Hotel">Number Installment</label>
-                                        <input type="text" class="form-control" value="{{old('numberInstallment')}}" id="numberInstallment" name="numberInstallment" placeholder="Enter Nunmber">
+                                        <label for="Hotel">Number Of Installment</label>
+                                        <input type="text" class="form-control" value="{{old('numberInstallment')}}" id="numberInstallment" name="numberInstallment" placeholder="Enter Number">
                                         @if ($errors->has('numberInstallment'))
                                             <span class="danger">{{$errors->first('numberInstallment')}}</span>
                                         @endif

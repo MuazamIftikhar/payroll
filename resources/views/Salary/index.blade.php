@@ -1,10 +1,13 @@
 @extends('layouts.masterLayout')
 
+@section('start')
+    Salary Head
+    <small>Create Salary Head</small>
+@endsection
 @section('content')
     <section class="content">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -49,10 +52,7 @@
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Manage Salary Head</h3>
@@ -81,7 +81,7 @@
                     <!-- /.box-body -->
                 </div>
             </div>
-            <div class="col-md-4"></div>
+            {{--<div class="col-md-4"></div>--}}
         </div>
 
     </section>

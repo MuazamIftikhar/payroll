@@ -1,5 +1,10 @@
 @extends('layouts.masterLayout')
 
+
+@section('start')
+    Attendance
+    <small>Manage Attendance</small>
+@endsection
 @section('content')
     <section class="content">
 
@@ -8,7 +13,7 @@
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Search</h3>
+                        <h3 class="box-title">Establishment Search</h3>
                     </div>
                     <form class="form" method="GET" action="{{route('searchByCompany_manageAttendance')}}">
                         <div class="box-body">
@@ -24,7 +29,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                <input type="month" class="form-control" id="Month"  name="Month" >
+                                <input type="month" class="form-control" id="Month"  name="Month" value="{{$monthShow}}" >
                                 </div>
                             </div>
                             <div class="col-md-7">
@@ -48,6 +53,8 @@
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Father Name</th>
+                        <th>DOJ</th>
                         <th>Assign Day</th>
                         <th>PR Day</th>
                         <th>PL</th>
@@ -62,6 +69,8 @@
                     @foreach($attendance as $b)
                         <tr>
                             <td>{{$b->Name}}</td>
+                            <td>{{$b->fatherName}}</td>
+                            <td>{{$b->DOJ}}</td>
                             <td>{{$b->assignDay}}</td>
                             <td>{{$b->PR_Day}}</td>
                             <td>{{$b->PL}}</td>

@@ -57,6 +57,8 @@ class EmployeeController extends Controller
         $employee->City=$request->City;
         $employee->State=$request->State;
         $employee->zipCode=$request->zipCode;
+        $employee->District=$request->District;
+        $employee->per_District=$request->per_District;
         $employee->per_streetAddress=$request->per_streetAddress;
         $employee->per_City=$request->per_City;
         $employee->per_State=$request->per_State;
@@ -218,6 +220,8 @@ class EmployeeController extends Controller
         $City=$request->City;
         $State=$request->State;
         $zipCode=$request->zipCode;
+        $District=$request->District;
+        $per_District=$request->per_District;
         $per_streetAddress=$request->per_streetAddress;
         $per_City=$request->per_City;
         $per_State=$request->per_State;
@@ -279,7 +283,7 @@ class EmployeeController extends Controller
 
         $update=DB::table('employees')->where('id', '=', $request->id)->update(['Name' => $Name,'fatherName' => $fatherName,'lastName' => $lastName,'DOB' => $DOB,'DOJ' => $DOJ,'DOE' => $DOE,'joining' => $joining,'ending' => $ending,'Gender' => $Gender,
             'Religion' => $Religion,'Phone' => $Phone,'Email' => $Email,'streetAddress' => $streetAddress,'City' => $City,'State' => $State,'zipCode' => $zipCode,'per_streetAddress' => $per_streetAddress,
-            'per_City' => $per_City,'per_State' => $per_State,'per_zipCode' => $per_zipCode,'Designation' => $Designation,'company_id' => $companyName,'Status' => $Status,'bankName' => $bankName,
+            'per_City' => $per_City,'per_State' => $per_State,'per_zipCode' => $per_zipCode,'Designation' => $Designation,'company_id' => $companyName,'Status' => $Status,'bankName' => $bankName,'District' => $District,'per_District' => $per_District,
             'accountNumber' => $accountNumber,'ISFC' => $ISFC,'checkBook' => $checkBook,'esicNumber' => $esicNumber,'UAN' => $UAN,'esicFlag' => $esicFlag,'PTFlag' => $PTFlag,'PFSaturating' => $PFSaturating,
             'PFFlag' => $PFFlag,'NameAsAdhar' => $NameAsAdhar,'adharNumber' => $adharNumber,'adharProof' => $adharProof,'NameAsPan' => $NameAsPan,'panNumber' => $panNumber,'panProof' => $panProof,
             'family_firstName' => $family_firstName,'family_lastName' => $family_lastName,'family_Relation' => $family_Relation,'family_presentAddress' => $family_presentAddress,'family_permanentAddress' => $family_permanentAddress,
