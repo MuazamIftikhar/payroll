@@ -55,6 +55,7 @@
                         <th>Name</th>
                         <th>Father Name</th>
                         <th>DOJ</th>
+                        <th>Month</th>
                         <th>Assign Day</th>
                         <th>PR Day</th>
                         <th>PL</th>
@@ -71,6 +72,7 @@
                             <td>{{$b->Name}}</td>
                             <td>{{$b->fatherName}}</td>
                             <td>{{$b->DOJ}}</td>
+                            <td>{{$monthShow}}</td>
                             <td>{{$b->assignDay}}</td>
                             <td>{{$b->PR_Day}}</td>
                             <td>{{$b->PL}}</td>
