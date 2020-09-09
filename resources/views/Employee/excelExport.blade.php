@@ -146,9 +146,17 @@
 
                     @endphp
                 @endforeach
+                <?php
+                  //  dd($toal4);
+                ?>
+
+
                 @if($countSalaryHead == $counts)
                 @else
                 <td>0</td>
+                    <?php
+                    $loopValue += 1;
+                    ?>
                 @endif
                 <td>0</td>
                 @php
@@ -318,6 +326,7 @@
             <td>{{$PLTotal}}</td>
             <td>{{$PHTotal}}</td>
             <td>{{$TotalTotal}}</td>
+
 
             @if($loopValue >= 1)
             <td>{{$toal1}}</td>

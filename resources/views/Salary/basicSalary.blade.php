@@ -62,7 +62,7 @@
                             <td>{{$b->DOJ}}</td>
                             <td>{{$b->DOB}}</td>
                             @foreach($salaryHead as $s)
-                            <td><input maxlength="100" type="text" required="required"class="form-control" style="width: 100%" name="{{$s->id}}"/></td>
+                            <td><input maxlength="100" type="text" required="required" class="form-control" style="width: 100%" name="{{$s->id}}"/></td>
                             @endforeach
                             <td><select  class="form-control" name="salaryFlag" >
                                     <option>Per Day</option>
