@@ -259,9 +259,11 @@
                         $PF=round(round($newSumPf*$b->Total,0)*12/100,0);
                        }else{
                             if($b->PFSaturating == "Yes"){
-                                 if(($newSumPf/$b->assignDay*$b->Total) >15000){ $PF=round(round($newSumPf/$b->assignDay*$b->Total,0)*12/100,0); }else {   $PF=round(15000*12/100,0); }
+                                 if(($newSumPf/$b->assignDay*$b->Total) >15000){    $PF=round(1800*12/100,0); }else {$PF=round(round($newSumPf/$b->assignDay*$b->Total,0)*12/100,0);  }
+                            //     if(($newSumPf/$b->assignDay*$b->Total) >15000){ $PF=round(round($newSumPf/$b->assignDay*$b->Total,0)*12/100,0); }else {   $PF=round(15000*12/100,0); }
                             }else{
-                                 $PF=0;
+                            //$PF=0;
+                                 $PF=round(round($newSumPf/$b->assignDay*$b->Total,0)*12/100,0);
                             }
                        }
                    }else{
@@ -272,7 +274,8 @@
                        if($b->salary_flag == "Per Day"){
                        if($sum>807){ $ESIC=0; }else {$ESIC=ceil((round($newSumEsic*$b->Total,0))*0.75/100);}
                        }else{
-                       if($sum>21000){ $ESIC=0; }else {$ESIC=ceil((round($newSumEsic/$b->assignDay*$b->Total,0))*0.75/100);}
+                       $ESIC=ceil((round($newSumEsic/$b->assignDay*$b->Total,0))*0.75/100);
+//                   if($sum>21000){ $ESIC=0; }else {$ESIC=ceil((round($newSumEsic/$b->assignDay*$b->Total,0))*0.75/100);}
                        }
                    }else{
                    $ESIC=0;
