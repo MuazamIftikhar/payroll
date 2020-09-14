@@ -65,7 +65,7 @@
                    @endif
                 @endif
              @endforeach
-            <td colspan="2">{{$e->Total}}</td>
+            <td colspan="2">{{$e->assignDay - $e->Total}}</td>
             <td colspan="2"></td>
         </tr>
     @endforeach

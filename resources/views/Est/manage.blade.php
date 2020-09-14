@@ -25,7 +25,7 @@
                     <tbody>
                     @foreach($estimation as $b)
                         <tr>
-                            <td>{{$b->ownerName}}</td>
+                            <td> @foreach(json_decode($b->ownerName) as $v){{$v}}  @endforeach</td>
                             <td>{{$b->EstType}}</td>
                             <td>{{$b->Factory}}</td>
                             <td>{{$b->City}}</td>
