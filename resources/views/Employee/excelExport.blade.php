@@ -124,7 +124,9 @@
                 <td>{{$b->PL+$b->SL+$b->CL}}</td>
                 <td>{{$b->PH}}</td>
                 <td>{{$b->Total}}</td>
-                @foreach(json_decode($b->salary_head) as $s)
+                @foreach(json_decode($b->salary_head) as $d=>$s)
+
+                    @if(count($salaryHead) >= $d)
                 <td>{{$s}}</td>
                     @php
                         $loopValue=$loop->iteration;
@@ -145,13 +147,10 @@
 
 
                     @endphp
+                    @endif
                 @endforeach
-                <?php
-                  //  dd($toal4);
-                ?>
 
-
-                @if($countSalaryHead == $counts)
+                @if($countSalaryHead <= $counts)
                 @else
                 <td>0</td>
                     <?php
@@ -193,7 +192,8 @@
                 @php
                 $totalsum=$totalsum+$sum;
                         @endphp
-                @foreach(json_decode($b->salary_head) as $s)
+                @foreach(json_decode($b->salary_head) as $d=>$s)
+                    @if(count($salaryHead) >= $d)
                     @if($b->salary_flag == "Per Day")
                     <td>{{round($s*$b->Total,0)}}</td>
                     @else
@@ -232,11 +232,13 @@
                              }
                     }
                     @endphp
+                    @endif
                 @endforeach
-                @if($countSalaryHead == $counts)
+                @if($countSalaryHead <= $counts)
                 @else
                     <td>0</td>
                 @endif
+
                 <td>0</td>
                 @php
                     if($b->salary_flag == "Per Day"){
