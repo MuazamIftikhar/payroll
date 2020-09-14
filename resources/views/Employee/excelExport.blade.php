@@ -272,7 +272,8 @@
                    //ESIC Flag
                    if($b->esicFlag == "Yes"){
                        if($b->salary_flag == "Per Day"){
-                       if($sum>807){ $ESIC=0; }else {$ESIC=ceil((round($newSumEsic*$b->Total,0))*0.75/100);}
+                       $ESIC=ceil((round($newSumEsic*$b->Total,0))*0.75/100);
+                       //if($sum>807){ $ESIC=0; }else {$ESIC=ceil((round($newSumEsic*$b->Total,0))*0.75/100);}
                        }else{
                        $ESIC=ceil((round($newSumEsic/$b->assignDay*$b->Total,0))*0.75/100);
 //                   if($sum>21000){ $ESIC=0; }else {$ESIC=ceil((round($newSumEsic/$b->assignDay*$b->Total,0))*0.75/100);}
