@@ -20,18 +20,28 @@
     </tr>
     @foreach($employee as $i => $e)
         @php
-            $sum=0;
+                $total=0;
+                $sum=0;
         @endphp
         <tr>
             <td colspan="1">{{$i+1}}</td>
             <td colspan="1">{{$e->UAN}}  </td>
             <td colspan="1">{{$e->salaryFlag}} </td>
             @foreach(json_decode($e->salary_head) as $s)
-                @php
-                    $sum=$sum+$s;
-                @endphp
+                {{--@php--}}
+                {{--$sum=$sum+$s;--}}
+                {{--@endphp--}}
+                <?php
+                if($e->salary_flag == "Per Day"){
+                    $sum=round($s*$e->Total,0);
+                }
+                else{
+                    $sum=round($s/$e->assignDay*$e->Total,0);
+                }
+                $total=$total+$sum;
+                ?>
             @endforeach
-            <td colspan="2">{{$sum}}</td>
+            <td colspan="2">{{$total}}</td>
             @foreach(json_decode($e->salary_head) as $s)
                 @php
                     $loopValue=$loop->iteration;
