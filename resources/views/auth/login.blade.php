@@ -48,7 +48,7 @@
             </form>
             <br>
             <p>
-                <strong>Copyright &copy; {{date('Y')}} <a href="https://cybermeteros.com">Cyber Meteors</a>.</strong> All rights reserved by <strong>Payroll</strong>.</a>
+                <strong>Copyright &copy; {{date('Y')}} Payroll</strong> All rights reserved by <strong>Payroll</strong>.</a>
             </p>
 
 
