@@ -46,11 +46,11 @@ class CreateEmployeesTable extends Migration
             $table->string('checkBook')->nullable();
             $table->string('esicNumber')->nullable();
             $table->string('UAN')->nullable();
-            $table->string('esicFlag');
-            $table->string('PTFlag');
-            $table->string('LWFFlag');
-            $table->string('PFSaturating');
-            $table->string('PFFlag');
+            $table->string('esicFlag')->default('Yes');
+            $table->string('PTFlag')->default('Yes');
+            $table->string('LWFFlag')->default('Yes');
+            $table->string('PFSaturating')->default('Yes');
+            $table->string('PFFlag')->default('Yes');
             $table->string('NameAsAdhar');
             $table->string('adharNumber');
             $table->string('adharProof')->nullable();

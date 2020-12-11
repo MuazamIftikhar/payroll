@@ -162,7 +162,8 @@ class EmployeeController extends Controller
 
     function import_index()
     {
-        return view('Employee.importEmployee');
+        $name=Company::where('user_id','=',Auth::user()->id)->get();
+        return view('Employee.importEmployee',compact('name'));
 
     }
     function import(Request $request)
@@ -171,7 +172,7 @@ class EmployeeController extends Controller
             'select_file'  => 'required|mimes:xls,xlsx'
         ]);
 
-        Excel::import(new EmployeeImport(),$request->file('select_file'));
+        Excel::import(new EmployeeImport($request->companyName),$request->file('select_file'));
         return back()->with('success', 'Excel Data Imported successfully.');
     }
 

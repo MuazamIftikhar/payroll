@@ -15,6 +15,7 @@ class CreateSalariesTable extends Migration
     {
         Schema::create('salaries', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('month');
             $table->string('employee_id');
             $table->string('salary_head');
             $table->string('salary_flag');

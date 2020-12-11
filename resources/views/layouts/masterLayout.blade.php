@@ -353,6 +353,7 @@
                                 <li><a href="{{route('Form13_excel_form')}}"><i class="fa fa-circle-o"></i> Form13 Excel</a></li>
                                 <li><a href="{{route('Bonus_form')}}"><i class="fa fa-circle-o"></i> Bonus Excel</a></li>
                                 <li><a href="{{route('Slip_form')}}"><i class="fa fa-circle-o"></i> Slip Excel</a></li>
+                                <li><a href="{{route('area_form')}}"><i class="fa fa-circle-o"></i> Area Excel</a></li>
                             </ul>
                         </li>
                         <li class="treeview">

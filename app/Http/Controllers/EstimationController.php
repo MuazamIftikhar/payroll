@@ -180,9 +180,9 @@ class EstimationController extends Controller
         }
         $est->remarks=$request->remarks;
         $est->save();
-        return redirect()->back()->with("success", "User Updated Successfully!");
+        return redirect()->back()->with("success", "Establishment Updated Successfully!");
         }else{
-           return redirect()->back()->with("error", "User Already ADD This!");
+           return redirect()->back()->with("error", "Establishment Already ADD This!");
         }
     }
 

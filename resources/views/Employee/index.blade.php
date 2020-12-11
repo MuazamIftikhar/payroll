@@ -74,7 +74,7 @@
                     @csrf
                     <div class="box box-primary setup-content" id="step-1">
                         <div class="box-header">
-                            <h3 class="box-title">Personal Detail</h3>
+                            <h3 class="box-title">Personal Detail <a href="{{route('import')}}" >(Import Employee with Excel)</a></h3>
                         </div>
                         <div class="box-body">
                             @if (session('error'))
@@ -371,7 +371,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">ISFC Code <span style="color: red" >*</span></label>
-                                        <input type="text"  class="form-control" value="{{old('ISFC')}}" name="ISFC" maxlength="11" minlength="11" placeholder="Enter ISFC" />
+                                        <input type="text"  class="form-control" value="{{old('ISFC')}}" name="ISFC" maxlength="11" minlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="Enter ISFC" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -483,7 +483,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label">Permanent Address <span style="color: red" >*</span> <a class="copyLink2"> Same as Present</a></label>
+                                            <label class="control-label">Permanent Address <span style="color: red" >*</span></label>
                                             <input type="text" required="required" class="form-control"  name="family_permanentAddress[]"/>
                                         </div>
                                     </div>

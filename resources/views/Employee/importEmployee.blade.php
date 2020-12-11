@@ -1,5 +1,8 @@
 @extends('layouts.masterLayout')
-
+@section('start')
+    Employee
+    <small>Import Employee</small>
+@endsection
 @section('content')
     <section>
         <div class="row">
@@ -12,6 +15,16 @@
                     <form class="form" method="POST" action="{{route('printImport')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="box-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Company Name <span style="color: red" >*</span></label>
+                                    <select class="form-control"  name="companyName">
+                                        @foreach($name as $n)
+                                            <option value="{{$n->id}}">{{$n->companyName}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="file" class="form-control"  name="select_file">

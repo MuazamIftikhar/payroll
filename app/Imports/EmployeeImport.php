@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Employee;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -13,37 +14,43 @@ class EmployeeImport implements ToModel,WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
     public function model(array $row)
     {
 
-        //dd($row);
-//        return new Company([
-//            'user_id' => $row['name'],
-//            'companyName' => $row['father_name'],
-//            'Address' => json_encode($row['last_name']),
-//        ]);
+
+        $UNIX_DATE = ($row['date_of_joining'] - 25569) * 86400;
+        $joining_date = gmdate("Y-m-d", $UNIX_DATE);
+        $joining = gmdate("Y-m", $UNIX_DATE);
         return new Employee([
 
             'Name' => $row['name'],
             'fatherName' => $row['father_name'],
             'lastName' => $row['last_name'],
             'DOB' => $row['date_of_birth'],
-            'DOJ' => $row['date_of_joining'],
-            'DOE' => $row['date_of_leaving'],
+            'DOJ' => $joining_date,
+            'DOE'=> date('Y-m-d', strtotime(Carbon::now()->addYear(50))),
+            'joining' => $joining,
+            'ending'=> date('Y-m', strtotime(Carbon::now()->addYear(50))),
             'Gender' => $row['gender'],
             'Religion' => $row['religion'],
             'Phone' => $row['phone'],
             'Email' => $row['email'],
-            'streetAddress' => $row['street_address'],
-            'City' => $row['city'],
-            'State' => $row['state'],
-            'zipCode' => $row['zip_code'],
+            'streetAddress' => $row['present_street_address'],
+            'City' => $row['present_city'],
+            'State' => $row['present_state'],
+            'zipCode' => $row['present_zip_code'],
+            'District' => $row['present_district'],
             'per_streetAddress' => $row['permanent_street_address'],
             'per_City' => $row['permanent_city'],
             'per_State' => $row['permanent_state'],
             'per_zipCode' => $row['permanent_zip_code'],
+            'per_District' => $row['permanent_district'],
             'Designation' => $row['designation'],
-            'company_id' => $row['company_id'],
+            'company_id' => $this->id,
             'Status' => $row['status'],
             'bankName' => $row['bank_name'],
             'accountNumber' => $row['account_number'],

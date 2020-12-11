@@ -150,8 +150,10 @@ class SalaryController extends Controller
             }
         }
         $salary=new Salary();
+        $salary->month=date('Y-m');
         $salary->employee_id=$request->id;
         $salary->salary_head=json_encode($vs);
+        dd(json_encode($vs));
         $salary->salary_flag=$request->salaryFlag;
         $salary->save();
         return redirect()->route('salary');
@@ -228,6 +230,7 @@ class SalaryController extends Controller
             ->update(['salary_head' => $salary_head,'salary_flag'=>$salary_flag]);
         }else{
             $salary=new Salary();
+            $salary->month=date('Y-m');
             $salary->employee_id=$request->employee_id;
             $salary->salary_head=json_encode($vs);
             $salary->salary_flag=$request->salaryFlag;

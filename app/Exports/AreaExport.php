@@ -16,19 +16,21 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeWriting;
 
 
-class LeaveExport implements FromView,WithEvents
+class AreaExport implements FromView,WithEvents
 {
 
-    public function __construct($id,$month,$setting)
+    public function __construct($id,$from,$to,$affect_from,$finalArray)
     {
         $this->id = $id;
-        $this->month = $month;
-        $this->setting = $setting;
+        $this->from = $from;
+        $this->to = $to;
+        $this->affect_from = $affect_from;
+        $this->finalArray = $finalArray;
     }
 
     public function view(): View
     {
-        $printDate=$this->month;
+        $printDate=date('Y-m-d');
         $company_id=Company::where('id','=',$this->id)->first()->id;
         $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
         $decodeIDs = json_decode($getIds);
@@ -38,17 +40,10 @@ class LeaveExport implements FromView,WithEvents
             $namesOfsalaryHead[]=$GetName;
         }
         $ptax=Ptax::first();
-        $employee = Employee::select(DB::raw('*,salaries.salary_head as salary_head, overtimes.salary_head as overtime_salary_head,esics.salary_head as esics_salary_head,pfs.salary_head as pfs_salary_head'))
-            ->Join('attendances','employees.id','=','attendances.employee_id')
-            ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
-            ->Join('overtimes', 'employees.company_id', '=', 'overtimes.company_id')
-            ->Join('esics', 'employees.company_id', '=', 'esics.company_id')
-            ->Join('pfs', 'employees.company_id', '=', 'pfs.company_id')
-            ->where('attendances.Month', '=', $this->month)
-            ->where('employees.company_id','=',$this->id)->get();
+        $employee= $this->finalArray;
         $company=Company::where('id','=',$company_id)->get();
-        $setting=Setting::where('id','=',$this->setting)->get();
-        return view('Employee.excelExport', [
+        $setting=Setting::where('id','=',1)->get();
+        return view('Export.Area', [
             'employee' => $employee,"salaryHead"=>$namesOfsalaryHead,"ptax"=>$ptax,'company'=>$company,'printDate'=>$printDate,'setting'=>$setting]);
     }
     public function registerEvents(): array
@@ -145,38 +140,19 @@ class LeaveExport implements FromView,WithEvents
                     ],
                 ])->getAlignment()->setWrapText(true);
 
-                $date=explode('-',$this->month);
-                $year=$date[0];
-                $month=$date[1];
-                $getRows=Employee::select(DB::raw('*'))
-                    ->Join('attendances','employees.id','=','attendances.employee_id')
-                    ->Join('salaries', 'employees.id', '=', 'salaries.employee_id')
-                    ->where('attendances.Month', '=', $this->month)
-                    ->where('employees.company_id','=',$this->id)->get();
+                //$date=date('Y-m-d');
+
+                $getRows=$this->finalArray;
                 $getRowsCount=count($getRows)+9;
-//$getAlphabetCount="U";
-//                $company_id=Company::where('id','=',$this->id)->first()->id;
-//                $getIds = company_basic::where('company_id', '=',$company_id)->first()->salary_head;
-//                $decodeIDs = json_decode($getIds);
-//                $namesOfsalaryHead=array();
-//                foreach ($decodeIDs as $i){
-//                    $GetName = SalaryHead::where('id', '=', $i)->first();
-//                    $namesOfsalaryHead[]=$GetName;
-//                }
-//                $i=1;
-//                $val=count($namesOfsalaryHead)*2;
-//for ($i;$i=$val;$i++){
-//$getAlphabetCount++;
-//}
 
                 $event->writer->getDelegate()->getActiveSheet()->getStyle("A7:Y$getRowsCount")->applyFromArray($styleArray = [
-                         'borders' => [
-                             'allBorders' => [
-                                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                                 'color' => ['argb' => '000000'],
-                                 'text-align' => 'center'
-                             ],
-                         ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                            'text-align' => 'center'
+                        ],
+                    ],
                     'font' => [
                         'size' => 12
                     ],

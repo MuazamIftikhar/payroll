@@ -166,8 +166,6 @@ Route::group([ 'middleware' => ['auth']], function() {
     Route::GET('/Slip_form', 'ExcelController@Slip_form')->name('Slip_form');
     Route::GET('/Slip_excel', 'ExcelController@Slip_excel')->name('Slip_excel');
 
-
-
-
-
+    Route::GET('/area_form', 'ExcelController@area_form')->name('area_form');
+    Route::GET('/area_excel', 'ExcelController@area_excel')->name('area_excel');
 });
